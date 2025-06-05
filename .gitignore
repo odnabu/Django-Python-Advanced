@@ -1,6 +1,29 @@
-/.env
+# __ NB! __ /.idea означает «только в корне», а .idea/ — в любом месте.
+# Лучше использовать второй вариант, потому что .idea/ действительно не всегда в корне (см. у себя).
+
+# Виртуальное окружение
+.venv/
+venv/
+
+# PyCharm
+.idea/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Файлы среды
+.env
+*.env
+
+
+
 /GitHub_and_PyCharm.md
 /manage.py
 /db.sqlite3
 /BASE_DIR.jpg
 /Lessons/
+
+
+
