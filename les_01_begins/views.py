@@ -4,6 +4,6 @@ from django.http import HttpResponse
 
 def hello(request):
     print(request.method)
-    return HttpResponse("Hello World!")
+    return HttpResponse("<h1>Hello, world!</h1>")
 
 

@@ -11,37 +11,50 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-# Для преобразования считываемых из .env значений переменных окружения, если они переданы через запятую:
-from decouple import config, Csv
+# Для чтения переменной окружения в settings.py из .env:
+from environ import Env
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Чтение переменной окружения в settings.py:
+env = Env()
+Env.read_env(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')      # Video 13, 3:11:40 - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
+SECRET_KEY = env('SECRET_KEY')      # Video 13, 3:11:40 - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
 # config('SECRET_KEY') — просто читает строку.
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = env.bool('DEBUG', default=False)
 # config('DEBUG', cast=bool) — превращает "True" или "False" в Python-логическое значение.
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())        # Video 13, 3:13:30 - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])        # Video 13, 3:13:30 - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
 # config('ALLOWED_HOSTS', cast=Csv()) — превращает строку 127.0.0.1,localhost в список ['127.0.0.1', 'localhost'].
+# ALLOWED_HOSTS = []         # Разрешает все хосты (НЕ использовать в продакшн)
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'les_01_begins',               # Video 13, __:__:__ - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
+    # ____  МОИ  ПРИЛОЖЕНИЯ  ________
+    # 'les_01_begins',               # Video 13, __:__:__ - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
+    'hw_01_first_app',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +67,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'DjangoProject.urls'
+ROOT_URLCONF = 'DjangoProject_config.urls'
+# ROOT_URLCONF = 'DjangoProject.urls'
 
 TEMPLATES = [
     {
@@ -72,17 +86,30 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'DjangoProject.wsgi.application'
+WSGI_APPLICATION = 'DjangoProject_config.wsgi.application'
+# WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if env.bool('MYSQL', default=False):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST', default="localhost"),
+            'PORT': env('DB_PORT', default="3306"),
+        },
     }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
 }
 
 
