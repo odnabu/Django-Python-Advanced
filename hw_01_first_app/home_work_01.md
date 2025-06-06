@@ -116,7 +116,7 @@ urlpatterns = [
 ### <span style="color: #8A2BE2; padding: 0px; ">**7)** Проверить работу приложения:</span>  
 <span style="color:#FFD700">NB! __ ЗАКОММЕНТИРОВАТЬ</span> в <a>settings.py</a> 
 ненужное приложение (<a id="img1">Fig. 1</a>):  
-<img src="img_1.png" width="350" alt="Закомментировать НЕнужное приложение."/>
+<img src="figs/img_1.png" width="350" alt="Закомментировать НЕнужное приложение."/>
 
 Создать <span style="color:#F00000">СУПЕРЮЗЕРА</span>, <span style="color: #606060">См. Video 15.1 42:30, link: https://player.vimeo.com/video/1090076209?h=56080a1f80</span>  
 ```
@@ -134,7 +134,7 @@ python manage.py runserver
 Перейти по адресу http://127.0.0.1:8000/hw-01, чтобы увидеть стандартную начальную страницу 
 Django с текстом приветствия из <a>hw_01_first_app/views.py</a> (<a id="img2">Fig. 2</a>):  
 
-<img src="img_2.png" width="350" alt="Добавить в адресной строке /hw-01, как в приложении."/>  
+<img src="figs/img_2.png" width="350" alt="Добавить в адресной строке /hw-01, как в приложении."/>  
 
 <span style="color: #606060">См. Video 14, 00:01:00, link: https://player.vimeo.com/video/1089688434?h=2eb8652d7a</span>.  
 
@@ -195,15 +195,15 @@ pip install mysqlclient
 
 По 1-му подпункту должно получиться так в браузере (<a id="img3">Fig. 3</a>):  
 
-<img src="img_3.png" width="350" alt="Добавить в адресной строке /home/od, как в приложении."/>  
+<img src="figs/img_3.png" width="350" alt="Добавить в адресной строке /home/od, как в приложении."/>  
 
 По 2-му подпункту для URL внутри приложения (<a id="img4">Fig. 4</a>):  
 
-<img src="img_4.png" width="450" alt="Добавление URL внутри приложения."/>  
+<img src="figs/img_4.png" width="450" alt="Добавление URL внутри приложения."/>  
 
 По 3-му подпункту для URL приложения в файле urls.py проекта (<a id="img5">Fig. 5</a>):  
 
-<img src="img_5.png" width="650" alt="Добавление URL приложения в файле urls.py проекта."/>  
+<img src="figs/img_5.png" width="650" alt="Добавление URL приложения в файле urls.py проекта."/>  
 
 
 
