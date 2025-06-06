@@ -21,11 +21,5 @@ __pycache__/
 *.env
 
 
-
-/BASE_DIR.jpg
 /Lessons/
-
-
-
-/GitHub_and_PyCharm.md
-/img_to_md.png
+/other/

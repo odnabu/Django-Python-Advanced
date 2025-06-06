@@ -33,12 +33,11 @@ SECRET_KEY = env('SECRET_KEY')      # Video 13, 3:11:40 - 1-st Lecture to Django
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
-# config('DEBUG', cast=bool) — превращает "True" или "False" в Python-логическое значение.
+DEBUG = env.bool('DEBUG', default=False)     # default=False - выполняется только если в .env НИЧЕГО НЕТ про Дебаг.
 
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])        # Video 13, 3:13:30 - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
-# config('ALLOWED_HOSTS', cast=Csv()) — превращает строку 127.0.0.1,localhost в список ['127.0.0.1', 'localhost'].
+# — превращает строку 127.0.0.1,localhost в список ['127.0.0.1', 'localhost']. 8000 - PORT.
 # ALLOWED_HOSTS = []         # Разрешает все хосты (НЕ использовать в продакшн)
 
 

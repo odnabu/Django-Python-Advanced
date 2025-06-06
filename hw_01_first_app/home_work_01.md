@@ -24,7 +24,7 @@ DjangoProject_config, что повлекло за собой много <span s
 - Установите библиотеку django-environ для работы с переменными окружения.
 - Считайте переменные SECRET_KEY, DEBUG и ALLOWED_HOSTS из .env файла в settings.py.
 
-<span style="color: #606060">См. видео урока от 2.06.2025 ---> Video 13, 3:11:40 - 1-st Lecture to Django (Intro).  
+<span style="color: #606060">См. видео урока от 2.06.2025  ▶  Video 13, 3:11:40 - 1-st Lecture to Django (Intro).  
 link:</span> https://player.vimeo.com/video/1089675502?h=23260e4621  
 +++   
 <span style="color: #606060">файлы DjangoProject_config/settings.py и DjangoProject_config/urls.py.</span>  
@@ -40,7 +40,7 @@ link:</span> https://player.vimeo.com/video/1089675502?h=23260e4621
 ```
 
 
-### <span style="color: #8A2BE2">**2)** Регистрация приложения в проекте</span>  --->  <a>DjangoProject_config / settings.py</a>:  
+### <span style="color: #8A2BE2">**2)** Регистрация приложения в проекте  ▶</span>  <a>DjangoProject_config / settings.py</a>:  
 <span style="color: #606060">См. Les13-Django_13-Django_INTRO-1.pdf, слайд 75.</span>  
 ```python
 INSTALLED_APPS = [
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 ```
 
 
-### <span style="color: #8A2BE2">**3)** Создание представления (Views)</span>  --->  <a>hw_01_first_app / views.py</a>:  
+### <span style="color: #8A2BE2">**3)** Создание представления (Views)  ▶</span>  <a>hw_01_first_app / views.py</a>:  
 <span style="color: #606060">См. Les13-Django_13-Django_INTRO-1.pdf, слайд 76.</span>  
 ```python
     from django.http import HttpResponse
