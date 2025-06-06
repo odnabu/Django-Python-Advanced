@@ -232,9 +232,9 @@ pip freeze > hw_01_first_app/requirements_hw_1.txt
 ## <span style="color: #008000"> 8. Git</span>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
-Ссылка на приложение по ДЗ: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_01_first_app.  
+Ссылка на приложение по ДЗ <a>hw_01_first_app</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_01_first_app.  
 
-Ссылка на весь проект 
+Ссылка на весь проект <a>DjangoProject</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main.  
 
 ---
 [//]: # (<span style="color: #8A2BE2; margin: 20px 10px;">▣</span> )
