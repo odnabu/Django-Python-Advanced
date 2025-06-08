@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     # ____  МОИ  ПРИЛОЖЕНИЯ  ________
     # 'les_01_begins',               # Video 13, __:__:__ - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
     'hw_01_first_app',
+    'les_15_users',
+    'hw_02_task_manager',
 ]
 
 MIDDLEWARE = [

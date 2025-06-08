@@ -1,31 +1,57 @@
-Вам необходимо самостоятельно создать Django проект и добавить его в Git.
+## Домашнее задание: Проект "Менеджер задач"  
+Цель: Создать структуру менеджера задач и зарегистрировать модели в панели администратора Django.  
+
+### Реализовать модели:  
+1. Модель Task:  
+- Описание: Задача для выполнения.  
+- Поля:  
+  - title: Название задачи. Уникально для даты.  
+  - description: Описание задачи.  
+  - categories: Категории задачи. Многие ко многим.  
+  - status: Статус задачи. Выбор из: New, In progress, Pending, Blocked, Done  
+  - deadline: Дата и время дедлайн.  
+  - created_at: Дата и время создания. Автоматическое заполнение.  
+2. Модель SubTask:  
+- Описание: Отдельная часть основной задачи (Task).  
+- Поля:  
+  - title: Название подзадачи.  
+  - description: Описание подзадачи.  
+  - task: Основная задача. Один ко многим.  
+  - status: Статус задачи. Выбор из: New, In progress, Pending, Blocked, Done  
+  - deadline: Дата и время дедлайн.  
+  - created_at: Дата и время создания. Автоматическое заполнение.  
+3. Модель Category:  
+- Описание: Категория выполнения.  
+- Поля:  
+  - name: Название категории.  
+
+### Шаги для выполнения задания:  
+1. Создайте модели:  
+  В файле models.py вашего приложения добавьте модели с указанными полями и описаниями.  
+2. Создайте миграции:  
+  Выполните команду для создания миграций:  
+3. Примените миграции:  
+  Выполните команду для применения миграций:  
+4. Зарегистрируйте модели в админке:  
+  В файле admin.py вашего приложения зарегистрируйте все модели.  
+5. Зафиксируйте изменения в гит:  
+  Создайте новый коммит и запушьте его в ваш гит.  
+6. Создайте записи через админку:  
+  Создайте суперпользователя  
+  Перейдите в административную панель Django.  
+  Добавьте несколько объектов для каждой модели.  
+7. Оформите ответ:
+  Прикрепите ссылку на гит и скриншоты где видны созданные объекты к ответу на домашнее задание.  
+
+
+
+
 
 ---
-## <span style="color: #008000">1. Создание проекта:</span>
-- Создайте новый Python-проект в PyCharm.
-- Установите фреймворк Django.
-- Создайте структуру Django-проекта с помощью команды в консоли.
+## <span style="color: #008000">2.Проект "Менеджер задач":</span>
 
-<span style="color: #606060">Сделано на уроке 2.06.2025.</span>  
-Создание Django-проекта с именем <span style="color: #F00000">config</span> в созданном 
-новом проекте Python:   
-```
-    django-admin startproject config        # __ NB! __ <project_name>  ==  config
-```
-Я свой назвала сначала <span style="background: #404040; padding: 5px">DjangoProject</span>, а потом переименовала в 
-DjangoProject_config, что повлекло за собой много <span style="background: #800000; padding: 5px">ПРОБЛЕМ</span> 
-с переименованием аргументов в разных файлах настроек Django-проекта.
-
-
-
----
-## <span style="color: #008000">2. Настройка переменных окружения:</span>
-- Создайте файл .env в корне проекта и добавьте переменные SECRET_KEY, DEBUG и ALLOWED_HOSTS.
-- Установите библиотеку django-environ для работы с переменными окружения.
-- Считайте переменные SECRET_KEY, DEBUG и ALLOWED_HOSTS из .env файла в settings.py.
-
-<span style="color: #606060">См. видео урока от 2.06.2025  ▶  Video 13, 3:11:40 - 1-st Lecture to Django (Intro).  
-link:</span> https://player.vimeo.com/video/1089675502?h=23260e4621  
+<span style="color: #606060">См. видео урока от __.06.2025  ▶  Video 15.1 & 15.2.  
+link:</span> ___________  
 +++   
 <span style="color: #606060">файлы DjangoProject_config/settings.py и DjangoProject_config/urls.py.</span>  
 
@@ -33,10 +59,10 @@ link:</span> https://player.vimeo.com/video/1089675502?h=23260e4621
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border: 2px outset #8A2BE2; padding: 5px;">        ДЕЙСТВИЯ</div>  
 
 
-### <span style="color: #8A2BE2">**1)** Создание Django-приложения:</span>  
+### <span style="color: #8A2BE2">**1)** Создание Django приложения:</span>  
 <span style="color: #606060">См. Les13-Django_13-Django_INTRO-1.pdf, слайд 67.</span>  
 ```
-  python manage.py startapp <app_name>
+  python manage.py startapp hw_02_task_manager
 ```
 
 
@@ -48,8 +74,8 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     ...,
     'django.contrib.staticfiles',
-    # Моё приложение:
-    'hw_01_first_app',      # ИЛИ 'myapp.apps.MyappConfig'.
+    # Моё приложение по ДЗ-2:
+    'hw_02_task_manager',      # ИЛИ 'myapp.apps.MyappConfig'.
 ]
 ```
 
