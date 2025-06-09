@@ -77,20 +77,21 @@ INSTALLED_APPS = [
 
 
 ### <span style="color: #8A2BE2">**5)** Подключение маршрутов приложения к проекту</span> <a>DjangoProject_config / urls.py</a>:  
-<span style="color: #606060">См. Les13-Django_13-Django_INTRO-1.pdf, слайд 78.</span>  
+<span style="color: #606060">См. Les13-Django_13-Django_INTRO-1.pdf, слайд 78.</span>
+
 ```python
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('les_01_begins/', include('les_01_begins.urls')),          # Подключение маршрутов приложения les_01_begins.
-    path('hw_01_first_app/', include('hw_01_first_app.urls')),      # Подключение маршрутов приложения hw_01_first_app.
+    path('les_01_begins/', include('les_14_begins.urls')),  # Подключение маршрутов приложения les_01_begins.
+    path('hw_01_first_app/', include('hw_01_first_app.urls')),  # Подключение маршрутов приложения hw_01_first_app.
 ]
 ```
 
 
-### <span style="color: #8A2BE2">**6)** Проверить ПУТЬ к config-файлу в</span> <a>manage.py</a>:  
+### <span style="color: #8A2BE2">**6)** <a style="color: #F00000;">_ NB! _</a> Проверить ПУТЬ к config-файлу в</span> <a>manage.py</a>:  
 <span style="color: #606060">См. Les13-Django_13-Django_INTRO-1.pdf, слайд 76.</span>  
 Лучше чтобы папка с config-настройками называлась просто "config".  
 Если папка с <a>settings.py</a> называется DjangoProject_config (а не config), то нужно внести 

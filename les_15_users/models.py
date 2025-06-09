@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator    # Список валидаторов: https://django.fun/docs/django/5.0/ref/validators/
 from django.db import models
 
 # Create your models here.
@@ -23,7 +24,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=70, verbose_name='Family name')
     # verbose_name - то что будет ОТОБРАЖАТЬСЯ вместо Last Name.
 
-    age = models.IntegerField()
+    age = models.IntegerField(validators=[MinValueValidator(18), MaxValueValidator(140)])
     rating = models.FloatField(default=0.0)
     country = models.CharField(choices=countries, default='DE', help_text='Where are you born?')
 

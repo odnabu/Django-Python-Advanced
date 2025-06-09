@@ -19,7 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),        # http://127.0.0.1:8000/admin/
-    path('les_01_begins/', include('les_01_begins.urls')),  # Подключение маршрутов приложения les_01_begins.
+    path('les_01_begins/', include('les_14_begins.urls')),  # Подключение маршрутов приложения les_01_begins.
                     # При этом в браузере нужно ввести: http://127.0.0.1:8000/les_01_begins/<адрес из VIEWS>.
     # path('', include('hw_01_first_app.urls')),          # Подключение маршрутов ТОЛЬКО из приложения hw_01_first_app.
                     # Если несколько приложений, то пустые кавычки '' здесь НЕЛЬЗЯ использовать!.

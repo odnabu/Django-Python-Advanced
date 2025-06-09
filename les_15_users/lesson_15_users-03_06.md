@@ -34,11 +34,11 @@ class User(models.Model):
 ```python
 first_name = models.CharField(max_length=50, null=True, blank=True)
 ```
-- null - в БД без значений.  
-- blank - в ФОРМАХ без значений.  
+- null - в <span style="color: blue;">Базах Данных</span> без значений.  
+- blank - в <span style="color: red;">ФОРМАХ</span> без значений.  
 
 После __СУЩЕСТВЕННЫХ__ изменений в МОДЕЛИ:  
-```python
+```
 python manage.py makemigrations.
 python manage.py migrate.
 ```
