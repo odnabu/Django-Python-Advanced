@@ -30,4 +30,39 @@ class User(models.Model):
 
 
 
+class UserInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='info')     # O2O - One-to-One.
+    married = models.BooleanField()     # O2O - One-to-One.
+
+
+# ______  ANOTHER  MODELS only for Demonstration  _________________________________________________________
+# class Actor(models.Model):
+#     name = models.CharField(max_length=50)
+#
+# class Movie(models.Model):
+#     title = models.CharField(max_length=60)
+#     actors = models.ManyToManyField(Actor, related_name='movies')
+
+
+# ////////////////   TO   LESSON  from 23-06-25, See Video Video 20, 48:00    //////////////////////
+class Actor(models.Model):
+    name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
+
+class Director(models.Model):
+    name = models.CharField(max_length=255)
+    experience = models.IntegerField()
+    def __str__(self):
+        return self.name
+
+class Movie(models.Model):
+    title = models.CharField(max_length=32)
+    actors = models.ManyToManyField(Actor, related_name="movies")
+    director = models.ForeignKey(Director, related_name='movies', on_delete=models.SET_NULL, null=True, blank=True)
+    def __str__(self):
+        if self.director:       # Если нет директора / режисера:
+            return f'Director: {self.director.name}. Title: {self.title}'
+        else:
+            return f'Title: {self.title}'
 

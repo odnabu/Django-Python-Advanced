@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'hw_01_first_app',
     'les_15_users',
     'hw_02_task_manager',
+    'project',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'     # See Lec18, slide 42.
 
 TIME_ZONE = 'UTC'
 

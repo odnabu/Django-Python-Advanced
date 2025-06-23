@@ -1,5 +1,5 @@
 03.06.2025 
-## Работа с моделями Django - 1
+## <a id="s1" style="color: #008000">Работа с моделями Django - 1</a>
 
 ### Список Источников:  
 
@@ -43,6 +43,12 @@ python manage.py makemigrations.
 python manage.py migrate.
 ```
 
+ИЛИ для определенного приложения:
+```
+python manage.py makemigrations les_15_users
+python manage.py migrate les_15_users
+```
+
 После НЕсущественных изменений, таких как добавление help_text или verbose_name,
 выполнять команды в консоли для миграций НЕ обязательно.
 
@@ -51,3 +57,10 @@ last_name = models.CharField(max_length=70, verbose_name='Family name')
 ```
 verbose_name - то что будет ОТОБРАЖАТЬСЯ вместо Last Name.
 
+
+<a id="s1" style="color: #008000"> OneToOneField</a> используется для создания связи "один к одному" (O2O).
+
+Запустить сервер и проверить в админке, как выглядят модели:
+```
+python manage.py runserver
+```

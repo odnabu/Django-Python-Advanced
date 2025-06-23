@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),        # http://127.0.0.1:8000/admin/
     path('les_01_begins/', include('les_14_begins.urls')),  # Подключение маршрутов приложения les_01_begins.
@@ -28,4 +29,5 @@ urlpatterns = [
                     # При этом в браузере нужно ввести: http://127.0.0.1:8000/hw_01_first_app/<адрес из VIEWS>
                     # (у меня для 1-ой функции ендпоинт hw-01/ и по нему выводится приветственное сообщение в браузере).
     path('hw-02/', include('hw_02_task_manager.urls')),
+    path('project/', include('project.urls')),      # 19-06-2026
 ]
