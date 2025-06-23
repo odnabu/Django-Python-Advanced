@@ -30,7 +30,8 @@ class DeveloperAdmin(admin.ModelAdmin):
     # Задание полей по которым будет производиться поиск
     search_fields = ('name', 'grade')
 
-# Сoздание красивого класса Администратора для модели Developer:
+
+# Сoздание красивого класса Администратора для модели ___:
 class TaskAdmin(admin.ModelAdmin):
     # Определение полей, которые будут отображаться в списке объектов модели
     list_display = ('name', 'project__name', 'status', 'priority', 'created_at', 'due_date', 'assignee__username')    # project__name - для обращения к связанной модели __ .

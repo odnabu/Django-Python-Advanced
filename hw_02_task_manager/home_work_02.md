@@ -1,5 +1,5 @@
 
-## <a id="s6" style="color: #9000F0">Домашнее задание: Проект "Менеджер задач"</a>    
+## <a id="s6" style="color: #9000F0">Домашнее задание 8 (2 in Django): Проект "Менеджер задач"</a>    
 Цель: Создать структуру менеджера задач ([п. 1](#s1)) и зарегистрировать модели в 
 панели администратора Django.  
 
@@ -183,7 +183,7 @@ python manage.py runserver
 Перейти по созданному URL адресу http://127.0.0.1:8000 для проверки корректности 
 реализации, где выбрать из списка нужное ([<font color="#696969">Fig. 1</font>](#img1)):  
 
-<img src="figs/img01.png" width="350" alt="Тестирование работы приложения hw-02."/>  
+<img src="figs/hw_02/img01.png" width="350" alt="Тестирование работы приложения hw-02."/>  
 
 <a id="img1" style="margin: 40px; color:#606060;">Fig. 1.</a>
 
@@ -193,7 +193,7 @@ python manage.py runserver
 - <a style="color:#D01050">hw-02/</a> - имя приложения, прописанное в <a>DjangoProject_config / urls.py</a>,
 - <a style="color:#D01050">home/</a> - страница с приветствием.  
 
-<img src="figs/img02.png" width="350" alt="Замена эндпоинта в адресной строке браузера."/>  
+<img src="figs/hw_02/img02.png" width="350" alt="Замена эндпоинта в адресной строке браузера."/>  
 
 <a id="img2" style="margin: 40px; color:#606060;">Fig. 2.</a>  
 
@@ -202,43 +202,43 @@ python manage.py runserver
 
 Перейти на страницу с адресом http://127.0.0.1:8000/admin/.
 
-<img src="figs/img_cat.png" width="700"/>  
+<img src="figs/hw_02/img_cat.png" width="700"/>  
 
 <a id="img3" style="margin: 40px; color:#606060;">Fig. 3. Список категорий в Админке.</a>
 
-<img src="figs/img_tasks.png" width="700"/>  
+<img src="figs/hw_02/img_tasks.png" width="700"/>  
 
 <a id="img4" style="margin: 40px; color:#606060;">Fig. 4. Список задач в Админке.</a>
 
-<img src="figs/img_task_1.png" width="700"/>  
+<img src="figs/hw_02/img_task_1.png" width="700"/>  
 
 <a id="img5" style="margin: 40px; color:#606060;">Fig. 5. Пример задачи в Админке.</a>
 
-<img src="figs/img_subtasks.png" width="700"/>  
+<img src="figs/hw_02/img_subtasks.png" width="700"/>  
 
 <a id="img6" style="margin: 40px; color:#606060;">Fig. 6. Список подзадач в Админке.</a>
 
-<img src="figs/img_subtask_1.png" width="700"/>  
+<img src="figs/hw_02/img_subtask_1.png" width="700"/>  
 
 <a id="img7" style="margin: 40px; color:#606060;">Fig. 7. Пример подзадачи в Админке.</a>
 
-<img src="figs/img_db.png" width="400"/>  
+<img src="figs/hw_02/img_db.png" width="400"/>  
 
 <a id="img8" style="margin: 40px; color:#606060;">Fig. 8. Структура таблиц приложения "hw_02_task_manager" в БД.</a>
 
-<img src="figs/img_db_cat.png" width="400"/>  
+<img src="figs/hw_02/img_db_cat.png" width="400"/>  
 
 <a id="img9" style="margin: 40px; color:#606060;">Fig. 9. Таблица "Категории".</a>
 
-<img src="figs/img_db_tasks.png" height="200"/>  
+<img src="figs/hw_02/img_db_tasks.png" height="200"/>  
 
 <a id="img10" style="margin: 40px; color:#606060;">Fig. 10. Таблица "Задачи".</a>
 
-<img src="figs/img_db_subtasks.png" height="180"/>  
+<img src="figs/hw_02/img_db_subtasks.png" height="180"/>  
 
 <a id="img11" style="margin: 40px; color:#606060;">Fig. 11. Таблица "Подзадачи".</a>
 
-<img src="figs/img_db_task_to_cat.png" height="200"/>  
+<img src="figs/hw_02/img_db_task_to_cat.png" height="200"/>  
 
 <a id="img12" style="margin: 40px; color:#606060;">Fig. 12. Таблица "Многие-ко-многим".</a>
 

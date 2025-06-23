@@ -1,9 +1,36 @@
 from django.contrib import admin
+# ДОБАВЛЯЕМ сюда МОДЕЛИ:
 from hw_02_task_manager.models import Category, Task, SubTask
 
-# Register your models here.
 
-admin.site.register(Category)
-admin.site.register(Task)
-admin.site.register(SubTask)
+# ///////   home_work_03.md    /////////
+
+# Сoздание красивого класса Администратора для модели Category:
+class CategoryAdmin(admin.ModelAdmin):
+    # Определение полей, которые будут отображаться в списке объектов модели
+    list_display = ('name',)
+    # Задание полей по которым будет производиться поиск
+    search_fields = ('name',)
+
+
+# Сoздание красивого класса Администратора для модели Task:
+class TaskAdmin(admin.ModelAdmin):
+    # Определение полей, которые будут отображаться в списке объектов модели
+    list_display = ('title', 'publish_date', 'description')
+    # Задание полей по которым будет производиться поиск
+    search_fields = ('title', 'publish_date', 'description')
+
+
+# Сoздание красивого класса Администратора для модели SubTask:
+class SubTaskAdmin(admin.ModelAdmin):
+    # Определение полей, которые будут отображаться в списке объектов модели
+    list_display = ('title', 'description', 'status', 'deadline', 'created_at')
+    # Задание полей по которым будет производиться поиск
+    search_fields = ('title', 'description', 'status', 'deadline', 'created_at')
+
+
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Task, TaskAdmin)
+admin.site.register(SubTask, SubTaskAdmin)
 

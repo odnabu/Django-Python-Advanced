@@ -11,9 +11,18 @@ from django.core.validators import MinLengthValidator   # Список вали�
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name='Название категории', help_text='Категория выполнения')
 
+    # class Meta:
+    #     verbose_name = 'Категория'
+    #     verbose_name_plural = 'Категории'
+
+    # ///////   home_work_03.md    /////////
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        db_table = 'task_manager_category'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+        constraints = [
+            models.UniqueConstraint(fields=['name'], name='unique_category_name'),
+        ]
 
     def __str__(self):
         return self.name
@@ -68,6 +77,16 @@ class Task(models.Model):
     #         kwargs['force_insert'] = False      # Создание названия по умолчанию происходит только если это нужно!
     #     super().save(*args, **kwargs)
 
+    # ///////   home_work_03.md    /////////
+    class Meta:
+        db_table = 'task_manager_task'
+        ordering = ['-created_at']
+        verbose_name = 'Task'
+        verbose_name_plural = 'Tasks'
+        constraints = [
+            models.UniqueConstraint(fields=['title'], name='unique_task_title'),
+        ]
+
     def __str__(self):
         return self.title
 
@@ -94,7 +113,16 @@ class SubTask(models.Model):
     deadline = models.DateTimeField(help_text='Введите дату и время дедлайна для этой подзадачи.')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания подзадачи')
 
+    # ///////   home_work_03.md    /////////
+    class Meta:
+        db_table = 'task_manager_subtask'
+        ordering = ['-created_at']
+        verbose_name = 'SubTask'
+        verbose_name_plural = 'SubTasks'
+        constraints = [
+            models.UniqueConstraint(fields=['title'], name='unique_subtask_title'),
+        ]
+
     def __str__(self):
         return self.title
-
 
