@@ -37,7 +37,7 @@ class Project(models.Model):
         verbose_name = 'Project'
         verbose_name_plural = "Projects"
         unique_together = (('name', 'description'),)
-        # ====  НЕ МОРОЧИТЬ СЕБЕ ГОЛОВУ с constraints --- в итоговом проекту НЕ нужны!  =============================
+        # ====  НЕ МОРОЧИТЬ СЕБЕ ГОЛОВУ с constraints --- в итоговом проекте НЕ нужны!  =============================
         # constraints = [
         #     models.CheckConstraint(condition=models.Q(name__icontains='project'), name='project_name__icontains'),
         #     # models.UniqueConstraint(fields=['name', 'language'], name='project_name__language'),
