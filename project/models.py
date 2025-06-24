@@ -37,11 +37,13 @@ class Project(models.Model):
         verbose_name = 'Project'
         verbose_name_plural = "Projects"
         unique_together = (('name', 'description'),)
-        constraints = [
-            models.CheckConstraint(condition=models.Q(name__icontains='project'), name='project_name__icontains'),
-            # models.UniqueConstraint(fields=['name', 'language'], name='project_name__language'),
-            # See links: https://docs.djangoproject.com/en/5.2/ref/models/constraints/
-        ]
+        # ====  НЕ МОРОЧИТЬ СЕБЕ ГОЛОВУ с constraints --- в итоговом проекту НЕ нужны!  =============================
+        # constraints = [
+        #     models.CheckConstraint(condition=models.Q(name__icontains='project'), name='project_name__icontains'),
+        #     # models.UniqueConstraint(fields=['name', 'language'], name='project_name__language'),
+        #     # See links: https://docs.djangoproject.com/en/5.2/ref/models/constraints/
+        # ]
+        # ============================================================================================================
 
     def __str__(self):
         return self.name
