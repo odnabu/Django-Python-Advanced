@@ -16,7 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
 # Сoздание красивого класса Администратора для модели Task:
 class TaskAdmin(admin.ModelAdmin):
     # Определение полей, которые будут отображаться в списке объектов модели
-    list_display = ('title', 'publish_date', 'description')
+    list_display = ('title', 'status', 'publish_date', 'description')
     # Задание полей по которым будет производиться поиск
     search_fields = ('title', 'publish_date', 'description')
 
@@ -24,7 +24,7 @@ class TaskAdmin(admin.ModelAdmin):
 # Сoздание красивого класса Администратора для модели SubTask:
 class SubTaskAdmin(admin.ModelAdmin):
     # Определение полей, которые будут отображаться в списке объектов модели
-    list_display = ('title', 'description', 'status', 'deadline', 'created_at')
+    list_display = ('title', 'task', 'description', 'status', 'deadline', 'created_at')
     # Задание полей по которым будет производиться поиск
     search_fields = ('title', 'description', 'status', 'deadline', 'created_at')
 

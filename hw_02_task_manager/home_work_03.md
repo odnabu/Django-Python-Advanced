@@ -178,6 +178,8 @@ python manage.py migrate hw_02_task_manager
 ## <a id="s6" style="color: #008000">6. Git</a>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
+Ссылка на отчет по ДЗ <a>home_work_03.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_03.md.  
+
 Ссылка на приложение по ДЗ <a>hw_02_task_manager</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_02_task_manager.  
 
 Ссылка на весь проект <a>DjangoProject</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main.  
