@@ -35,10 +35,14 @@ SECRET_KEY = env('SECRET_KEY')      # Video 13, 3:11:40 - 1-st Lecture to Django
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)     # default=False - выполняется только если в .env НИЧЕГО НЕТ про Дебаг.
 
-
+# -----------------------------------------------------------------------------------------------------------------
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])        # Video 13, 3:13:30 - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
 # — превращает строку 127.0.0.1,localhost в список ['127.0.0.1', 'localhost']. 8000 - PORT.
 # ALLOWED_HOSTS = []         # Разрешает все хосты (НЕ использовать в продакшн)
+
+# Для устранения ОШИБКИ из-за НЕбезопасности POST-запросов, включая формы в админке (см. .env):
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+# -----------------------------------------------------------------------------------------------------------------
 
 
 
@@ -57,6 +61,7 @@ INSTALLED_APPS = [
     'les_15_users',
     'hw_02_task_manager',
     'project',
+    'les_18_shop',
 ]
 
 MIDDLEWARE = [

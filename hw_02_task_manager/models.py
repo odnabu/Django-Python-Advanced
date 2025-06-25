@@ -27,7 +27,7 @@ class Category(models.Model):
         ]
 
     def __str__(self):
-        return self.name
+        return self.name          # Показывать полное название в выпадающих списках
 
 
 
@@ -93,7 +93,7 @@ class Task(models.Model):
         ]
 
     def __str__(self):
-        return self.title
+        return self.title         # Показывать полное название в выпадающих списках
 
 
 # ___ Модель SubTask __________________________________________________________________________________________
@@ -132,5 +132,5 @@ class SubTask(models.Model):
         ]
 
     def __str__(self):
-        return self.title
+        return self.title         # Показывать полное название в выпадающих списках
 
