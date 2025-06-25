@@ -186,7 +186,7 @@ Django выведет колонку с заголовком `Short title`, чт
 ## <a id="s4" style="color: #008000">4. GitHub</a>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
-Ссылка на отчет по ДЗ <a>home_work_05.md</a> со скриншотами: .  
+Ссылка на отчет по ДЗ <a>home_work_05.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_05.md.  
 
 Ссылка на приложение по ДЗ <a>hw_02_task_manager</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_02_task_manager.  
 
@@ -203,9 +203,13 @@ Django выведет колонку с заголовком `Short title`, чт
 [//]: # (🔷🔹 🟩 ❇️♾️⚜️✳️❎✅☑️✔️🟪🔳🔲  )
 [//]: # (■ ⁜ ※ ⁂ ⁙ ⁘ ⫷ ⫸ ⩕ ⨠ ⨝ ⋘ ⋙ ∵ ∴ ∶ ∷ ■ ◪ ◩ ◲ ◳ ◆ ◇ ◈ ▼ ▽ ◀ ▶ ◁ ▷ ▹ ▲ △ ▢ ₪₪₪  )
 
-<div style="color: #F00000; margin: 40px 20px 20px 0;">
-<span style="border: 2px solid #6B0000; padding: 10px;"> NB ! </span>
-</div>
+
+[//]: # (<div style="color: #F00000; margin: 40px 20px 20px 0;">)
+
+[//]: # (<span style="border: 2px solid #6B0000; padding: 10px;"> NB ! </span>)
+
+[//]: # (</div>)
+
 
 [//]: # (&nbsp;&nbsp; spaces)
 [//]: # (<div style="font: small-caps 120% sans-serif; color: #8A2BE2; padding: 0 15px 0 0;">▣ &nbsp;&nbsp; Выполните запросы:</div>  )
