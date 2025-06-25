@@ -25,6 +25,16 @@ class SubTaskAdmin(admin.ModelAdmin):
     # Задание полей по которым будет производиться поиск
     search_fields = ('title', 'description', 'status', 'deadline', 'created_at')
 
+    # Функция, которая будет выполнять action в Админ-панели по массовому изменению
+    # статуса Подзадачи на Done:
+    def set_status_to_done(self, request, queryset):
+        queryset.update(status='Done')
+
+    set_status_to_done.short_description = "Set status to Done"     # Название функции в Админке.
+    # Собственно, активация пользовательского действия в Админке:
+    actions = [set_status_to_done]
+
+
 # ____ 1. Подключение связанной модели SubTask с основной моделью Task для ИНЛАЙНА в Админке:
 class SubTaskInline(admin.TabularInline):
     model = SubTask     # Вывод поля SubTask во вкладке Task.
@@ -50,6 +60,7 @@ class TaskAdmin(admin.ModelAdmin):
 
     short_title.short_description  = "Title"
 
+
 # """ __  NB!  __ """ # Можно прописать настройки для Админки и через декоратор. Например, так:
 # @admin.register(Task)
 # class TaskAdmin(admin.ModelAdmin):
@@ -58,6 +69,7 @@ class TaskAdmin(admin.ModelAdmin):
 #     list_filter = ['status']
 #     fields = ['title', 'status']
 #     list_per_page = 2
+
 
 # ------------------------------------------------------------------------------
 admin.site.register(Category, CategoryAdmin)

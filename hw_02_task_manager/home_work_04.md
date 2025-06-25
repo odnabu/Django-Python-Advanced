@@ -74,7 +74,12 @@ Python Advanced - Django
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border: 2px outset #8A2BE2; padding: 5px;">        ДЕЙСТВИЯ</div>
 
-!!! ВСЕГДА запускать команды python manage.py shell, migrate, runserver — находясь в корне проекта, рядом с manage.py.
+<div style="color: #F00000; margin: 40px 20px 20px 0;">
+<span style="border: 2px solid #6B0000; padding: 10px;"> NB ! </span>
+</div>  
+
+<span style="color: #F00000; border: 1px solid black; padding: 3px;">**!!! ВСЕГДА**</span>
+запускать команды python manage.py shell, migrate, runserver — находясь в корне проекта, рядом с manage.py.
 
 <span style="font: small-caps 120% sans-serif; color: #8A2BE2; padding: 0 15px 0 0;">▣</span>&nbsp;&nbsp;
 Для запуска Django Shell нужно ввести следующую команду в терминале в корневой директории проекта:
@@ -273,7 +278,9 @@ SubTasks "Create slides" в Админ-панели в Браузере.</a>
 [//]: # (<div style="font: small-caps 120% sans-serif; color: #8A2BE2; margin: 0 0 0 0px; padding: 0 15px 0 0;">▣ &nbsp;&nbsp; Выполните запросы:</div>  )
 [//]: # (🔷🔹 🟩 ❇️♾️⚜️✳️❎✅☑️✔️🟪🔳🔲  )
 [//]: # (■ ⁜ ※ ⁂ ⁙ ⁘ ⫷ ⫸ ⩕ ⨠ ⨝ ⋘ ⋙ ∵ ∴ ∶ ∷ ■ ◪ ◩ ◲ ◳ ◆ ◇ ◈ ▼ ▽ ◀ ▶ ◁ ▷ ▹ ▲ △ ▢ ₪₪₪  )
-[//]: # (<span style="color: #F00000; border: 2px solid yellow; padding: 3px;">\__ NB! \__  **текст** </span>)
+[//]: # (<div style="color: #F00000; margin: 40px 20px 20px 0;">
+[//]: # (<span style="border: 2px solid #6B0000; padding: 10px;"> NB ! </span>
+[//]: # (</div>)
 [//]: # (&nbsp;&nbsp; spaces)
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>
