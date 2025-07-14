@@ -1,3 +1,5 @@
+# DjangoProject_config/urls.py
+
 """
 URL configuration for DjangoProject project.
 
@@ -28,6 +30,24 @@ urlpatterns = [
                     # проекте Пайчарм НЕ одно приложение, как сейчас: les_01_begins, hw_01_first_app.
                     # При этом в браузере нужно ввести: http://127.0.0.1:8000/hw_01_first_app/<адрес из VIEWS>
                     # (у меня для 1-ой функции ендпоинт hw-01/ и по нему выводится приветственное сообщение в браузере).
-    path('hw-02/', include('hw_02_task_manager.urls')),
-    path('project/', include('project.urls')),      # 19-06-2026
+    path('hw-02/', include('hw_02_task_manager.urls')),     # HW_02 --> HW_06
+    path('project/', include('project.urls')),              # 19-06-2026
 ]
+
+
+
+# _____ HW_06 --->
+# _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView
+)
+
+urlpatterns += [
+    # Схема и документация:
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+]
+

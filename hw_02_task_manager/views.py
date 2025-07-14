@@ -96,3 +96,72 @@ def test(request):
 
     return HttpResponse("<h1>Test Request to hw_04 to app 'hw_02_task_manager'.</h1>")
 
+
+
+    # ///////   home_work_06.md    /////////
+
+# _____ 1.2.2. Представление для создания задачи
+
+from .models import Task
+from rest_framework import generics
+from .serializers import TaskSerializer
+
+class TaskCreateView(generics.CreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+# _____ 2. Эндпоинты для  -->  2.1. Список всех задач (GET /hw_02_task_manager/tasks/)
+
+from rest_framework.generics import ListAPIView
+
+class TaskListView(ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+# _____ 2. Эндпоинты для  -->  2.2. Получение задачи по ID (`GET /hw_02_task_manager/tasks/<int:pk>/`)
+
+from rest_framework.generics import RetrieveAPIView
+
+class TaskDetailView(RetrieveAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+# _____ 3. Агрегирующий эндпоинт для статистики задач  -->  3.1. View для статистики
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.utils import timezone
+
+class TaskStatisticsView(APIView):
+    def get(self, request):
+        total_tasks = Task.objects.count()
+        new_tasks = Task.objects.filter(status='New').count()
+        in_progress_tasks = Task.objects.filter(status='In Progress').count()
+        done_tasks = Task.objects.filter(status='Done').count()
+        overdue_tasks = Task.objects.filter(deadline__lt=timezone.now(), status__in=['New', 'In Progress']).count()
+
+        return Response({
+            "total": total_tasks,
+            "new": new_tasks,
+            "in_progress": in_progress_tasks,
+            "done": done_tasks,
+            "overdue": overdue_tasks
+        })
+
+# _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc  -->  Примечания
+# from rest_framework.generics import GenericAPIView
+# from .serializers import TaskStatisticsSerializer  # нужно создать этот сериализатор
+#
+# class TaskStatisticsView(GenericAPIView):
+#     serializer_class = TaskStatisticsSerializer
+#
+#     def get(self, request):
+#         data = {
+#             "total_tasks": 10,
+#             "completed_tasks": 3,
+#         }
+#         return Response(data)
+

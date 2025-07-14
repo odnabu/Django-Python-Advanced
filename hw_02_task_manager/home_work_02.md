@@ -62,7 +62,7 @@
 
 
 ---
-## <a id="s1" style="color: #008000">1.Создание и регистрация приложения "Менеджер задач"</a>
+## <a id="s1" style="color: #008000">1. Создание и регистрация приложения "Менеджер задач"</a>
 Внести изменения в файлы DjangoProject_config/<a>settings.py</a> и DjangoProject_config/<a>urls.py</a>.
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border: 2px outset #8A2BE2; padding: 5px;">        ДЕЙСТВИЯ</div>  

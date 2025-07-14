@@ -55,13 +55,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # ____  МОИ  ПРИЛОЖЕНИЯ  ________
+    # ____  djangorestframework  ______ see Les/Video 22
+    'rest_framework',
+    # ____  МОИ  ПРИЛОЖЕНИЯ  __________
     # 'les_01_begins',               # Video 13, __:__:__ - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
     'hw_01_first_app',
     'les_15_users',
     'hw_02_task_manager',
     'project',
     'les_18_shop',
+    # ____ Для HW_06   -->  5.2.2. Подключение Swagger и ReDoc
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +165,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# _____ HW_06 - Пагинация — это способ разделить большой список объектов на страницы.
+# +++
+# _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3,  # можно поставить 5, 20 и т.д.
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+# _____ HW_06 --->
+# _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Task Manager API',
+    'DESCRIPTION': 'API для управления задачами и подзадачами',
+    'VERSION': '1.0.0',
+}
+
