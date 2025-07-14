@@ -564,7 +564,30 @@ urlpatterns += [
 ```
 
 
-#### <span style="color: #008000;">Шаг 5:</span> Проверить результат
+#### <span style="color: #008000;">Шаг 5:</span> Установить `drf-spectacular-sidecar`:
+<font style="color: #606060;">Смотри пояснения здесь: https://chatgpt.com/s/t_6875627853bc8191bcef570f80c6b3c1.</font>  
+Swagger и ReDoc не работают из-за отсутствия нужных HTML-шаблонов, которые не входят в 
+библиотеку drf-spectacular по умолчанию. Чтобы устранить ошибку, нужно установить drf-spectacular-sidecar, 
+который автоматически подключает шаблоны для Swagger и ReDoc:
+1. Установить sidecar-пакет, для чего в терминале PyCharm выполнить команду установки:
+```bash
+  pip install drf-spectacular[sidecar]
+```
+Или, если PyCharm жалуется — можно отдельно: `pip install drf-spectacular` и `pip install drf-spectacular-sidecar`.
+
+2. Добавить `drf_spectacular_sidecar` в `INSTALLED_APPS`:
+В <a>settings.py</a>:
+```python
+INSTALLED_APPS = [
+    ...
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+    ...
+]
+```
+
+
+#### <span style="color: #008000;">Шаг 6:</span> Проверить результат
 
 1. Запустить / ПЕРЕзапустить сервер:
 ```bash
@@ -595,30 +618,34 @@ python manage.py runserver
 Чтобы `TaskStatisticsView` корректно отображался в документации — нужно в:
     * Наследоваться от `GenericAPIView` - <a>hw_02_task_manager / views.py</a> добавить код ниже.
     * Добавить `serializer_class`
-Код в <a>hw_02_task_manager / views.py</a>:
+Код в <a>hw_02_task_manager / views.py</a (https://chatgpt.com/s/t_6875645a82b48191ab1a9f15a8287c43):
 ```python
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView
+from drf_spectacular.utils import extend_schema
 from .serializers import TaskStatisticsSerializer  # нужно создать этот сериализатор
 
-class TaskStatisticsView(GenericAPIView):
-    serializer_class = TaskStatisticsSerializer
+class TaskStatisticsView(APIView):
 
+    @extend_schema(responses=TaskStatsSerializer)
     def get(self, request):
         data = {
-            "total_tasks": 10,
-            "completed_tasks": 3,
+            "total_tasks": 5,
+            "done": 3,
+            "in_progress": 2,
         }
         return Response(data)
 ```
 
-А в `serializers.py`:
+А в `serializers.py` (https://chatgpt.com/s/t_6875645a82b48191ab1a9f15a8287c43):
 ```python
+# serializers.py
 from rest_framework import serializers
 
-class TaskStatisticsSerializer(serializers.Serializer):
+class TaskStatsSerializer(serializers.Serializer):
     total_tasks = serializers.IntegerField()
-    completed_tasks = serializers.IntegerField()
+    done = serializers.IntegerField()
+    in_progress = serializers.IntegerField()
 ```
 Это **сделает документацию красивее**, но **не обязательно** для работы самих эндпоинтов.
 
