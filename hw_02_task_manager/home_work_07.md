@@ -61,16 +61,23 @@ __Шаги для выполнения:__
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
 ### <m style="color: #008000">Источники</m>  
-<m style="color: #606060">Видео - уроки от *14.07.2025*</m>  [<font color="#696969">[1 - ▶  Video ___]</font>](#v1).  
-1. ▶ Video __ "", *14.07.2025*: <m id="v1"></m>.    
-2. ▶ Video __ "", *14.07.2025*: <m id="v2"></m>.    
-3. ▶ Video __ "", *14.07.2025*: <m id="v3"></m>.    
-4. Presentation <a id="p1">Les24-Django_23-REST-14_07.pdf</a>.    
-5. Conspectus <a id="c1">Les24-Django_23---REST-14_07.pdf</a>.  
-6. Presentation <a id="p2">Les24-Django_24-REST-14_07-pyth_25.pdf</a>.  
-7. Conspectus <a id="c2">Les24-Django_24---REST-14_07-pyth_25.pdf</a>.  
-8. Приложение **home_work_06**: файл <m id="hw6">home_work_06.md</m>.  
-9. Руководство по оформлению Markdown файлов: https://gist.github.com/Jekins/2bf2d0638163f1294637.
+<m style="color: #606060">Видео - уроки от *14.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 24]</font>](#v1).  
+[1] ▶ Video 24 "Python Adv 24: Основы работы с Django REST Framework. Часть 2" (3:26:57), *14.07.2025*: <m id="v1">view-source:https://player.vimeo.com/video/1101756493?h=3cd74f7f06</m>.  
+[2] Presentation <a id="p1">Les24-Django_23-REST-14_07.pdf</a>.    
+[3] Conspectus <a id="c1">Les24-Django_23---REST-14_07.pdf</a>.  
+[4] Presentation <a id="p2">Les24-Django_24-REST-14_07-pyth_25.pdf</a>.  
+[5] Conspectus <a id="c2">Les24-Django_24---REST-14_07-pyth_25.pdf</a>.  
+[6] Приложение **home_work_06**: файл <m id="hw6">home_work_06.md</m>.  
+[7] Руководство по оформлению Markdown файлов: https://gist.github.com/Jekins/2bf2d0638163f1294637.
+
+
+| <m style="color: red"> NB! &nbsp; &nbsp;</m> В СЛЕДУЮЩУЮ ДОМАШКУ 14 (Django 8)                                                                                                                                                                                                                                               |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ▶ Video 25 "Python Adv 25: Extract методы, query_params", *14.07.2025*: <br/><m id="v2">https://player.vimeo.com/video/1101197544?h=08aba743e2</m>.                                                                                                                                                                          |
+| ▶ Video __(1) "Additional practicum 5: mini project (Agile project)" (1:37:37), *15.07.2025*: <br/><m id="v____">https://player.vimeo.com/video/1101471476?h=c62c9c2dc1</m> - <br/> НА САМОМ ДЕЛЕ продолжение Урока <m style="color: red">25</m> - "Python Adv 25: Extract методы, query_params".                            |
+| ▶ Video __(2) "Additional practicum 5: mini project (Agile project) (3:26:57), *15.07.2025*: <br/><m id="v____">https://player.vimeo.com/video/1101172994?h=485abc1389</m> - <br/><m style="color: red">ДУБЛИРУЕТСЯ видео 24</m> "Python Adv 24: Основы работы с Django REST Framework. Часть 2" (3:26:57), от *14.07.2025*. |
+| ▶ Video 26 "Python Adv 26: Summary session 6", *15.07.2025*: <br/> <m id="v____">https://player.vimeo.com/video/1101535545?h=ed5a8d7fd2</m> - <br/>НАЧАЛО мини проекта "Adile Mini-project".                                                                                                                                 |
+
 
 
 
@@ -79,9 +86,8 @@ __Шаги для выполнения:__
 ## <m id="s1" style="color: #008000">1. Переопределение полей сериализатора</m>  
 
 <div style="margin: 20px 20px 20px 0;">
-<b style="color: #F00000; border: 2px solid #6B0000; padding: 10px; margin: 0 10px 0 0;"> NB ! </b>
-<p style="margin: 0 0 0 65px;"> Из презентаций и конспекта <b style="color: red">НЕ</b>  очевидно, какой код и в какой ФАЙЛ вставлять.
-<br> Поэтому дальше решение с Чатом GPT. Хорошо, что он есть 🥰 Без него я бы этот курс не закончила.
+<b style="color: #F00000; border: 2px solid #6B0000; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> Из презентаций и конспекта <b style="color: red">НЕ</b>  очевидно, какой код и в какой ФАЙЛ вставлять.
+<p style="margin: 0 0 0 65px;"> Поэтому дальше решение с Чатом GPT. Хорошо, что он есть 🥰 Без него я бы этот курс не закончила.
 </div>
 
 ### <m id="s1.1" style="color: #008000">1.1. Миграции</m>  
@@ -103,9 +109,8 @@ __Шаги для выполнения:__
 ```
    python manage.py runserver
 ```
-
-
 ---
+
 
 ### <m id="ss1.2" style="color: #008000">1.2. SubTaskCreateSerializer</m>  
 Смотри решение тут [ChatGPT](https://chatgpt.com/s/t_68789c352618819192f6bac3d5b4052a).  
@@ -145,13 +150,14 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
 - Этот метод автоматически вызывает `Model.objects.create(**validated_data)` и таким образом
 создаёт объект модели и сохраняет его в базе данных.
 
-
+---
 ### <m id="s2.2" style="color: #008000">2.2. `CategoryCreateSerializer` с методом `update`</m>  
 В файл <a>hw_02_task_manager / serializers.py</a> добавить код для метода `update`.  
 Переопределение метода `update` для проверки уникальности названия категории реализуется 
 с помощью условия для `Category.objects.exclude(pk=instance.pk, name=name).filter(name=name)`. 
 Если вводится имя категории, которое уже существует в БД, рейзится ошибка `ValidationError`.  
 
+---
 ### <m id="s2.3" style="color: #008000">2.3. Результаты выполнения задания 1 и 2</m>  
 
 <img src="figs/hw_07/img_1.png" width="650" style="margin: 0 0 0 40px"/>  
@@ -174,7 +180,7 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
 Сериализатор `TaskDetailSerializer` включает вложенный сериализатор для  
 полного отображения связанных подзадач (`SubTask`).
 
-
+---
 <div style="margin: 20px 20px 20px 0;">
 <b style="color: #F00000; border: 2px solid #6B0000; padding: 10px; margin: 0 10px 0 0;"> NB ! </b>
 Обязательно убедиться,
@@ -189,7 +195,7 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
 
 ### <m id="s3.2" style="color: #008000">3.2. Результаты выполнения задания 3</m>  
 
-<img src="figs/hw_07/img_2.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_2.png" width="500" style="margin: 0 0 0 40px"/>  
 
 <m id="img2" style="margin: 40px; color:#606060;">Fig. 2. Сериализатор `TaskDetailSerializer` c вложенным сериализатором `SubTaskSerializer`.</m>
 
@@ -205,9 +211,10 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
 В файл <a>hw_02_task_manager / serializers.py</a> добавить код для класса 
 `TaskCreateSerializer` с валидацией `deadline`.
 
+---
 ### <m id="s4.2" style="color: #008000">4.2. Результаты выполнения задания 3</m>  
 
-<img src="figs/hw_07/img_3.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_3.png" width="500" style="margin: 0 0 0 40px"/>  
 
 <m id="img3" style="margin: 40px; color:#606060;">Fig. 3. Сериализатор `TaskCreateSerializer` с валидацией `deadline`.</m>
 
@@ -229,14 +236,18 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
 
 <m id="img4" style="margin: 40px; color:#606060;">Fig. 4. Представление в <a>hw_02_task_manager / views.py</a> 
 для создания и получения списка подзадач.</m>
+---
+
 
 ### <m id="s5.2" style="color: #008000">5.2. Класс представлений</m> `SubTaskDetailUpdateDeleteView`  
 `SubTaskDetailUpdateDeleteView` — класс представлений для получения, обновления и удаления подзадач.
 
-<img src="figs/hw_07/img_5.png" width="700" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_5.png" width="650" style="margin: 0 0 0 40px"/>  
 
 <m id="img5" style="margin: 40px; color:#606060;">Fig. 5. Класс представлений `SubTaskDetailUpdateDeleteView` 
 для получения, обновления и удаления подзадач.</m>
+---
+
 
 ### <m id="s5.3" style="color: #008000">5.3. Маршруты в файле</m> <a>urls.py</a>  
 Добавление маршрутов в файле <a>urls.py</a>, чтобы использовать классы `SubTaskListCreateView` и 
@@ -280,8 +291,8 @@ from .views import home_view, TaskListView
 
 <m id="img6" style="margin: 40px; color:#606060;">Fig. 6. Маршруты для <b>hw_07</b> в файле <a>urls.py</a>.</m>
 
-
 ---
+
 
 ### <m id="s5.4" style="color: #008000">5.4. ДОПОЛНИТЕЛЬНО</m>  
 В детальном представлении задачи отобразить названия связанных с ней подзадач.   
@@ -298,40 +309,41 @@ from .views import home_view, TaskListView
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
+
 ## <m id="s6" style="color: #008000">6. Проверка результатов hw_07 в БРАУЗЕРЕ</m>  
 
 <b id="s4.1" style="color: #008000">⋘ 1 ⋙ </b> зайти на домашнюю страницу и проверить работу приложения: http://127.0.0.1:8000/hw-02/home/
 На домашней странице будет видно приветствие: "Welcome to the Task Manager!".  
-
 ---
+
 <b id="s4.2" style="color: #008000">⋘ 2 ⋙ </b> далее ПЕРЕЙТИ по ссылке: http://127.0.0.1:8000/hw-02/subtasks/.
 
 Откроется страница со СПИСКОМ подзадач и полем для добавления новой подзадачи `SubTask`:
 
-<img src="figs/hw_07/img_7.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_7.png" width="700" style="margin: 0 0 0 40px"/>  
 
 <m id="img7" style="margin: 40px; color:#606060;">Fig. 7. Список всех подзадач и поля добавления новой подзадачи.</m>
 
-
 ---
+
 <b id="s4.3" style="color: #008000">⋘ 3 ⋙ </b> далее ПЕРЕЙТИ по ссылке: http://127.0.0.1:8000/hw-02/subtasks/.
 
-<img src="figs/hw_07/img_8.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_8.png" width="700" style="margin: 0 0 0 40px"/>  
 
 <m id="img8" style="margin: 40px; color:#606060;">Fig. 8. Подзадача с ID=1 и полем добавления новой подзадачи.</m>
 
-<img src="figs/hw_07/img_9_1.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_9_1.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_9_2.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_9_2.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_9_3.png" width="600" style="margin: 0 0 0 40px"/>
+<img src="figs/hw_07/img_9_3.png" width="700" style="margin: 0 0 0 40px"/>
 
 <m id="img9" style="margin: 40px; color:#606060;">Fig. 9. Создание НОВОЙ подзадачи из-под ендпоинта с ID=1: 
 http://127.0.0.1:8000/hw-02/subtasks/1/.</m>
 
-<img src="figs/hw_07/img_10_1.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_10_1.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_10_2.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_10_2.png" width="700" style="margin: 0 0 0 40px"/>  
 
 <m id="img10" style="margin: 40px; color:#606060;">Fig. 10. Редактирование подзадачи с ID=1 задачи 5.</m> 
 <br><m style="margin: 90px; color: red">ВОПРОС - почему дата стоит ЗАДАЧИ, а не дата создания ПОДзадачи????</m>
@@ -346,29 +358,28 @@ http://127.0.0.1:8000/hw-02/subtasks/1/.</m>
 <br> - то ли еще какая-то причина...
 </div>
 
-<img src="figs/hw_07/img_11_1.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_11_1.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_11_2.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_11_2.png" width="700" style="margin: 0 0 0 40px"/>  
 
 <m id="img11" style="margin: 40px; color:#606060;">Fig. 11. ПРОВЕРКА даты создания НОВОЙ подзадачи в задаче 5 
 из-под эндпоинта http://127.0.0.1:8000/hw-02/subtasks/ для проверки ___времени создания ПОДзадачи___.</m> 
 <br> <m style="margin: 85px;"> Дата создания подзадачи теперь АКТУАЛЬНАЯ.</m> 
 
-
-
 ---
+
 <b id="s4.4" style="color: #008000">⋘ 4 ⋙ </b> далее ПЕРЕЙТИ по ссылке: http://127.0.0.1:8000/hw-02/subtasks/.  
 Создать подзадачу для проверки удаления подзадачи.
 
-<img src="figs/hw_07/img_12_1.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_12_1.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_12_2.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_12_2.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_12_3.png" width="600" style="margin: 0 0 0 40px"/>
+<img src="figs/hw_07/img_12_3.png" width="700" style="margin: 0 0 0 40px"/><br/>
 
-<img src="figs/hw_07/img_12_4.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_12_4.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_07/img_12_5.png" width="600" style="margin: 0 0 0 40px"/>  
+<img src="figs/hw_07/img_12_5.png" width="700" style="margin: 0 0 0 40px"/>  
 
 <m id="img12" style="margin: 40px; color:#606060;">Fig. 12. Результат создания подзадичи в задаче 5 
 и её последующего удаления.</m> 
@@ -394,13 +405,13 @@ http://127.0.0.1:8000/hw-02/subtasks/1/.</m>
 ## <m id="s7" style="color: #008000">7. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
-Ссылка на отчет по ДЗ <a>home_work_07.md</a> со скриншотами: .  
+Ссылка на отчет по ДЗ <a>home_work_07.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_07.md.  
 
 Ссылка на приложение по ДЗ <a>hw_02_task_manager</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_02_task_manager.  
 
 Ссылка на весь проект <a>DjangoProject</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main.  
 
----
+
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #8A2BE2; padding: 5px; margin: 40px 0 40px 0"></div>
 
 [//]: # ([<font color="#696969">[1 - ▶  Video 22, 48:00]</font>]&#40;#v1&#41;)
