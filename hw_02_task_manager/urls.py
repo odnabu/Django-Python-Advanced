@@ -1,14 +1,16 @@
 # hw_02_task_manager/urls.py
 
 from django.urls import path
+# _____ Импортирование ВСЕХ классов представлений из файла hw_02_task_manager / views.py:
 from . import views
+
 
 # urlpatterns = [
 #     path('home/', views.welcome_to_the_app, name='welcome_to_the_app'),  # __ NB! __  'hw_02/'  and  welcome_to_the_app.
 # ]
 
 
-# ///////   home_work_06.md    /////////
+#       ///////   home_work_06.md    /////////
 
 # _____ 1.2.3 Маршрут (URL) для обращения к представлению
 from .views import TaskCreateView
@@ -57,3 +59,14 @@ urlpatterns += [
 ]
 
 
+
+#       ///////   home_work_07.md    /////////
+
+# _____ 5.3. Маршруты в файле urls.py:
+from .views import SubTaskListCreateView, SubTaskDetailUpdateDeleteView
+
+urlpatterns += [
+    path('subtasks/', SubTaskListCreateView.as_view(), name='subtask-list-create'),
+    path('subtasks/<int:pk>/', SubTaskDetailUpdateDeleteView.as_view(),
+         name='subtask-detail-update-delete'),
+]

@@ -1,5 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+# _____  Для home_work_06.md:  _____
+from .models import Task
+from rest_framework import generics
+from .serializers import TaskSerializer, SubTaskSerializer
+# _____  Для home_work_07.md:  _____
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import SubTask
+from .serializers import SubTaskCreateSerializer
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -102,10 +113,6 @@ def test(request):
 
 # _____ 1.2.2. Представление для создания задачи
 
-from .models import Task
-from rest_framework import generics
-from .serializers import TaskSerializer
-
 class TaskCreateView(generics.CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -164,4 +171,56 @@ class TaskStatisticsView(APIView):
 #             "completed_tasks": 3,
 #         }
 #         return Response(data)
+
+
+
+    # ///////   home_work_07.md    /////////
+
+# _____ 5.1. Представление для создания и получения списка подзадач:
+
+class SubTaskListCreateView(APIView):
+
+    # Получение СПИСКА подзадач:
+    def get(self, request):
+        subtasks = SubTask.objects.all()
+        serializer = SubTaskCreateSerializer(subtasks, many=True)
+        return Response(serializer.data)
+
+    # Создание СПИСКА подзадач:
+    def post(self, request):
+        serializer = SubTaskCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# _____ 5.2. Класс представлений для получения, обновления и удаления подзадач:
+
+class SubTaskDetailUpdateDeleteView(APIView):
+
+    # Указание ID (является PRIMARY_KEY - pk) подзадачи в БД для дальнейшего вызова его в методах:
+    def get_object(self, pk):
+        return get_object_or_404(SubTask, pk=pk)
+
+    # Получение ОДНОЙ подзадачи по ID и вывод в браузере:
+    def get(self, request, pk):
+        subtask = self.get_object(pk)
+        serializer = SubTaskCreateSerializer(subtask)
+        return Response(serializer.data)
+
+    # Обновление ОДНОЙ подзадачи по ID и вывод в браузере:
+    def put(self, request, pk):
+        subtask = self.get_object(pk)
+        serializer = SubTaskCreateSerializer(subtask, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Удаление ОДНОЙ подзадачи по ID и вывод в браузере:
+    def delete(self, request, pk):
+        subtask = self.get_object(pk)
+        subtask.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
