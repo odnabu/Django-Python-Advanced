@@ -65,7 +65,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 class ProductDetailCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductDetail
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['product', 'description', 'manufacturing_date', 'expiration_date', 'weight']
 
 
 # 17.07.2025 Lesson 29, Practice 7, Presentation - Les28-Django_Pr7.pdf

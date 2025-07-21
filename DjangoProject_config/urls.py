@@ -51,3 +51,7 @@ urlpatterns += [
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
 
+# 27.07.2025 - Pr 8: Задание 1: Представления и маршруты для модели Category
+urlpatterns += [
+    path('shop/', include('les_18_shop.urls')),
+]

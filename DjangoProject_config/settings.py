@@ -171,8 +171,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # +++
 # _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
 REST_FRAMEWORK = {
+    # "DEFAULT_RENDERER_CLASSES": [         # Для других браузеров, если по умолчанию не отрендерит, как в Хроме.
+    #     "rest_framework.renderers.JSONRenderer",
+    #     "rest_framework.renderers.BrowsableAPIRenderer",
+    # ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3,  # можно поставить 5, 20 и т.д.
+    'PAGE_SIZE': 5,  # можно поставить 5, 20 и т.д.
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
