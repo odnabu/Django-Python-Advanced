@@ -1,19 +1,27 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
 # _____  Для home_work_06.md:  _____
-from .models import Task
+# from hw_02_task_manager.models import Task        # See home_work_04
 from rest_framework import generics
-from .serializers import TaskSerializer, SubTaskSerializer
+from hw_02_task_manager.serializers import TaskSerializer, SubTaskSerializer, TaskDetailSerializer
 # _____  Для home_work_07.md:  _____
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import SubTask
-from .serializers import SubTaskCreateSerializer
+# from hw_02_task_manager.models import SubTask        # See home_work_04
+from hw_02_task_manager.serializers import SubTaskCreateSerializer
 from django.shortcuts import get_object_or_404
+# _____  Для home_work_08.md:  _____
+# from hw_02_task_manager.models import Task, SubTask        # See home_work_04
+from rest_framework.pagination import PageNumberPagination
+# from hw_02_task_manager.serializers import TaskSerializer    # See home_work_06
+import datetime
+from rest_framework.request import Request
 
 
-# Create your views here.
+
+
 
 def welcome_to_the_app(request):                                      # __ NB! __   hello_django.
     return HttpResponse("<h1>Welcome to the Task Manager!</h1>")
@@ -114,6 +122,9 @@ def test(request):
 # _____ 1.2.2. Представление для создания задачи
 
 class TaskCreateView(generics.CreateAPIView):
+    """
+    Создание задачи.
+    """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -123,6 +134,9 @@ class TaskCreateView(generics.CreateAPIView):
 from rest_framework.generics import ListAPIView
 
 class TaskListView(ListAPIView):
+    """
+    Список всех задач.
+    """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -132,8 +146,23 @@ class TaskListView(ListAPIView):
 from rest_framework.generics import RetrieveAPIView
 
 class TaskDetailView(RetrieveAPIView):
+    """
+    Получение детальной информации о задаче по ID.
+    """
     queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+
+    # ДОПОЛНИТЕЛЬНО к "home_work_07.md":
+    # Добавление возможности переключения сериализаторов в зависимости от параметра ?subtask_titles=true.
+    # Сначала закомментировать строку ниже:
+    # serializer_class = TaskSerializer
+    # Затем обновить TaskDetailView, чтобы сериализатор выбирался по параметру:
+    def get_serializer_class(self):
+        subtask_title = self.request.query_params.get('subtask_titles')
+        if subtask_title and subtask_title.lower() in ['1', 'true', 'yes']:
+            return TaskDetailSerializer
+        return TaskSerializer
+
+
 
 
 # _____ 3. Агрегирующий эндпоинт для статистики задач  -->  3.1. View для статистики
@@ -143,6 +172,10 @@ from rest_framework.response import Response
 from django.utils import timezone
 
 class TaskStatisticsView(APIView):
+    """
+    Статистика задач.
+    """
+
     def get(self, request):
         total_tasks = Task.objects.count()
         new_tasks = Task.objects.filter(status='New').count()
@@ -178,13 +211,50 @@ class TaskStatisticsView(APIView):
 
 # _____ 5.1. Представление для создания и получения списка подзадач:
 
-class SubTaskListCreateView(APIView):
+# _____ home_work_08: 2. Пагинация в отображении списка подзадач:
+class SubTaskPagination(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 20
 
-    # Получение СПИСКА подзадач:
+
+class SubTaskListCreateView(APIView, PageNumberPagination):
+    """
+    home_work_08:
+        - Пагинация в отображении списка подзадач.
+        - Отображение и создание подзадач с возможностью фильтрации по названию задачи и статусу.
+    """
+    # serializer = SubTaskCreateSerializer(subtasks, many=True)
+    # return Response(serializer.data)
+
+    pagination_class = SubTaskPagination
+
+    # Получение СПИСКА подзадач
+    # +++
+    # _____ home_work_08: 2. Пагинация в отображении списка подзадач:
     def get(self, request):
-        subtasks = SubTask.objects.all()
-        serializer = SubTaskCreateSerializer(subtasks, many=True)
-        return Response(serializer.data)
+        subtasks = SubTask.objects.all().order_by('-created_at')     # Сортировка по убыванию даты создания.
+
+        # Получение query-параметров:
+        task_title = request.query_params.get('task_title')
+        status_filter = request.query_params.get('status')
+
+        # Фильтрация по названию главной задачи:
+        if task_title:
+            subtasks = subtasks.filter(task__title__icontains=task_title)
+
+        # Фильтрация по статусу подзадачи:
+        if status_filter:
+            subtasks = subtasks.filter(status__iexact=status_filter)
+
+        # Пагинация:
+        paginator = self.pagination_class()
+        page = paginator.paginate_queryset(subtasks, request)
+
+        # Краткая информация о подзадаче из сериализатора SubTaskSerializer для отображения в СПИСКЕ подзадач:
+        serializer = SubTaskSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+    # ____________________________________________________
 
     # Создание СПИСКА подзадач:
     def post(self, request):
@@ -198,6 +268,9 @@ class SubTaskListCreateView(APIView):
 # _____ 5.2. Класс представлений для получения, обновления и удаления подзадач:
 
 class SubTaskDetailUpdateDeleteView(APIView):
+    """
+    Получение, обновление и удаление подзадач.
+    """
 
     # Указание ID (является PRIMARY_KEY - pk) подзадачи в БД для дальнейшего вызова его в методах:
     def get_object(self, pk):
@@ -223,4 +296,47 @@ class SubTaskDetailUpdateDeleteView(APIView):
         subtask = self.get_object(pk)
         subtask.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+    # ///////   home_work_08.md    /////////
+
+# _____ 1. Эндпоинт на получение списка всех задач по дню недели
+
+class TaskByWeekdayView(APIView):
+    """
+    Получение списка всех задач по дню недели.
+    """
+
+    def get(self, request):
+        day_param = request.query_params.get('day', '').strip().lower()
+
+        # Если никакой параметр запроса не передавался - по умолчанию выводить все записи:
+        if not day_param:
+            tasks = Task.objects.all()
+        else:
+            # Сопоставление английских дней недели с номерами (monday = 0, sunday = 6)
+            day_name_to_number = {
+                'monday': 0,
+                'tuesday': 1,
+                'wednesday': 2,
+                'thursday': 3,
+                'friday': 4,
+                'saturday': 5,
+                'sunday': 6,
+            }
+
+            if day_param not in day_name_to_number:
+                return Response({f"\033[90;31mERROR\033[0m": "Not valid weekday name."}, status=400)
+
+            weekday_number = day_name_to_number[day_param]
+
+            # Фильтрация по дню недели:
+            tasks = Task.objects.filter(deadline__week_day=weekday_number + 2)
+            # +1 — потому что в Django 1=sunday, 2=monday... 7=saturday
+
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data)
+
+
 

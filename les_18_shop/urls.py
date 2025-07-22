@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 
 from les_18_shop.views import CategoryViewSet, SupplierViewSet, ProductListCreateView, ProductRetrieveUpdateDestroyView, \
-    ProductDetailViewSet, AddressViewSet
+    ProductDetailViewSet, AddressViewSet, CustomerViewSet, OrderViewSet, OrderItemViewSet
 
 # Создаем экземпляр роутера:
 router = DefaultRouter()
@@ -19,14 +19,22 @@ router.register('supplier', SupplierViewSet)
 
 
 # 27.07.2025 - Pr 8: Задание 3: Представления и маршруты для модели Product
-# Пути нельзя добавить в router. Поэтому добавляются они сразу в urlpatterns.
+# Пути нельзя добавить в router, потому что ProductListCreateView(ListCreateAPIView). Поэтому добавляются они сразу в urlpatterns.
 
-# 27.07.2025 - Pr 8: Задание 3: Представления и маршруты для модели Product
+# 27.07.2025 - Pr 8: Задание 3: Представления и маршруты для модели ProductDetail
 router.register('product-detail', ProductDetailViewSet)
 
 # 27.07.2025 - Pr 8: Задание 5: Представления и маршруты для модели Address
 router.register('address', AddressViewSet)
 
+# 27.07.2025 - Pr 8: Задание 6: Представления и маршруты для модели Customer
+router.register('customer', CustomerViewSet)
+
+# 27.07.2025 - Pr 8: Задание 7: Представления и маршруты для модели Order
+router.register('order', OrderViewSet)
+
+# 27.07.2025 - Pr 8: Задание 8: Представления и маршруты для модели OrderItem
+router.register('order-item', OrderItemViewSet)
 
 # Основной список маршрутов нашего приложения.
 # Мы просто включаем в него все URL, которые сгенерировал роутер.
@@ -35,6 +43,4 @@ urlpatterns = [
     path('product/', ProductListCreateView.as_view(), name='product-list-create'),
     path('product/<int:pk>/', ProductRetrieveUpdateDestroyView.as_view(), name='product-detail'),
 ]
-
-
 

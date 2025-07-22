@@ -1,7 +1,14 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from les_18_shop.models import Category, Supplier, ProductDetail, Address
-from les_18_shop.serializers import CategorySerializer, SupplierSerializer, AddressSerializer
+from rest_framework.permissions import IsAuthenticated
+
+from les_18_shop.models import Category, Supplier, ProductDetail, Address, Customer, Order, OrderItem
+from les_18_shop.serializers import (CategorySerializer, SupplierSerializer,
+                                     AddressSerializer,
+                                     CustomerSerializer, CustomerCreateUpdateSerializer,
+                                     OrderSerializer, OrderCreateUpdateSerializer,
+                                     OrderItemSerializer, OrderItemCreateUpdateSerializer)
 
 
 # 27.07.2025 - Pr 8: Задание 1: Представления и маршруты для модели Category
@@ -36,6 +43,11 @@ class ProductListCreateView(ListCreateAPIView):
     Представление для получения списка продуктов и создания нового продукта.
     """
     queryset = Product.objects.all()
+
+    # ____ Для practice_21_07.md:
+    # Задание 9.1: Настройка фильтрации для модели Product
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category', 'price']
 
     # _____  Переопределяем метод ProductCreateUpdateSerializer  ______
     # Этот метод позволяет нам динамически выбирать сериалайзер:
@@ -80,5 +92,39 @@ class AddressViewSet(viewsets.ModelViewSet):
 
 
 # 27.07.2025 - Pr 8: Задание 6: Представления и маршруты для модели Customer
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+
+    # Задание 9.2: Настройка фильтрации для модели Customer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['first_name', 'last_name']
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return CustomerSerializer
+        return CustomerCreateUpdateSerializer
+
+
+# 27.07.2025 - Pr 8: Задание 7: Представления и маршруты для модели Order
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return OrderSerializer
+        return OrderCreateUpdateSerializer
+
+
+# 27.07.2025 - Pr 8: Задание 8: Представления и маршруты для модели OrderItem
+class OrderItemViewSet(viewsets.ModelViewSet):
+    queryset = OrderItem.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return OrderItemSerializer
+        return OrderItemCreateUpdateSerializer
+
+
+# 27.07.2025 - Pr 8: Задание 9: Добавление filter_backends
 
 

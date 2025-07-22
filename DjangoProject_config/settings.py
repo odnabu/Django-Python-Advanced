@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # ____  djangorestframework  ______ see Les/Video 22
     'rest_framework',
+    # ____ Для practice_21_07.md
+    'django_filters',
     # ____  МОИ  ПРИЛОЖЕНИЯ  __________
     # 'les_01_begins',               # Video 13, __:__:__ - 1-st Lecture to Django (Intro). link: https://player.vimeo.com/video/1089675502?h=23260e4621
     'hw_01_first_app',

@@ -73,10 +73,10 @@ __Шаги для выполнения:__
 
 | <m style="color: red"> NB! &nbsp; &nbsp;</m> В СЛЕДУЮЩУЮ ДОМАШКУ 14 (Django 8)                                                                                                                                                                                                                                               |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ▶ Video 25 "Python Adv 25: Extract методы, query_params", *14.07.2025*: <br/><m id="v2">https://player.vimeo.com/video/1101197544?h=08aba743e2</m>.                                                                                                                                                                          |
+| ▶ Video 25 "Python Adv 25: Extract методы, query_params" (1:52:40), *14.07.2025*: <br/><m id="v2">https://player.vimeo.com/video/1101197544?h=08aba743e2</m>.                                                                                                                                                                |
 | ▶ Video __(1) "Additional practicum 5: mini project (Agile project)" (1:37:37), *15.07.2025*: <br/><m id="v____">https://player.vimeo.com/video/1101471476?h=c62c9c2dc1</m> - <br/> НА САМОМ ДЕЛЕ продолжение Урока <m style="color: red">25</m> - "Python Adv 25: Extract методы, query_params".                            |
 | ▶ Video __(2) "Additional practicum 5: mini project (Agile project) (3:26:57), *15.07.2025*: <br/><m id="v____">https://player.vimeo.com/video/1101172994?h=485abc1389</m> - <br/><m style="color: red">ДУБЛИРУЕТСЯ видео 24</m> "Python Adv 24: Основы работы с Django REST Framework. Часть 2" (3:26:57), от *14.07.2025*. |
-| ▶ Video 26 "Python Adv 26: Summary session 6", *15.07.2025*: <br/> <m id="v____">https://player.vimeo.com/video/1101535545?h=ed5a8d7fd2</m> - <br/>НАЧАЛО мини проекта "Adile Mini-project".                                                                                                                                 |
+| ▶ Video 26 "Python Adv 26: Summary session 6", *15.07.2025*: <br/> <m id="v____">https://player.vimeo.com/video/1101535545?h=ed5a8d7fd2</m> - <br/>на самом деле <u>НАЧАЛО мини проекта</u> "Adile Mini-project".                                                                                                            |
 
 
 
@@ -301,9 +301,46 @@ from .views import home_view, TaskListView
 и еще здесь [ChatGPT](https://chatgpt.com/s/t_687a3d0f0c8481919ba2fa9519b9af44).  
 И еще дополнительно здесь [ChatGPT](https://chatgpt.com/s/t_687a3d79efd08191a850f9711df40cc3) 
 решение для __переключения между разными сериализаторами__ по query-параметру, 
-например `?short=true`, чтобы получать: 
+например `?subtask_title=true`, чтобы получать: 
 - либо полную информацию о задаче с подзадачами,
 - либо только названия подзадач (короткий вариант).
+
+<m style="color: #9000F0">В переключении между разными сериализаторами</m> используется ``query_params``.  
+Смотри файл <a>hw_02_task_manager / views.py</a>.
+```python
+short = self.request.query_params.get('subtask_title')
+```
+Здесь используется **`query_params`**, потому что это — **доступ к GET-параметрам в URL-запросе**, например:
+```
+http://127.0.0.1:8000/hw-02/tasks/5/?subtask_title=true
+```
+
+### <b style="color: #9000F0">Разница между</b> `query_params` и `queryset`
+
+| Название       | Описание                                | Где используется                                      | Пример                                  |
+| -------------- |-----------------------------------------| ----------------------------------------------------- | --------------------------------------- |
+| `query_params` | Параметры запроса в URL (GET-параметры) | `request.query_params.get(...)`                       | `?short=true`, `?page=2`, `?search=abc` |
+| `queryset`     | Список объектов из базы данных          | В `APIView`, `ListAPIView`, `RetrieveAPIView`, и т.д. | `queryset = Task.objects.all()`         |
+
+Пример в файле <a>hw_02_task_manager / views.py</a>:
+```python
+def get_serializer_class(self):
+    subtask_titles = self.request.query_params.get('subtask_titles')  # ← читаем параметр из URL
+    if subtask_titles == 'true':
+        return TaskDetailSerializer
+    return TaskSerializer
+```
+→ Здесь `query_params` используется, чтобы узнать, **что именно запрашивает пользователь**: 
+полный вывод задачи или только названия подзадач.
+
+А `queryset` — это то, **откуда мы берём данные** (обычно из БД):
+```python
+queryset = Task.objects.all()
+```
+
+
+
+
 
 
 

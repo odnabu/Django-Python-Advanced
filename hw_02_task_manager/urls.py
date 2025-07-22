@@ -13,7 +13,7 @@ from . import views
 #       ///////   home_work_06.md    /////////
 
 # _____ 1.2.3 Маршрут (URL) для обращения к представлению
-from .views import TaskCreateView
+from hw_02_task_manager.views import TaskCreateView
 
 # urlpatterns = [
 #     path('admin/', view=test), # http://127.0.0.1:8000/admin/
@@ -23,7 +23,7 @@ from .views import TaskCreateView
 
 
 # _____ 2. Эндпоинты для  -->  2.3. Подключение маршрутов
-from .views import TaskListView, TaskDetailView
+from hw_02_task_manager.views import TaskListView, TaskDetailView
 
 urlpatterns = [
     # path('admin/', view=test), # http://127.0.0.1:8000/admin/
@@ -34,7 +34,7 @@ urlpatterns = [
 ]
 
 # _____ 3. Агрегирующий эндпоинт для статистики задач  -->  3.2. Добавление маршрута
-from .views import TaskStatisticsView
+from hw_02_task_manager.views import TaskStatisticsView
 
 urlpatterns += [
     path('tasks/statistics/', TaskStatisticsView.as_view(), name='task-statistics'),      # __ NB! __  'hw_06':
@@ -63,10 +63,21 @@ urlpatterns += [
 #       ///////   home_work_07.md    /////////
 
 # _____ 5.3. Маршруты в файле urls.py:
-from .views import SubTaskListCreateView, SubTaskDetailUpdateDeleteView
+from hw_02_task_manager.views import SubTaskListCreateView, SubTaskDetailUpdateDeleteView
 
 urlpatterns += [
     path('subtasks/', SubTaskListCreateView.as_view(), name='subtask-list-create'),
     path('subtasks/<int:pk>/', SubTaskDetailUpdateDeleteView.as_view(),
          name='subtask-detail-update-delete'),
+]
+
+
+
+#       ///////   home_work_08.md    /////////
+
+# _____ 1.2. URL-маршрут
+from hw_02_task_manager.views import TaskByWeekdayView
+
+urlpatterns += [
+    path('tasks/by-day/', TaskByWeekdayView.as_view(), name='tasks-by-day'),
 ]

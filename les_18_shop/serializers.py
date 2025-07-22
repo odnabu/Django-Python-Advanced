@@ -87,7 +87,8 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'address', 'date_joined', 'deleted', 'deleted_at']
         read_only_fields = ['date_joined', 'deleted', 'deleted_at']
 
 
@@ -118,11 +119,12 @@ class CustomerCreateUpdateSerializer(serializers.ModelSerializer):
 # Задание 7.1. Сериалайзер для получения данных
 
 class OrderSerializer(serializers.ModelSerializer):
-    customers = CustomerSerializer(read_only=True, many=True)
+    customer = CustomerSerializer(read_only=True)      # , many=True
 
     class Meta:
         model = Order
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['customer', 'order_date']
         read_only_fields = ['order_date']
 
 

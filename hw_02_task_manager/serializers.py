@@ -1,15 +1,17 @@
 # HW_06
-#
 
 from rest_framework import serializers
-from .models import Task, SubTask, Category
+from hw_02_task_manager.models import Task, SubTask, Category
 from rest_framework.exceptions import ValidationError
 from datetime import date
+# ____  Для home_work_08  ____
+import datetime
 
 
 
 # ДОПОЛНИТЕЛЬНО к "home_work_07.md": чтобы в детальном представлении задачи отображались и связанные
 # с ней подзадачи. Для этого используются вложенные сериализаторы в Django REST Framework.
+# Сериализатор для коротких подзадач:
 class SubTaskTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubTask
@@ -25,10 +27,26 @@ class TaskSerializer(serializers.ModelSerializer):
     # ДОПОЛНИТЕЛЬНО к "home_work_07.md":
     subtasks = SubTaskTitleSerializer(many=True, read_only=True)
 
+    # ____  Для к "home_work_08.md"  ____
+    weekday = serializers.SerializerMethodField()
+
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'status', 'deadline', 'subtasks']
+
+        # Для к "home_work_07.md":
+        # fields = ['id', 'title', 'deadline', 'subtasks']
         # fields = '__all__'
+
+        # Для к "home_work_08.md":
+        fields = ['id', 'title', 'deadline', 'weekday', 'subtasks']
+
+    # Для к "home_work_08.md":
+    def get_weekday(self, obj):
+        # Преобразование даты в день недели:
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        if obj.deadline:
+            return days[obj.deadline.weekday()]  # .weekday() → 0=Monday ... 6=Sunday
+        return None
 
 
 # _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc  -->  Примечания
@@ -77,15 +95,35 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
 class SubTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubTask
-        fields = '__all__'
+        # fields = '__all__'
+        # fields = ['id', 'title', 'description', 'status', 'deadline', 'created_at', 'task']
+        fields = ['id', 'title', 'status', 'deadline']
 
 
+    # Сериализатор, который использует только названия подзадач:
 class TaskDetailSerializer(serializers.ModelSerializer):
-    subtasks = SubTaskSerializer(many=True, read_only=True, source='subtasks')
+    subtasks = SubTaskSerializer(many=True, read_only=True)     # , source='subtasks'
+
+    # ____  Для к "home_work_08.md"  ____
+    weekday = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
-        fields = '__all__'
+
+        # ДОПОЛНИТЕЛЬНО к "home_work_07.md":
+        # fields = ['id', 'title', 'description', 'status', 'deadline', 'subtasks']
+        # fields = '__all__'
+
+        # Для к "home_work_08.md":
+        fields = ['id', 'title', 'description', 'status', 'deadline', 'weekday', 'created_at', 'subtasks']
+
+    # Для к "home_work_08.md":
+    def get_weekday(self, obj):
+        # Преобразование даты в день недели:
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        if obj.deadline:
+            return days[obj.deadline.weekday()]  # .weekday() → 0=Monday ... 6=Sunday
+        return None
 
 
 # _____ 4. Валидация данных в сериализаторах
