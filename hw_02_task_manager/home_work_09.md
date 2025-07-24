@@ -41,10 +41,10 @@ CRUD (Create, Read, Update, Delete) функционала.
      - получение, 
      - удаление данных через API.
 
-
-
-
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
+
+
+
 
 ### <m style="color: #008000">Источники</m>  
 <m style="color: #606060">Видео - уроки от *16.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 27, 2:26:00]</font>](#v1).  
@@ -62,8 +62,6 @@ CRUD (Create, Read, Update, Delete) функционала.
 
 
 
-
-
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border: 2px outset #8A2BE2; margin: 60px 0 40px 0; padding: 5px 0 5px 25px;">ОТЧЕТ</div>
 
 
@@ -77,15 +75,16 @@ CRUD (Create, Read, Update, Delete) функционала.
 Запускать команды `python manage.py shell`, `migrate`, `runserver` — находясь в корне проекта, рядом с <a>manage.py</a>
   (см. [<font color="#696969">[8 - hw_09]</font>](#hw6)).
 
-После изменений в МОДЕЛЯХ сделать и применить миграции [<font color="#696969">[1 - ▶  Video 20, 57:60]</font>](#v1):
-```
+После изменений в МОДЕЛЯХ сделать и применить миграции [<font color="#696969">[1 - ▶  Video 20, 57:60]</font>](#v1):  
+```bash
     python manage.py makemigrations hw_02_task_manager
     python manage.py migrate hw_02_task_manager
 ```
-Запустить локальный сервер Django с помощью <a>manage.py</a> в терминале [<font color="#696969">[1 - ▶  Video 20, 57:60]</font>](#v1):
-```
+Запустить локальный сервер Django с помощью <a>manage.py</a> в терминале [<font color="#696969">[1 - ▶  Video 20, 57:60]</font>](#v1):  
+```bash
    python manage.py runserver
 ```
+
 ---
 
 
@@ -179,7 +178,7 @@ CRUD (Create, Read, Update, Delete) функционала.
 
 <img src="figs/hw_09/task_1/img_t1_5_1.png" width="800" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_09/task_1/img_t1_5_2.png" width="800" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs/hw_09/task_1/img_t1_5_2.png" width="900" style="margin: 0 0 0 40px"/><br/>  
 
 <img src="figs/hw_09/task_1/img_t1_5_3.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
@@ -314,20 +313,20 @@ http://127.0.0.1:8000/hw-02/tasks/statistics/.</m>
 
 ##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ 2 ⋙ </b> Обновление задачи и ее удаление
 
-<img src="figs/hw_09/img_t2_5_1.png" width="700" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs/hw_09/task_2/img_t2_5_1.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_09/img_t2_5_2.png" width="700" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs/hw_09/task_2/img_t2_5_2.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_09/img_t2_5_3.png" width="900" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs/hw_09/task_2/img_t2_5_3.png" width="900" style="margin: 0 0 0 40px"/><br/>  
 
 <img src="figs/hw_09/task_2/img_t2_5_4.png" width="900" style="margin: 0 0 0 40px"/>  
 
 <m id="img2.5" style="margin: 40px; color:#606060;">Fig. 2.5. Обновление подзадачи по url http://127.0.0.1:8000/hw-02/subtasks/14/. 
 Результаты в: Postman; PyCharm DB; Browser Chrome.</m>
 
-<img src="figs/hw_09/img_t2_6_1.png" width="900" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs/hw_09/task_2/img_t2_6_1.png" width="900" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="figs/hw_09/img_t2_6_2.png" width="800" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs/hw_09/task_2/img_t2_6_2.png" width="800" style="margin: 0 0 0 40px"/><br/>  
 
 <img src="figs/hw_09/task_2/img_t2_6_3.png" width="900" style="margin: 0 0 0 40px"/>  
 
@@ -340,11 +339,11 @@ http://127.0.0.1:8000/hw-02/tasks/statistics/.</m>
 
 ##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ 1 ⋙ </b> Фильтрация по полям `status` и `deadline`
 
-<img src="figs/hw_09/img_t2_7_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
+<img src="figs/hw_09/task_2/img_t2_7_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
 
-<img src="figs/hw_09/img_t2_7_2.png" width="700" style="margin: 0 0 0 40px"/><br>  
+<img src="figs/hw_09/task_2/img_t2_7_2.png" width="700" style="margin: 0 0 0 40px"/><br>  
 
-<img src="figs/hw_09/img_t2_7_3.png" width="900" style="margin: 0 0 0 40px"/><br>  
+<img src="figs/hw_09/task_2/img_t2_7_3.png" width="900" style="margin: 0 0 0 40px"/><br>  
 
 <img src="figs/hw_09/task_2/img_t2_7_4.png" width="800" style="margin: 0 0 0 40px"/>
 
@@ -354,7 +353,7 @@ Postman; Browser Chrome.</m>
 
 ##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ 2 ⋙ </b> Поиск по полям `title` и `description`
 
-<img src="figs/hw_09/img_t2_8_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
+<img src="figs/hw_09/task_2/img_t2_8_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
 
 <img src="figs/hw_09/task_2/img_t2_8_2.png" width="900" style="margin: 0 0 0 40px"/>
 
@@ -429,7 +428,7 @@ REST_FRAMEWORK = {
 ## <m id="s4" style="color: #008000">4. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
-Ссылка на отчет по ДЗ <a>home_work_09.md</a> со скриншотами: .  
+Ссылка на отчет по ДЗ <a>home_work_09.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_09.md.  
 
 Ссылка на приложение по ДЗ <a>hw_02_task_manager</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_02_task_manager.  
 
