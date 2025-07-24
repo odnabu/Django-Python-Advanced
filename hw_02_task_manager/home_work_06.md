@@ -341,10 +341,9 @@ urlpatterns = [
 <m id="img7" style="margin: 40px; color:#606060;">Fig. 7. Результата перехода по эндпоинту 
 `http://127.0.0.1:8000/hw-02/tasks/statistics/` - выполнение GET-запроса на статистику задач.</m>
 
-
-
-
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
+
+
 
 ## <m id="s4" style="color: #008000">4. Итог</m>
 
@@ -598,8 +597,8 @@ python manage.py runserver
 * [http://127.0.0.1:8000/swagger/](http://127.0.0.1:8000/swagger/) — Swagger UI
 * [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/) — ReDoc
 
-
 ---
+
 #### <m style="color: #008000;">ПРИМЕЧАНИЯ:</m> 
 
 ##### <m style="color: #008000;">* Примечание 1</m> 
@@ -676,12 +675,10 @@ class TaskStatsSerializer(serializers.Serializer):
 <m id="img11" style="margin: 40px; color:#606060;">Fig. 11. Результат перехода по эндпоинту 
 `http://127.0.0.1:8000/schema/` - документация ReDoc UI.</m>
 
-
-
-
-
-
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
+
+
+
 
 ## <m id="s6" style="color: #008000">6. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.

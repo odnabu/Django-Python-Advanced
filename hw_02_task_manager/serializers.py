@@ -28,7 +28,7 @@ class TaskSerializer(serializers.ModelSerializer):
     subtasks = SubTaskTitleSerializer(many=True, read_only=True)
 
     # ____  Для к "home_work_08.md"  ____
-    weekday = serializers.SerializerMethodField()
+    deadline_weekday = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
@@ -38,10 +38,10 @@ class TaskSerializer(serializers.ModelSerializer):
         # fields = '__all__'
 
         # Для к "home_work_08.md":
-        fields = ['id', 'title', 'deadline', 'weekday', 'subtasks']
+        fields = ['id', 'title', 'deadline', 'deadline_weekday', 'subtasks']
 
     # Для к "home_work_08.md":
-    def get_weekday(self, obj):
+    def get_deadline_weekday(self, obj):
         # Преобразование даты в день недели:
         days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         if obj.deadline:
@@ -65,6 +65,7 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubTask
         fields = '__all__'           # ['id', 'title', 'description', 'status', 'deadline']
+        # fields = ['id', 'title', 'description', 'status', 'deadline', 'task']
         read_only_fields = ['created_at']
 
 
@@ -97,7 +98,7 @@ class SubTaskSerializer(serializers.ModelSerializer):
         model = SubTask
         # fields = '__all__'
         # fields = ['id', 'title', 'description', 'status', 'deadline', 'created_at', 'task']
-        fields = ['id', 'title', 'status', 'deadline']
+        fields = ['id', 'title', 'status', 'deadline', 'task']
 
 
     # Сериализатор, который использует только названия подзадач:

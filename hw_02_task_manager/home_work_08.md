@@ -96,7 +96,6 @@ ___пошагово___ реализовать эндпоинт для получ
 ### <m id="ss1.1" style="color: #008000">1.1. Представление</m>  
 В файл <a>views.py</a> добавить код для представления `TaskByWeekdayView(APIView)`.  
 
-
 ### <m id="ss1.2" style="color: #008000">1.2. URL-маршрут</m>  
 В файл <a>urls.py</a> прописать маршруты для представления `TaskByWeekdayView`.
 ```python
@@ -106,7 +105,6 @@ ___пошагово___ реализовать эндпоинт для получ
       path('tasks/by-day/', TaskByWeekdayView.as_view(), name='tasks-by-day'),
   ]
 ```
-
 
 ### <m id="ss1.3" style="color: #008000">1.3. День недели в каждой задаче в ответе API</m>  
 Как добавить день недели к каждой задаче в ответ API, чтобы он красиво отображался в браузере смотри у 
@@ -118,7 +116,6 @@ ___пошагово___ реализовать эндпоинт для получ
 
 Если используется `TaskDetailSerializer`, можно просто добавить в него то же поле 
 `weekday = serializers.SerializerMethodField()` и метод `get_weekday`.
-
 
 ### <m id="ss1.4" style="color: #008000">1.4. Использование эндпоинтов</m>  
 
@@ -139,7 +136,6 @@ ___пошагово___ реализовать эндпоинт для получ
 ---
 
 ### <m id="ss1.5" style="color: #008000">1.5. Результаты выполнения задания 1 в браузере</m>  
-Перейти по ссылке http://127.0.0.1:8000/hw-02/tasks/7/?subtask_titles=true.
 
 <b id="s1.5.1" style="color: #008000">⋘ 1 ⋙ </b> зайти на домашнюю страницу и проверить работу приложения: http://127.0.0.1:8000/hw-02/home/
 На домашней странице будет видно приветствие: "Welcome to the Task Manager!".  
@@ -165,7 +161,7 @@ ___пошагово___ реализовать эндпоинт для получ
 
 <img src="figs/hw_08/img_t1_3.png" width="650" style="margin: 0 0 0 40px"/>
 
-<m id="img9" style="margin: 40px; color:#606060;">Fig. 9. Пустой список задач на Tuesday: 
+<m id="img1.3" style="margin: 40px; color:#606060;">Fig. 1.3. Пустой список задач на Tuesday: 
 http://127.0.0.1:8000/hw-02/tasks/by-day/?day=tuesday.</m>
 
 ---
@@ -181,7 +177,6 @@ http://127.0.0.1:8000/hw-02/tasks/by-day/?day=tuesday.</m>
 
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
-
 
 
 
@@ -208,6 +203,7 @@ http://127.0.0.1:8000/hw-02/tasks/by-day/?day=tuesday.</m>
 И затем внести правки в код класса <m style="color: #f08000">SubTaskListCreateView</m>.  
 
 ---
+
 ### <m id="s2.2" style="color: #008000">2.2. GET-запрос с номером страницы и количеством подзадач на странице</m>  
 Пример обращения по URL:  
 ```http request
@@ -216,24 +212,23 @@ http://127.0.0.1:8000/hw-02/tasks/by-day/?day=tuesday.</m>
 Возвращает 2-ую страницу списка ПОДзадач (page=2) с тремя элементами на странице (page_size=3).
 
 ---
+
 ### <m id="s2.3" style="color: #008000">2.3. Результаты выполнения задания 2</m>  
 Перейти по эндпоинту: http://127.0.0.1:8000/hw-02/subtasks/?page=1 или http://127.0.0.1:8000/hw-02/subtasks/?page=2.
 
 <img src="figs/hw_08/img_t2_1.png" width="650" style="margin: 0 0 0 40px"/>  
 
-<m id="img1" style="margin: 40px; color:#606060;">Fig. -------. Вид страницы со списком подзадач по эндпоинту http://127.0.0.1:8000/hw-02/subtasks/?page=1.</m>
+<m id="img2.1" style="margin: 40px; color:#606060;">Fig. 2.1. Вид страницы со списком подзадач по эндпоинту http://127.0.0.1:8000/hw-02/subtasks/?page=1.</m>
 
 <img src="figs/hw_08/img_t2_2.png" width="650" style="margin: 0 0 0 40px"/>  
 
-<m id="img2" style="margin: 40px; color:#606060;">Fig. -------. Вид страницы со списком подзадач по эндпоинту http://127.0.0.1:8000/hw-02/subtasks/?page=2.</m>
+<m id="img2.2" style="margin: 40px; color:#606060;">Fig. 2.2. Вид страницы со списком подзадач по эндпоинту http://127.0.0.1:8000/hw-02/subtasks/?page=2.</m>
 
 <img src="figs/hw_08/img_t2_3.png" width="650" style="margin: 0 0 0 40px"/>  
 
-<m id="img2" style="margin: 40px; color:#606060;">Fig. -------. Вид страницы по эндпоинту http://127.0.0.1:8000/hw-02/subtasks/?page=2&page_size=3.</m>
+<m id="img2.3" style="margin: 40px; color:#606060;">Fig. 2.3. Вид страницы по эндпоинту http://127.0.0.1:8000/hw-02/subtasks/?page=2&page_size=3.</m>
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
-
-
 
 
 
@@ -314,12 +309,12 @@ http://127.0.0.1:8000/hw-02/tasks/by-day/?day=tuesday.</m>
 <m id="img3.5" style="margin: 40px; color:#606060;">Fig. 3.5. Список из подзадач с одновременной фильтрацией 
 по названию задачи и по статусу подзадачи.</m>
 
-
-
-
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
-## <m id="s5" style="color: #008000">5. GitHub</m>
+
+
+
+## <m id="s4" style="color: #008000">4. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
 Ссылка на отчет по ДЗ <a>home_work_08.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_08.md.  

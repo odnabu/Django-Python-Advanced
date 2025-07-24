@@ -1,6 +1,11 @@
 from itertools import product
 
 from django.db import models
+# 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1:
+from DjangoProject_config import settings
+
+# 24.07.2025 - Pr 10: Задание 1. Извлечение пользователя из объекта запроса:
+from django.contrib.auth.models import User
 
 
 
@@ -95,9 +100,28 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name='orders')
     order_date = models.DateTimeField(auto_now_add=True, editable=False)
 
+    # 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        null=True,
+        related_name='orders'
+    )
+
+    # 24.07.2025 - Pr 10: Задание 1. Извлечение пользователя из объекта запроса:
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='orders')
+
     class Meta:
         ordering = ['-order_date']
         get_latest_by = 'order_date'
+
+        # 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
+        # Добавляем кастомное разрешение:
+        permissions = [
+            ("can_view_order_statistics", "Can view order statistics"),
+        #     "Can view order statistics" - чловекочитаемое имя permissions в админ панели.
+        ]
+
 
     def __str__(self):
         return f"Order {self.id} by {self.customer}"     # self.customer -- Здесь автоматически подхватит return f"{self.first_name} {self.last_name}"

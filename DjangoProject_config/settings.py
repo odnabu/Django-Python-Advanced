@@ -10,9 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+
+from datetime import timedelta
 from pathlib import Path
 # Для чтения переменной окружения в settings.py из .env:
 from environ import Env
+# import environ
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,6 +52,7 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +62,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # ____  djangorestframework  ______ see Les/Video 22
     'rest_framework',
+    # Аутентификация ______ 23.07.25 + 24.07.2025:
+    'rest_framework.authtoken',
+    # Аутентификация JWT ______ Practice 9, 24.07.2025:
+    'rest_framework_simplejwt',
     # ____ Для practice_21_07.md
     'django_filters',
     # ____  МОИ  ПРИЛОЖЕНИЯ  __________
@@ -178,16 +187,59 @@ REST_FRAMEWORK = {
     #     "rest_framework.renderers.BrowsableAPIRenderer",
     # ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5,  # можно поставить 5, 20 и т.д.
+    'PAGE_SIZE': 5,  # Теперь по умолчанию на всех страницах будет 5 элементов. Можно поставить 5, 20 и т.д.
+
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 10,  # Здесь PAGE_SIZE работает как 'default_limit'
+
+    # Указываем полный путь к нашему классу!
+    # 'DEFAULT_PAGINATION_CLASS': 'config.paginations.CustomCursorPagination',
+    # 'PAGE_SIZE': 5,
+
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': [
+            "django_filters.rest_framework.DjangoFilterBackend"
+        ],
+    # ----------------------------------------------------------------
+    # # 23.07.2025 - Basic Authentication:
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # # 'rest_framework.authentication.TokenAuthentication',
+    # # Если вы хотите использовать несколько методов, добавьте их здесь.
+    # # Например:
+    # # 'rest_framework.authentication.SessionAuthentication',
+    # # 'rest_framework.authentication.BasicAuthentication',
+    #     ],
+    #
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    # ----------------------------------------------------------------
+
 }
 
 
 # _____ HW_06 --->
 # _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Task Manager API',
-    'DESCRIPTION': 'API для управления задачами и подзадачами',
-    'VERSION': '1.0.0',
-}
+# SPECTACULAR_SETTINGS = {
+#     'TITLE': 'Task Manager API',
+#     'DESCRIPTION': 'API для управления задачами и подзадачами',
+#     'VERSION': '1.0.0',
+# }
+
+
+# Lesson 33 "Lec 30: JWT-аутентификация", 23.07.2025 - Basic Authentication:
+# +++
+# Аутентификация JWT ______ Practice 9, 24.07.2025:
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(hours=23),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+#     # Можно добавить и другие настройки, например, для токенов одноразового использования
+# }
+
+
+
+# 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
+AUTH_USER_MODEL = env('AUTH_USER_MODEL', default='auth.User')
+
 

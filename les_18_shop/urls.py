@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 
 from les_18_shop.views import CategoryViewSet, SupplierViewSet, ProductListCreateView, ProductRetrieveUpdateDestroyView, \
-    ProductDetailViewSet, AddressViewSet, CustomerViewSet, OrderViewSet, OrderItemViewSet
+    ProductDetailViewSet, AddressViewSet, CustomerViewSet, OrderViewSet, OrderItemViewSet, OrderStatisticsView
 
 # Создаем экземпляр роутера:
 router = DefaultRouter()
@@ -31,7 +31,7 @@ router.register('address', AddressViewSet)
 router.register('customer', CustomerViewSet)
 
 # 27.07.2025 - Pr 8: Задание 7: Представления и маршруты для модели Order
-router.register('order', OrderViewSet)
+router.register('order', OrderViewSet, basename='order')
 
 # 27.07.2025 - Pr 8: Задание 8: Представления и маршруты для модели OrderItem
 router.register('order-item', OrderItemViewSet)
@@ -42,5 +42,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('product/', ProductListCreateView.as_view(), name='product-list-create'),
     path('product/<int:pk>/', ProductRetrieveUpdateDestroyView.as_view(), name='product-detail'),
+    # 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
+    path('order-statistics/', OrderStatisticsView.as_view(), name='order-statistics'),
 ]
 
