@@ -57,6 +57,29 @@ class TaskSerializer(serializers.ModelSerializer):
 #     completed_tasks = serializers.IntegerField()
 
 
+
+
+# //////////////   home_work_10   Задание 1. CRUD для категорий с использованием ModelViewSet     ////////////////////
+
+# _____ hw_10:  1. Создайте `CategoryViewSet`, используя `ModelViewSet` для CRUD операций.
+class CategorySerializer(serializers.ModelSerializer):
+    tasks = TaskSerializer(many=True, read_only=True)
+
+    # Для подсчета кол-ва задач для категории:
+    task_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'tasks', 'task_count', 'is_deleted', 'deleted_at']
+        # fields = '__all__'
+
+    # Подсчет количества задач по категориям:
+    def get_task_count(self, request):
+        return Task.objects.filter(categories=request).count()
+# -------------------------------------------------------------------------------------------------------------
+
+
+
 # ///////   home_work_07.md    /////////
 
 # _____ 1.2. SubTaskCreateSerializer
@@ -72,6 +95,7 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
 # _____ 2.1. `CategoryCreateSerializer` с методом `create`
 
 class CategoryCreateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
         fields = '__all__'
@@ -88,7 +112,7 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
         # Если вводится имя категории, которое уже существует в БД:
         if Category.objects.exclude(pk=instance.pk, name=name).filter(name=name).exists():
             raise ValidationError(f"Category with name {name} already exists")
-        return super().update()
+        return super().update(validated_data)
 
 
 # _____ 3. Использование вложенных сериализаторов
@@ -105,8 +129,11 @@ class SubTaskSerializer(serializers.ModelSerializer):
 class TaskDetailSerializer(serializers.ModelSerializer):
     subtasks = SubTaskSerializer(many=True, read_only=True)     # , source='subtasks'
 
-    # ____  Для к "home_work_08.md"  ____
+    # ____  Для "home_work_08.md"  ____
     weekday = serializers.SerializerMethodField()
+
+    # ____  Для "home_work_10.md"  ____
+    categories = CategoryCreateSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
@@ -116,7 +143,7 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         # fields = '__all__'
 
         # Для к "home_work_08.md":
-        fields = ['id', 'title', 'description', 'status', 'deadline', 'weekday', 'created_at', 'subtasks']
+        fields = ['id', 'title', 'description', 'status', 'deadline', 'weekday', 'created_at', 'categories', 'subtasks']
 
     # Для к "home_work_08.md":
     def get_weekday(self, obj):
@@ -130,6 +157,7 @@ class TaskDetailSerializer(serializers.ModelSerializer):
 # _____ 4. Валидация данных в сериализаторах
 
 class TaskCreateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Task
         fields = '__all__'
@@ -138,5 +166,6 @@ class TaskCreateSerializer(serializers.ModelSerializer):
             if value < date.today():
                 raise ValidationError("Deadline can't be in the past.")
             return value
+
 
 

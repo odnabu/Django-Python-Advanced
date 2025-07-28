@@ -6,9 +6,9 @@ See Les30-Django_PrfS8.pdf
 
 Чтобы видеть структуру проекта и прочие опции, нужно добавить адрес к файлу с настройками проекта:  
 
-<img src="img.png" width="700" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs_pr_21_07/img.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
-<img src="img_1.png" width="700" style="margin: 0 0 0 40px"/>  
+<img src="figs_pr_21_07/img_1.png" width="700" style="margin: 0 0 0 40px"/>  
 
 ### 21.07.2025 - Pr 8: Задание 1: Представления и маршруты для модели Category
 1) views.py - добавить class CategoryViewSet(viewsets.ModelViewSet):
@@ -61,11 +61,11 @@ INSTALLED_APPS = [
 Задание 9.1: Настройка фильтрации для модели Product
 Проверить в браузере по эндпоинту http://127.0.0.1:8000/shop/product/?category=2
 
-<img src="img_2.png" width="700" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs_pr_21_07/img_2.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 
 
 Задание 9.2: Настройка фильтрации для модели Customer
 Проверить в браузере по эндпоинту http://127.0.0.1:8000/shop/customer/
 
-<img src="img_3.png" width="700" style="margin: 0 0 0 40px"/><br/>  
+<img src="figs_pr_21_07/img_3.png" width="700" style="margin: 0 0 0 40px"/><br/>  
 

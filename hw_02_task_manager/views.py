@@ -16,8 +16,18 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from hw_02_task_manager.models import Task, SubTask
 from hw_02_task_manager.serializers import TaskSerializer, TaskDetailSerializer, SubTaskCreateSerializer
 
+# *****  home_work_10  *****************************
+#    Импорты библиотек и методов:
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+#    Импорты из фалов приложения:
+from hw_02_task_manager.models import Category
+from hw_02_task_manager.serializers import CategorySerializer
 
-# //////////////        Задание 1: Generic Views для задач (Task)       //////////////////////////////
+
+
+
+# //////////////      home_work_09    Задание 1: Generic Views для задач (Task)       //////////////////////////////
 
 # Класс для создания задач и для получения списка задач:
 class TaskListCreateView(ListCreateAPIView):
@@ -44,7 +54,7 @@ class TaskDetailView(RetrieveUpdateDestroyAPIView):
 
 
 
-# //////////////        Задание 2: Generic Views для подзадач (SubTask)       //////////////////////////////
+# //////////////     home_work_09   Задание 2: Generic Views для подзадач (SubTask)       //////////////////////////////
 
 # _____ home_work_08: 2. Пагинация в отображении списка подзадач:
 class SubTaskPagination(PageNumberPagination):
@@ -78,14 +88,17 @@ class SubTaskDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = SubTaskCreateSerializer
 
 
-# //////////////        ПРЕДСТАВЛЕНИЯ из предыдущей версии views.py       //////////////////////////////
+# //////////////     home_work_09   ПРЕДСТАВЛЕНИЯ из предыдущей версии views.py       //////////////////////////////
 
-# _____ hw_02:
-def welcome_to_the_app(request):      #  hello_django.
-    """
-    Домашняя страница с приветствием в приложении по адресу http://127.0.0.1:8000/hw-02/home/.
-    """
-    return HttpResponse("<h1>Welcome to the Task Manager!</h1>")
+# _____ hw_02:   Домашняя страница с приветствием:
+
+class WelcomeToTheAppView(APIView):
+    def welcome_to_the_app(request):      #  hello_django.
+        """
+        Домашняя страница с приветствием в приложении по адресу http://127.0.0.1:8000/hw-02/home/.
+        """
+        return HttpResponse("<h1>Welcome to the Task Manager!</h1>")
+
 
 
 # _____ hw_06:  3. Агрегирующий эндпоинт для статистики задач  -->  3.1. View для статистики
@@ -146,3 +159,47 @@ class TaskByWeekdayView(APIView):
 
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
+
+
+
+# //////////////   home_work_10   Задание 1. CRUD для категорий с использованием ModelViewSet     ////////////////////
+
+# _____ hw_10:  1. Создайте `CategoryViewSet`, используя `ModelViewSet` для CRUD операций.
+from django.db.models import Count
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    Это представление предоставляет полный набор действий CRUD для модели Category.
+    ---
+    API endpoint that allows categories to be viewed or edited.
+    """
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    # Мягкое удаление:
+    def perform_destroy(self, instance):
+        instance.delete()
+
+    # Новый кастомный метод:
+    @action(detail=False, methods=['get'])
+    def count_tasks(self, request):
+        """
+        Возвращает количество задач для каждой категории.
+        """
+        # С помощью annotate добавляем к каждой категории поле task_count:
+        category_with_tasks_count = Category.objects.annotate(task_count=Count('tasks'))
+        # print(f"\033[31m{category_with_tasks_count}\033[0m")
+
+        # Формируем данные для ответа:
+        data = [
+            {
+                "id": item.id,
+                "category": item.name,
+                "task_count": item.task_count,
+            }
+            for item in category_with_tasks_count
+        ]
+        return Response(data)
+        # return Response(category_with_tasks_count)
+
+

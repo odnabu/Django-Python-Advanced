@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     # Аутентификация JWT ______ Practice 9, 24.07.2025:
     'rest_framework_simplejwt',
+    # Аутентификация JWT - black list ______ Les 37, Lec 33, 25.07.2025:
+    'rest_framework_simplejwt.token_blacklist',
     # ____ Для practice_21_07.md
     'django_filters',
     # ____  МОИ  ПРИЛОЖЕНИЯ  __________
@@ -88,6 +90,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Для моих приложений middleware:
+    'DjangoProject_config.middleware.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoProject_config.urls'
@@ -201,19 +205,20 @@ REST_FRAMEWORK = {
             "django_filters.rest_framework.DjangoFilterBackend"
         ],
     # ----------------------------------------------------------------
-    # # 23.07.2025 - Basic Authentication:
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # # 'rest_framework.authentication.TokenAuthentication',
-    # # Если вы хотите использовать несколько методов, добавьте их здесь.
-    # # Например:
-    # # 'rest_framework.authentication.SessionAuthentication',
-    # # 'rest_framework.authentication.BasicAuthentication',
-    #     ],
-    #
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ],
+    # 23.07.2025 - Basic Authentication:
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # 'rest_framework.authentication.TokenAuthentication',
+      # Если вы хотите использовать несколько методов, добавьте их здесь.
+      # Например:
+    # 'rest_framework.authentication.SessionAuthentication',
+    # 'rest_framework.authentication.BasicAuthentication',
+        ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
     # ----------------------------------------------------------------
 
 }
@@ -221,25 +226,33 @@ REST_FRAMEWORK = {
 
 # _____ HW_06 --->
 # _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
-# SPECTACULAR_SETTINGS = {
-#     'TITLE': 'Task Manager API',
-#     'DESCRIPTION': 'API для управления задачами и подзадачами',
-#     'VERSION': '1.0.0',
-# }
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Task Manager API',
+    'DESCRIPTION': 'API для управления задачами и подзадачами',
+    'VERSION': '1.0.0',
+}
 
 
 # Lesson 33 "Lec 30: JWT-аутентификация", 23.07.2025 - Basic Authentication:
 # +++
 # Аутентификация JWT ______ Practice 9, 24.07.2025:
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(hours=23),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-#     # Можно добавить и другие настройки, например, для токенов одноразового использования
-# }
+SIMPLE_JWT = {
+    # Время жизни access токена (короткое):
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=10),
+    # Время жизни refresh токена (длинное):
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    # Можно добавить и другие настройки, например, для токенов одноразового использования
+
+    # Включаем ротацию refresh токенов для повышения безопасности:
+    'ROTATE_REFRESH_TOKENS': True,
+    # Добавляем старый refresh токен в черный список после его использования:
+    'BLACKLIST_AFTER_ROTATION': True,
+    # Указываем тип заголовка авторизации:
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 
 
-# 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
+# 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинт для статистики. Часть 1
 AUTH_USER_MODEL = env('AUTH_USER_MODEL', default='auth.User')
-
 

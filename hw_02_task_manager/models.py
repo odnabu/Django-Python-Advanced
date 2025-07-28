@@ -3,7 +3,9 @@ from tkinter.constants import CASCADE
 
 from django.db import models
 from django.core.validators import MinLengthValidator   # Список валидаторов: https://django.fun/docs/django/5.0/ref/validators/
-
+# Для home_work_10.md:
+from django.utils import timezone
+from hw_02_task_manager.managers import SoftDeleteManager
 
 
 # ___ Модель Category __________________________________________________________________________________________
@@ -26,8 +28,29 @@ class Category(models.Model):
             models.UniqueConstraint(fields=['name'], name='unique_category_name'),
         ]
 
+    # ///////   home_work_10.md    /////////
+    # Задание 2. Реализация мягкого удаления категорий.
+    is_deleted = models.BooleanField(default=False)               # Поле для мягкого удаления.
+    deleted_at = models.DateTimeField(null=True, blank=True)      # Дата удаления.
+
+    objects = SoftDeleteManager()            # Менеджер по умолчанию (отфильтрованные) - для исключения удаленных записей
+    all_objects = models.Manager()           # Стандартный менеджер (все записи)
+
+    def delete(self, *args, **kwargs):
+        """Переопределяем стандартный метод удаления."""
+        self.is_deleted = True               # Устанавливаем флаг
+        self.deleted_at = timezone.now()
+        self.save()                          # Сохраняем изменения
+
+    def restore(self):
+        """Метод для восстановления записи."""
+        self.is_deleted = False
+        self.save()
+
+
     def __str__(self):
         return self.name          # Показывать полное название в выпадающих списках
+
 
 
 

@@ -167,3 +167,22 @@ class OrderItemCreateUpdateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Quantity must be less than 1000.')
         return value
 
+
+
+# 24.07.2025 - Les 38, Lec 33: Регистрация пользователя с JWT
+class UserRegisterSerializer(serializers.ModelSerializer):
+    # Делаем поле пароля только для записи (его нельзя будет прочитать из API)
+    password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'email']
+
+    def create(self, validated_data):
+        # Используем create_user, чтобы пароль был правильно захеширован.
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            password=validated_data['password'],
+            email=validated_data.get('email', '')
+        )
+        return user

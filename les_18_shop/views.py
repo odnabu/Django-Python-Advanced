@@ -1,18 +1,131 @@
+from django.contrib.auth import authenticate
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from les_18_shop.models import Category, Supplier, ProductDetail, Address, Customer, Order, OrderItem
 from les_18_shop.serializers import (CategorySerializer, SupplierSerializer,
                                      AddressSerializer,
                                      CustomerSerializer, CustomerCreateUpdateSerializer,
                                      OrderSerializer, OrderCreateUpdateSerializer,
-                                     OrderItemSerializer, OrderItemCreateUpdateSerializer)
+                                     OrderItemSerializer, OrderItemCreateUpdateSerializer, UserRegisterSerializer)
+
+
+# --------------------------------------------------------------------------------------
+# 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов
+
+# Вспомогательная функция для установки cookie
+def set_jwt_cookies(response, user):
+    refresh = RefreshToken.for_user(user)
+    access_token = refresh.access_token
+
+    response.set_cookie(
+        key='access_token',
+        value=str(access_token),
+        httponly=True, secure=False, samesite='Lax'
+    )
+    response.set_cookie(
+        key='refresh_token',
+        value=str(refresh),
+        httponly=True, secure=False, samesite='Lax'
+    )
+
+# Реализация логина с сохранением токенов в куки:
+class LoginView(APIView):
+    # Разрешаем доступ всем (даже анонимным пользователям), чтобы они могли войти
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        # Проверяем, существует ли пользователь с таким логином и паролем
+        user = authenticate(request, username=username, password=password)
+
+        if user:
+            # Создаем успешный ответ
+            response = Response(status=status.HTTP_200_OK)
+
+            # ВЫНЕСЛИ в отдельную функцию ВЫШЕ - set_jwt_cookies(response, user)
+            # # Если пользователь найден, создаем для него токены
+            # refresh = RefreshToken.for_user(user)
+            # access_token = refresh.access_token
+            #
+            #
+            # # Устанавливаем access_token в cookie
+            # response.set_cookie(
+            #     key='access_token',
+            #     value=str(access_token),
+            #     httponly=True,  # Защита от доступа через JavaScript
+            #     secure=False,  # В продакшене должно быть True (только для HTTPS)
+            #     samesite='Lax'
+            # )
+            # # Устанавливаем refresh_token в cookie
+            # response.set_cookie(
+            #     key='refresh_token',
+            #     value=str(refresh),
+            #     httponly=True,
+            #     secure=False,  # В продакшене должно быть True
+            #     samesite='Lax'
+            # )
+
+            set_jwt_cookies(response, user)
+
+            return response
+
+# --------------------------------------------------------------------------------------
+
+
+# 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT
+class RegistrationView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = UserRegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            # Создаем ответ с данными пользователя
+            response = Response({
+                'user': {
+                    'username': user.username,
+                    'email': user.email
+                }
+            }, status=status.HTTP_201_CREATED)
+
+            # Вызываем нашу функцию, чтобы добавить cookie с токенами в ответ
+            set_jwt_cookies(response, user)
+
+            return response
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# --------------------------------------------------------------------------------------
+
+# 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: РАЗЛОГИНИВАНИЕ пользователя с JWT
+class LogoutView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Создаем пустой ответ
+        response = Response(data={'message': 'Logout successful'},status=status.HTTP_204_NO_CONTENT)
+        # Отправляем команду браузеру на удаление cookie
+        response.delete_cookie('access_token')
+        response.delete_cookie('refresh_token')
+        return response
+
+
+# --------------------------------------------------------------------------------------
+
+
+
+
+
 
 # 24.07.2025 - Pr 10: Задание 2. Создание кастомных классов разрешений
 from les_18_shop.permissions import IsOwnerOrReadOnly, CanViewOrderStatistics
@@ -39,11 +152,14 @@ class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
 
+
+
 # 27.07.2025 - Pr 8: Задание 3: Представления и маршруты для модели Product
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from les_18_shop.models import Product
 from les_18_shop.serializers import (ProductSerializer, ProductCreateUpdateSerializer,
                                      ProductDetailSerializer, ProductDetailCreateUpdateSerializer)
+
 
 class ProductListCreateView(ListCreateAPIView):
     """
@@ -106,6 +222,7 @@ class ProductRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         return ProductCreateUpdateSerializer
 
 
+
 class ProductDetailViewSet(viewsets.ModelViewSet):
     queryset = ProductDetail.objects.all()
 
@@ -120,6 +237,8 @@ class ProductDetailViewSet(viewsets.ModelViewSet):
             return ProductDetailSerializer
         # Для остальных методов:
         return ProductDetailCreateUpdateSerializer
+
+
 
 # 27.07.2025 - Pr 8: Задание 5: Представления и маршруты для модели Address
 class AddressViewSet(viewsets.ModelViewSet):
@@ -187,8 +306,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """
         Этот метод определяет список объектов для отображения.
-        Мы фильтруем заказы, оставляя только те, где поле `user`
-        совпадает с текущим пользователем.
+        Мы фильтруем заказы, оставляя только те, где поле `user` совпадает с текущим пользователем.
         Таким образом, каждый пользователь видит только свои заказы.
         """
         return Order.objects.filter(user=self.request.user)
@@ -234,4 +352,5 @@ class OrderStatisticsView(APIView):
             'total_orders': total_orders,
         }
         return Response(data)
+
 

@@ -16,10 +16,10 @@ See Les34-Django_Pr9.pdf  and  Les34-Django_PrfS9-24_07.pdf
 Можно сделать в https://www.base64encode.org/.
 
 Через сам Postman: 
-![img_4.png](img_4.png)
+![img_4.png](figs_pr9_pr10_24_07/img_4.png)
 
 Через ВНЕШНЕЕ кодирование:
-![img_5.png](img_5.png)
+![img_5.png](figs_pr9_pr10_24_07/img_5.png)
 
 Чат, объясни, пожалуйста, почему в Хром и Едж не появляется плашка с вводом догина и пароля при 
 попытке перейти по адресу http://127.0.0.1:8000/shop/product/. Я тестирую аутентификацию. ОС Виндовс 11.
@@ -40,11 +40,11 @@ https://chatgpt.com/s/t_6881e331fc908191bd9f25a92654b314
 }
 ```
 
-![img_6.png](img_6.png)
+![img_6.png](figs_pr9_pr10_24_07/img_6.png)
 
-![img_7.png](img_7.png)
+![img_7.png](figs_pr9_pr10_24_07/img_7.png)
 
-![img_8.png](img_8.png)
+![img_8.png](figs_pr9_pr10_24_07/img_8.png)
 
 
 
@@ -66,11 +66,11 @@ https://chatgpt.com/s/t_6881e331fc908191bd9f25a92654b314
     "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNDI2ODQ3LCJpYXQiOjE3NTMzNDQwNDcsImp0aSI6IjMyNDdiZDAzYTI3NjQ0OTNhODFiZDgyM2I3ZGFmYTUwIiwidXNlcl9pZCI6IjEifQ.tiDyCRsRuMZu2cheYVyUs-odSDM6vMp0AU2zMjTcBGw"
 }
 ```
-![img_9.png](img_9.png)
+![img_9.png](figs_pr9_pr10_24_07/img_9.png)
 
 РЕЗУЛЬТАТ получения списка продуктов в Постмане:
 
-![img_10.png](img_10.png)
+![img_10.png](figs_pr9_pr10_24_07/img_10.png)
 
 
 
@@ -79,7 +79,7 @@ https://chatgpt.com/s/t_6881e331fc908191bd9f25a92654b314
 ### 24.07.2025 - Pr 9: Задание 4.3. Использование разрешений для остальных представлений
 Настройте разрешения для остальных представлений, обсудив какие необходимо применить.
 
-![img_11.png](img_11.png)
+![img_11.png](figs_pr9_pr10_24_07/img_11.png)
 
 
 
@@ -121,11 +121,11 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 ```
 POST Customers:
-![img_12.png](img_12.png)
-![img_14.png](img_14.png)
+![img_12.png](figs_pr9_pr10_24_07/img_12.png)
+![img_14.png](figs_pr9_pr10_24_07/img_14.png)
 
 GET ORDERS:  
-![img_16.png](img_16.png)
+![img_16.png](figs_pr9_pr10_24_07/img_16.png)
 
 
 
@@ -149,7 +149,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         return OrderCreateUpdateSerializer
     ...
 ```
-![img_17.png](img_17.png)
+![img_17.png](figs_pr9_pr10_24_07/img_17.png)
 
 
 ---
@@ -159,6 +159,6 @@ class OrderViewSet(viewsets.ModelViewSet):
 ```python
     AUTH_USER_MODEL = env('AUTH_USER_MODEL', default='auth.User')
 ```
-![img_18.png](img_18.png)
-![img_19.png](img_19.png)
+![img_18.png](figs_pr9_pr10_24_07/img_18.png)
+![img_19.png](figs_pr9_pr10_24_07/img_19.png)
 

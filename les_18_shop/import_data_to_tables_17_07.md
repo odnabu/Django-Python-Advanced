@@ -25,25 +25,25 @@ Conspectus - <a>Les28-Django_PrfS7.pdf</a>.
 из файла в таблицы приложения:
 </div>
 
-<img src="figs_les29_pr76/img.png" width="350" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img.png" width="350" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 1.</div>
 
 
-<img src="figs_les29_pr76/img_1.png" width="350" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_1.png" width="350" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 2.</div>
 
-<img src="figs_les29_pr76/img_2.png" width="500" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_2.png" width="500" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 3.</div>
 
-<img src="figs_les29_pr76/img_3.png" width="550" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_3.png" width="550" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 4.</div>
 
 
-<img src="figs_les29_pr76/img_4.png" width="450" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_4.png" width="450" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 5.</div>
 
@@ -70,34 +70,34 @@ Conspectus - <a>Les28-Django_PrfS7.pdf</a>.
 2. Рассчитайте общую стоимость всех продуктов (цена умноженная на количество) в базе данных.
 
 ```shell
-from django.db.models import Sum, F
-from les_18_shop.models import Product
-total_sum = Product.objects.aggregate(total=Sum(F('price') * F('quantity')))
-total_sum
+    from django.db.models import Sum, F
+    from les_18_shop.models import Product
+    total_sum = Product.objects.aggregate(total=Sum(F('price') * F('quantity')))
+    total_sum
 ```
 
-<img src="figs_les29_pr76/img_5.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_5.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 5px 40px; padding: 2px 10px 2px 10px; ">Fig. 6.</div>
 
-<img src="figs_les29_pr76/img_6.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_6.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 7.</div>
 
 ```shell
-avg_price_products = Product.objects.values('category__name').annotate(avg_price=Avg('price')).order_by('category__name')
-avg_price_products
+    avg_price_products = Product.objects.values('category__name').annotate(avg_price=Avg('price')).order_by('category__name')
+    avg_price_products
 ```
 
-<img src="figs_les29_pr76/img_7.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_7.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 8.</div>
 
 ```shell
-for item in avg_price_products:
-  print(f"Category: {item['category__name']}, Avg_Price: {item['avg_price']}")
+    for item in avg_price_products:
+      print(f"Category: {item['category__name']}, Avg_Price: {item['avg_price']}")
 ```
-<img src="figs_les29_pr76/img_8.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
+<img src="figs_les23_pr6/img_8.png" width="600" style="margin: 0 0 0 40px; border-bottom: 1px solid dimgrey; "/>  
 
 <div style="color: dimgrey; margin: 0 0 0 40px; padding: 2px 10px 2px 10px; ">Fig. 9.</div>
 
