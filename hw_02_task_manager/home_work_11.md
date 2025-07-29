@@ -307,7 +307,7 @@ __Примеры__ HTTP-запросов в приложении:
 ## <m id="s3" style="color: #008000">3. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
-Ссылка на отчет по ДЗ <a>home_work_11.md</a> со скриншотами: .  
+Ссылка на отчет по ДЗ <a>home_work_11.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_11.md.  
 
 Ссылка на приложение по ДЗ <a>hw_02_task_manager</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_02_task_manager.  
 
