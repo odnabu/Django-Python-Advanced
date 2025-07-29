@@ -16,6 +16,9 @@ from pathlib import Path
 # Для чтения переменной окружения в settings.py из .env:
 from environ import Env
 # import environ
+# Для работы блока логирования проекта:
+import os
+
 
 
 
@@ -238,7 +241,7 @@ SPECTACULAR_SETTINGS = {
 # Аутентификация JWT ______ Practice 9, 24.07.2025:
 SIMPLE_JWT = {
     # Время жизни access токена (короткое):
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     # Время жизни refresh токена (длинное):
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     # Можно добавить и другие настройки, например, для токенов одноразового использования
@@ -253,6 +256,86 @@ SIMPLE_JWT = {
 
 
 
+
+# _____ HW_11  -  Задание 2.  Логирования работы включенного сервера:
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+
+    # Из примера Бандыло - filters (для чего нужен - НЕ понятно):
+    'filters': {
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            }
+        },
+
+    'handlers': {
+        'console': {  # Логирование сервера в консоль
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+
+        'http_file': {  # Логирование HTTP-запросов
+            'level': 'DEBUG',
+            # 'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'http_logs.log'),    # http_logs.log - Файл для логов
+            'formatter': 'verbose',
+        },
+
+        'db_file': {  # Логирование SQL-запросов
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'db_logs.log'),
+            'formatter': 'verbose',
+        },
+    },
+
+    'loggers': {
+        'django': {  # Основные логи Django, в консоль
+            'handlers': ['console', 'http_file'],       # Куда выводить и записывать логи.
+            'level': 'INFO',
+        },
+
+        'django.server': {  # Сервер (runserver)
+            'handlers': ['console', 'http_file'],       # Куда выводить и записывать логи.
+            'level': 'INFO',
+            'propagate': False,
+        },
+
+        'django.request': {  # HTTP-запросы
+            'handlers': ['http_file'],       # Куда выводить и записывать логи.
+            'level': 'DEBUG',
+            # 'level': 'INFO',
+            'propagate': False,
+        },
+
+        'django.db.backends': {  # SQL-запросы
+            'handlers': ['db_file'],     # Куда отправлять логи. Пока закомментирую эту опцию - 'console',
+            'level': 'DEBUG',            # Уровень логирования.
+            'propagate': False,
+        },
+    }
+}
 # 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинт для статистики. Часть 1
 AUTH_USER_MODEL = env('AUTH_USER_MODEL', default='auth.User')
+
+
+
+# ---------------------------- НЕ ЗНАЮ пока, для чего - разберусь позже -------------
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
