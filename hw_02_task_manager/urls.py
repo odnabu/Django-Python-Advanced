@@ -1,15 +1,11 @@
 # hw_02_task_manager/urls.py
 
-from django.contrib import admin
+# from django.contrib import admin      # ЗДЕСЬ admin уже НЕ нужен, т.к. прописан глобально для всего проекта в config.
 from django.urls import path, include
 # _____ Импортирование ВСЕХ классов представлений из файла hw_02_task_manager / views.py:
 # from . import views
-# from . import views
 # from hw_02_task_manager.views import welcome_to_the_app
 from hw_02_task_manager.views import WelcomeToTheAppView
-
-
-
 # --------------------------------------------------------------------------
 #       ///////   home_work_10.md    /////////
 from rest_framework.routers import DefaultRouter
@@ -41,8 +37,11 @@ urlpatterns = [
     path('home/', WelcomeToTheAppView.welcome_to_the_app, name='welcome_to_the_app'),       # hw_02/  and  welcome_to_the_app: http://127.0.0.1:8000/hw-02/home/
     path('tasks/create/', TaskListCreateView.as_view(), name='task-create'),  # hw_06: http://127.0.0.1:8000/hw-02/tasks/create/
     path('tasks/', TaskListCreateView.as_view(), name='task-list'),           # hw_06: http://127.0.0.1:8000/hw-02/tasks/
-    path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),    # hw_06: http://127.0.0.1:8000/hw-02/tasks/8/
-                                                                                    # hw_06: http://127.0.0.1:8000/hw-02/tasks/7/?subtask_titles=true
+
+    # ВСЕ ДИНАМИЧЕСКИЕ ссылки tasks/<int:pk>/, которые содержат <int:pk>, ЛУЧШЕ размещать ПОСЛЕ эндпоинта tasks.
+    # Смотри код ниже для hw_08:  1.2. URL-маршрут.
+    # path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),    # hw_06: http://127.0.0.1:8000/hw-02/tasks/8/
+    #                                                                                 # hw_06: http://127.0.0.1:8000/hw-02/tasks/7/?subtask_titles=true
 ]
 
 # _____ hw_06:  3. Агрегирующий эндпоинт для статистики задач  -->  3.2. Добавление маршрута
@@ -96,5 +95,35 @@ from hw_02_task_manager.views import TaskByWeekdayView
 urlpatterns += [
     path('tasks/by-day/', TaskByWeekdayView.as_view(), name='tasks-by-day'),            # hw_08: http://127.0.0.1:8000/hw-02/tasks/by-day/
                                                                                               # hw_08: http://127.0.0.1:8000/hw-02/tasks/by-day/?day=monday
+    # ВСЕ ДИНАМИЧЕСКИЕ ссылки tasks/<int:pk>/, которые содержат <int:pk>, ЛУЧШЕ размещать после эндпоинта tasks.
+    path('tasks/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),              # hw_06: http://127.0.0.1:8000/hw-02/tasks/8/
+                                                                                              # hw_06: http://127.0.0.1:8000/hw-02/tasks/7/?subtask_titles=true
 ]
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%       LESSONS 33 and 34 to Authentication     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# 23.07.2025 - Python Adv 33: Введение в аутентификацию и авторизацию.
+# части кода с урока по app "library" - в УЧЕБНЫХ целях.
+from hw_02_task_manager.views import (ProtectedDataView,
+                                      PublicView,
+                                      AdminView)
+# Связывание представления с url:
+urlpatterns += [
+    path('protected/', ProtectedDataView.as_view(), name='protected-data'),     # les_33: http://127.0.0.1:8000/hw-02/protected/
+    # 23.07.2025 - Python Adv 34: Практикум 9,  1:13:00:  PERMISSIONS.
+    path('public/', PublicView.as_view(), name='public-data'),                  # les_34:  http://127.0.0.1:8000/hw-02/public/
+    # 23.07.2025 - Python Adv 34: Практикум 9, 1:15:40.
+    # Пермишен ниже позволяет Админу получить доступ к представлению AdminView, но НЕ позволяет
+    # # обычному пользователю получить доступ.
+    path('admin/', AdminView.as_view(), name='admin'),
+]
+
+# ---------------------------------------------------------------------------------------------------------------
+
+
+#       ///////   home_work_12.md    /////////
+# _____ hw_12:  2. Реализация пермишенов для API.
+# Здесь url добавлять НЕ нужно, т.к. по условию ДЗ нужно прописать СТАНДАРТНЫЕ из DRF - DjangoModelPermissions.
+
+
 

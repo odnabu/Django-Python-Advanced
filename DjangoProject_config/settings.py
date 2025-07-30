@@ -203,10 +203,14 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS': 'config.paginations.CustomCursorPagination',
     # 'PAGE_SIZE': 5,
 
+    # Для Swagger и Redoc:
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+    # Подключение фильтрации. См. hw_09:
     'DEFAULT_FILTER_BACKENDS': [
             "django_filters.rest_framework.DjangoFilterBackend"
         ],
+
     # ----------------------------------------------------------------
     # 23.07.2025 - Basic Authentication:
 
@@ -219,6 +223,7 @@ REST_FRAMEWORK = {
     # 'rest_framework.authentication.BasicAuthentication',
         ],
 
+    # 23.07.2025 - Permissions:
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
@@ -226,14 +231,6 @@ REST_FRAMEWORK = {
 
 }
 
-
-# _____ HW_06 --->
-# _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Task Manager API',
-    'DESCRIPTION': 'API для управления задачами и подзадачами',
-    'VERSION': '1.0.0',
-}
 
 
 # Lesson 33 "Lec 30: JWT-аутентификация", 23.07.2025 - Basic Authentication:
@@ -252,6 +249,22 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     # Указываем тип заголовка авторизации:
     'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+
+
+# _____ HW_06 --->
+# _____ 5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
+# http://drf-spectacular.readthedocs.io/en/latest/settings.html
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Task Manager API',
+    'DESCRIPTION': 'API для управления задачами и подзадачами',
+    'VERSION': '1.0.0',
+}
+
+SPECTACULAR_DEFAULTS = {
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],  # Permissions for schema UI views
+    # 'SERVE_AUTHENTICATION': None,  # Authentication class for schema UI views; None to use DRF default
 }
 
 
