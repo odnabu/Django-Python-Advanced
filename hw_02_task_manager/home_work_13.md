@@ -1,39 +1,19 @@
 Python Advanced - Django  
 29.07.2025
 
-## <div style="color: #9000F0">Домашнее задание 18 (12 in Django): <br> Проект "Менеджер задач" — Реализация аутентификации JWT и пермишенов. Глобальная пагинация.</div>    
+## <div style="color: #9000F0">Домашнее задание 19 (13 in Django): <br> Проект "Менеджер задач" — .</div>    
 __Цель:__  
-Настроить JWT (JSON Web Token) аутентификацию с использованием SimpleJWT и реализовать пермишены для защиты API.  
-Убедитесь, что только авторизованные пользователи могут выполнять определённые действия.
 
-###  Задание 1. Настройка JWT аутентификации
+
+###  Задание 1. 
 Шаги для выполнения (см. начало [<font color="#696969">[3, p. 77]</font>](#p1), [<font color="#696969">[4, s. 22]</font>](#c1)):
-1. Установите djangorestframework-simplejwt.  
-   - Убедитесь, что библиотека djangorestframework-simplejwt установлена.
-2. Настройте аутентификацию в settings.py.  
-   - Добавьте конфигурации SimpleJWT в settings.py.
-3. Добавьте маршруты для получения и обновления JWT токенов.
-   - Настройте маршруты для получения и обновления JWT токенов.
-4. Проверьте что эндпоинты работают.
-   - Проверьте что маршруты для получения и обновления JWT токенов работают.
+1. 
 
-###  Задание 2. Реализация пермишенов для API  
+###  Задание 2.  
 Шаги для выполнения:
-1. Продумайте пермишены.
-   - Продумайте какие пермишены должны быть на представлениях.
-2. Примените пермишены к API представлениям.
-   - Добавьте пермишены ко всем представлениям.
-3. Проверьте что пермишены работают.
-   - Проверьте что пермишены работают согласно их настройкам.  
 
-###  Задание 3. Настройка глобальной пагинации в проекте  
-??????????? Вроде бы уже сделали в ДЗ 11, задание 1.
-1. Обновить настройки проекта:
-   - Подключить в настройках проекта Django REST framework глобальную пагинацию, выбрав класс пагинации 
-   из тех, что рассматривались на занятиях.
-2. Протестировать эндпоинты:
-   - Установить для пагинации возврат 5-ти элементов по умолчанию.
-   - Проверить работу эндпоинтов с добавлением пагинации.
+
+###  Задание 3.   
 
 ###  Оформление ответа:
 1. Предоставьте решение: Прикрепите ссылку на гит.
@@ -46,20 +26,20 @@ __Цель:__
 
 
 ### <m style="color: #008000">Источники</m>  
-<m style="color: #606060">Видео - уроки от *23.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 33, c 1:52:35]</font>](#v1).  
-[1] ▶ Video 33 "Python Adv 33: Введение в аутентификацию и авторизацию" (3:24:04), *23.07.2025* начиная 
-<m style="color: red">c 1:52:35</m>: <m id="v1">https://player.vimeo.com/video/1103751018?h=423485f3b8</m>.  
-[2] ▶ Video 34 "Python Adv 34: Практикум 9" (1:43:09), *23.07.2025* начиная 
-<m style="color: red">c 20:40</m>: <m id="v2">https://player.vimeo.com/video/1103770268?h=6dfd40072f</m>.  
-[3] Presentation 29 _"Введение в аутентификацию и авторизацию-1"_.  
-<a id="p1">Les33-Django_29-Les 33-Authent_Author-23_07.pdf</a>. 
-<m style="color: #606060">——▷  Аутентификация (в DRF) и авторизация. BasicAuthentication. Токен- и JWT-аутентификация</m>   
-[4] Conspectus 29 <a id="c1">Les33-Django_29---Les 33-Authent_Author-23_07.pdf</a>.  
-[5] Presentation 30 _"Введение в аутентификацию и авторизацию-2"_.  
-<a id="p2">Les33-Django_30---Les 33-JWT_Authent_Author-23_07.pdf</a>. 
-<m style="color: #606060">——▷  JWT-аутентификация. Использование встроенных классов разрешений</m>.   
-[6] Conspectus 30 <a id="c2">Les33-Django_30---Les 33-JWT_Authent_Author-23_07.pdf</a>.  
-[7] Приложение **home_work_11**: файл <m id="hw7">home_work_11.md</m>.  
+<m style="color: #606060">Видео - уроки от *\_.07.2025*</m>  [<font color="#696969">[1 - ▶  Video \_, c \_:\_:\_]</font>](#v1).  
+[1] ▶ Video \_ "" (\_:\_:\_), *\_.07.2025* начиная 
+<m style="color: red">c \_:\_:\_</m>: <m id="v1"></m>.  
+[2] ▶ Video \_ "" (\_:\_:\_), *\_.07.2025* начиная 
+<m style="color: red">c \_:\_</m>: <m id="v2"></m>.  
+[3] Presentation \_ _""_.  
+<a id="p1"></a>. 
+<m style="color: #606060">——▷  </m>   
+[4] Conspectus \_ <a id="c1"></a>.  
+[5] Presentation \_ _""_.  
+<a id="p2"></a>. 
+<m style="color: #606060">——▷  </m>.   
+[6] Conspectus \_ <a id="c2"></a>.  
+[7] Приложение **home_work_12**: файл <m id="hw7">home_work_12.md</m>.  
 [8] Руководство по оформлению Markdown файлов: https://gist.github.com/Jekins/2bf2d0638163f1294637.  
 [9] Шпаргалка по Markdown: https://gist.github.com/fomvasss/8dd8cd7f88c67a4e3727f9d39224a84c.
 
@@ -102,7 +82,7 @@ __Цель:__
 
 
 
-## <m id="s1" style="color: #008000">1. Настройка JWT аутентификации</m>  
+## <m id="s1" style="color: #008000">1. </m>  
 
 <div style="margin: 20px 20px 20px 0;">
 <b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b>Так как на консультации 1 от 28.07.2025 пофиксили проблемы с обновлением токена 
@@ -140,14 +120,13 @@ __Цель:__
 2. Полезная нагрузка (payload): Содержит утверждения и другую информацию о пользователе.
 3. Подпись (signature): Подписывает токен, чтобы убедиться, что он не был изменен.
 
-### <m id="ss1.1" style="color: #008000">1.1. Настройки для JWT в config</m>  
+### <m id="ss1.1" style="color: #008000">1.1. </m>  
 В файле настроек <a>settings.py</a> проверить наличие кода (после всех лекций и практик) для:    
-- REST_FRAMEWORK,
-- SIMPLE_JWT.
+
 
 ---
 
-### <m id="ss1.2" style="color: #008000">1.2. Настройка URL-ов в </m> <a>urls.py</a>  
+### <m id="ss1.2" style="color: #008000">1.2. </a>  
 Проверить маршруты для получения и обновления токенов в <a>DjangoProject_config / urls.py</a>.  
 
 ---
@@ -160,33 +139,14 @@ Postman и размещением скриншотов в отчете к это
 в <a>home_work_10.md</a> начиная с п. "1.4. Результаты выполнения задания 1 в браузере". 
 
 ##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ 1 ⋙ </b> Получение JWT  
-<m style="color: limegreen">POST</m> <a>/api/token/</a> с телом (см. [<font color="#696969">[3, s. 86-91]</font>](#p1), 
+<m style="color: limegreen">POST</m> <a>/api/token/</a> (см. [<font color="#696969">[3, s. 86-91]</font>](#p1), 
 [ChatGPT](https://chatgpt.com/s/t_688899135da88191bddc291ff171104b)): 
-```
-{
-  "username": "odnabu",
-  "password": "123"
-}
-```
-<m style="color: limegreen">POST</m> <a>/api/token/refresh/</a> с телом: 
-```
-{
-  "refresh": "мой_refresh_токен"
-}
-```
 
-В общем, процедура получения JWT-токена через Postman для пользователей разного уровня доступа (admin, common user)
-выглядит так [<font color="#696969">[3, s. 86-87]</font>](#p1):  
-1. во вкладке "Authorization" ввести логин и пароль для доступа на стороне сервера,  
-2. во вкладке "Body" в поле for"m-data" ввести логин и пароль на стороне клиента (admin или другой common user),  
-3. Нажать Send. В ответе появится JSON-объект с JWT.  
 
-Процедура использования JWT-токена через Postman и в браузере для пользователей разного уровня доступа продемонстрирована 
-на слайдах в <a>home_work_10.md</a>.
 
-<img src="figs/hw_12/task_1/img_1.png" width="900" style="margin: 0 0 0 40px"/><br>  
+<img src="figs/hw_13/img_1.png" width="900" style="margin: 0 0 0 40px"/><br>  
 
-<img src="figs/hw_12/task_1/img_2.png" width="900" style="margin: 0 0 0 40px"/>
+<img src="figs/hw_13/task_1/img_2.png" width="900" style="margin: 0 0 0 40px"/>
 
 <m id="img1.1" style="margin: 40px; color:#606060;">Fig. 1.1. Выполнение POST-запроса в Postman для получения JWT-токена.</m>
 
@@ -215,66 +175,63 @@ Postman и размещением скриншотов в отчете к это
 <m style="color: #9000F0">Permissions</m> - разрешения в DRF определяют, какие пользователи 
 имеют доступ к различным ресурсам API.
 
-### <m id="s2.1" style="color: #008000">2.1. Выбор стратегии</m> 
-Например:  
-- Все пользователи могут смотреть список задач.
-- Только автор задачи может её изменять или удалять.  
-
-### <m id="s2.2" style="color: #008000">2.2. Стандартные Permissions для всех представлений и маршруты</m>  
-
-Далее прописать <m style="color: limegreen">СТАНДАРТНЫЕ пермишены</m> из DRF - DjangoModelPermissions 
-для всех Представлений приложения. Например:
+<m style="color: #9000F0">Кастомный permission:</m>    
+- Создать файл <a>permissions.py</a> в приложении <a>hw_02_task_manager/</a>.  
+- Далее либо добавить в него ИЛИ код из [permissions.py to "library" from V. Bandylo on GitHub](https://github.com/viacheslav-bandylo/111124-projects/blob/main/library/permissions.py) 
+ИЛИ код из решения [ChatGPT](https://chatgpt.com/s/t_688899135da88191bddc291ff171104b) и отредактировать:
 ```python
-class TaskListCreateView(ListCreateAPIView):
-...
-    # _____ home_work_12:  2:  Добавление пермишенов:
-    permission_classes = [IsAuthenticatedOrReadOnly]
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
-class TaskDetailView(RetrieveUpdateDestroyAPIView):
-...
-    # _____ home_work_12:  2:  Добавление пермишенов:
-    permission_classes = [IsAdminUser]
+class IsOwnerOrReadOnly(BasePermission):
+    """
+    Только владелец может редактировать. Остальные — только читать.
+    """
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        return obj.author == request.user
+
 ```
 
-Хотя, по умолчанию УЖЕ назначен `IsAuthenticated` в настройках проекта, ВСЁ РАВНО нужно ПРОПИСЫВАТЬ настройки.
-Связывать СТАНДАРТНЫЕ разрешения (Permissions) представлений с url в файле <a>hw_02_task_manager / urls.py</a>
-НЕ нужно, так как все работает "из коробки" `rest_framework.permissions`. Только для учебных представлений, 
-которые были добавлены во <a>hw_02_task_manager / views.py</a> в демонстрационных целях, 
-см. [<font color="#696969">[1 - ▶  Video 33, 2:44:40]</font>](#v1).
+Далее прописать <m style="color: #9000F0">СТАНДАРТНЫЕ пермишены</m> из DRF - DjangoModelPermissions для всех 
+Представлений приложения.  
 
----
+После связать представления с url в файле <a>hw_02_task_manager / urls.py</a>, см. 
+[<font color="#696969">[1 - ▶  Video 33, 2:44:40]</font>](#v1).
 
-### <m id="s2.3" style="color: #008000">2.3. Результаты назначения разрешений (Permissions) для представлений</m> 
 
-##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ 1 ⋙ </b> Для `Category`
-Для `CategoryViewSet` как по url: http://127.0.0.1:8000/hw-02/categories/, так и 
-по url: http://127.0.0.1:8000/hw-02/categories/3/ прописан `permission_classes = [IsAuthenticatedOrReadOnly]`.  
 
-<img src="figs/hw_12/task_2/img_t2_1_categories_no_butt_delete.png" width="700" style="margin: 0 0 0 40px"/>
 
-<m id="img2.1" style="margin: 40px; color:#606060;">Fig. 2.1. Кнопка __DELETE__ отсутствует.</m>
-
-<img src="figs/hw_12/task_2/img_t2_2_categories_with_butt_delete.png" width="700" style="margin: 0 0 0 40px"/>
-
-<m id="img2.2" style="margin: 40px; color:#606060;">Fig. 2.2. Кнопка __DELETE__ появляется.</m>
-
-##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ 2 ⋙ </b>  Для `Tasks`  
-Для `TaskListCreateView` как по url: http://127.0.0.1:8000/hw-02/tasks/, так и 
-по url: http://127.0.0.1:8000/hw-02/taskss/7/ прописан `permission_classes = [IsAuthenticatedOrReadOnly]`. 
-
-<img src="figs/hw_12/task_2/img_t2_3_tasks_no_butt_delete.png" width="700" style="margin: 0 0 0 40px"/>
-
-<m id="img2.3" style="margin: 40px; color:#606060;">Fig. 2.3. Кнопка __DELETE__ отсутствует.</m>
-
-<img src="figs/hw_12/task_2/img_t2_4_tasks_with_butt_delete.png" width="700" style="margin: 0 0 0 40px"/>
-
-<m id="img2.4" style="margin: 40px; color:#606060;">Fig. 2.4. Кнопка __DELETE__ появляется.</m>
 
 
 ---
 
+### <m id="s2.1" style="color: #008000">2.1. </m> 
+В файл <a>DjangoProject_config / settings.py</a> добавить настройки по примерам в источниках выше.  
+При этом сделать сведения кода для оптимизации его работы.  
 
 
+##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ Шаг 1 ⋙ </b> 
+
+
+##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ Шаг 2 ⋙ </b> Д
+
+
+##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ Шаг 3 ⋙ </b> 
+
+##### <b style="color: #008000; margin: 0 20px 0 0;">⋘ Шаг 4 ⋙ </b> 
+
+---
+
+### <m id="s2.2" style="color: #008000">2.2. </m>  
+
+<img src="figs/hw_13/task_1/img_1.png" width="900" style="margin: 0 0 0 40px"/>
+
+<m id="img1" style="margin: 40px; color:#606060;">Fig. 2.1. Результат логирования GET-запросов в <a>db_logs.log</a></m>
+
+<img src="figs/hw_13/task_1/img_2.png" width="500" style="margin: 0 0 0 40px"/>
+
+<m id="img1" style="margin: 40px; color:#606060;">Fig. 2.1. Результат логирования GET-запросов в <a>http_logs.log</a></m>
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
@@ -283,7 +240,7 @@ class TaskDetailView(RetrieveUpdateDestroyAPIView):
 ## <m id="s3" style="color: #008000">3. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
-Ссылка на отчет по ДЗ <a>home_work_12.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_12.md.  
+Ссылка на отчет по ДЗ <a>home_work_12.md</a> со скриншотами: .  
 
 Ссылка на приложение по ДЗ <a>hw_02_task_manager</a>: https://github.com/odnabu/Django-Python-Advanced/tree/main/hw_02_task_manager.  
 
