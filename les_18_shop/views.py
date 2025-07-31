@@ -172,7 +172,7 @@ class ProductListCreateView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category', 'price']
 
-    # ____ Для practice_9_24_07.md:
+    # ____ Для practice_9_24_07.md   (Video "Python Adv 35: Виды разрешений, сигналы", part 1):
     # 24.07.2025 - Pr 9: Задание 1.1. Настройка BasicAuthentication
     # Явно указываем классы аутентификации для этого представления.
     # Это переопределит глобальные настройки, если они есть.
@@ -185,6 +185,7 @@ class ProductListCreateView(ListCreateAPIView):
     # permission_classes = [IsAuthenticated]
 
     # 24.07.2025 - Pr 9: Задание 4.3. Использование разрешений для остальных представлений
+    # (Video "Python Adv 35: Виды разрешений, сигналы", part 1)
     # Настройте разрешения для остальных представлений, обсудив какие необходимо применить.
     # permission_classes = [IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly]
     # permission_classes = [AllowAny]

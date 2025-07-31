@@ -222,7 +222,7 @@ Postman и размещением скриншотов в отчете к это
 
 ### <m id="s2.2" style="color: #008000">2.2. Стандартные Permissions для всех представлений и маршруты</m>  
 
-Далее прописать <m style="color: limegreen">СТАНДАРТНЫЕ пермишены</m> из DRF - DjangoModelPermissions 
+Далее прописать <m style="color: yellow">СТАНДАРТНЫЕ пермишены</m> из DRF - DjangoModelPermissions 
 для всех Представлений приложения. Например:
 ```python
 class TaskListCreateView(ListCreateAPIView):

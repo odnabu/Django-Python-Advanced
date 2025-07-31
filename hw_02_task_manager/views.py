@@ -26,11 +26,16 @@ from hw_02_task_manager.models import Category
 from hw_02_task_manager.serializers import CategorySerializer
 
 # *****  home_work_12  *****************************
-from hw_02_task_manager.permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import (DjangoModelPermissions,
                                         AllowAny, IsAuthenticated, IsAdminUser,
-                                        IsAuthenticatedOrReadOnly,      # Кастомный Пермишен для ДЗ 19.
+                                        IsAuthenticatedOrReadOnly,
                                         )
+# *****  home_work_13  *****************************
+from rest_framework.generics import ListAPIView
+# from rest_framework_simplejwt.tokens import RefreshToken
+from hw_02_task_manager.permissions import IsOwnerOrReadOnly      # Кастомный Пермишен для ДЗ 13.
+
+
 
 
 
@@ -93,15 +98,57 @@ class ProtectedDataView(APIView):
 
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%   Для проверки аутентификации в home_work_13   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# См. les_18_shop/views.py в части: 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов
+
+# # Вспомогательная функция для установки cookie
+# def set_jwt_cookies(response, user):
+#     refresh = RefreshToken.for_user(user)
+#     access_token = refresh.access_token
+#
+#     response.set_cookie(
+#         key='access_token',
+#         value=str(access_token),
+#         httponly=True, secure=False, samesite='Lax'
+#     )
+#     response.set_cookie(
+#         key='refresh_token',
+#         value=str(refresh),
+#         httponly=True, secure=False, samesite='Lax'
+#     )
+
+# # Реализация логина с сохранением токенов в куки:
+# class LoginView(APIView):
+#     # Разрешаем доступ всем (даже анонимным пользователям), чтобы они могли войти
+#     permission_classes = [AllowAny]
+#
+#     def post(self, request, *args, **kwargs):
+#         username = request.data.get('username')
+#         password = request.data.get('password')
+#
+#         # Проверяем, существует ли пользователь с таким логином и паролем
+#         user = authenticate(request, username=username, password=password)
+#
+#         if user:
+#             # Создаем успешный ответ
+#             response = Response(status=status.HTTP_200_OK)
+#
+#             set_jwt_cookies(response, user)
+#
+#             return response
+
+# --------------------------------------------------------------------------------------
+
+
+
+
+
 
 # //////////////      home_work_12    Задание 2: Реализация пермишенов для API      //////////////////////////////
 
 # ____  hw_12   Задание 2: Реализация пермишенов для API:
 # https://github.com/viacheslav-bandylo/111124-projects/blob/main/library/views.py
-
-
-
-
+# Для этого ДЗ все реализации стандартных пермишенов внутри самих Сериалайзеров.
 
 
 
@@ -133,30 +180,12 @@ class TaskListCreateView(ListCreateAPIView):
     # _____ home_work_12:  2:  Добавление пермишенов:
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-
+    # _____ home_work_13:  задание 1:  Извлечение текущего пользователя из запроса:
     def perform_create(self, serializer):
         # При сохранении объекта передается дополнительный параметр owner,
         # в который записывается текущий пользователь из запроса:
-        serializer.save(owner=self.request.user)
-
-    # # Переопределение метода create:
-    # def create(self, request, *args, **kwargs):
-    #     # Копирование данных из запроса, чтобы их можно было изменять:
-    #     data = request.data.copy()
-    #
-    #     # ----------------------------------------------------------------------
-    #     # Кастомная логика:             ???????? Что СЮДА вписывать вместо 'author' -- title ?????????
-    #     if 'author' not in data or not data['author']:
-    #         data['author'] = 1
-    #
-    #     # Дальше идет стандартная логика из DRF:
-    #     serializer = self.get_serializer(data=data)
-    #     serializer.is_valid(raise_exception=True)
-    #     # self.perform_create вызывает serializer.save():
-    #     self.perform_create(serializer)
-    #     headers = self.get_success_headers(serializer.data)
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
+        serializer.save(owner=self.request.user)    # Сохраняем текущего пользователя как владельца. То, что
+                                                    # передается здесь, будет добавлено к данным перед сохранением.
 
 
 # Класс для получения/обновления/удаления задачи:
@@ -168,7 +197,9 @@ class TaskDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = TaskDetailSerializer
 
     # _____ home_work_12:  2:  Добавление пермишенов:
-    permission_classes = [IsAdminUser]
+    # _____ home_work_13:  2:  Добавление пермишенов для API:
+    permission_classes = [IsAdminUser, IsOwnerOrReadOnly]
+
 
 
 
@@ -203,6 +234,14 @@ class SubTaskListCreateView(ListCreateAPIView, PageNumberPagination):
     # _____ home_work_12:  2:  Добавление пермишенов:
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    # _____ home_work_13:  задание 1:  Извлечение текущего пользователя из запроса:
+    def perform_create(self, serializer):
+        # При сохранении объекта передается дополнительный параметр owner,
+        # в который записывается текущий пользователь из запроса:
+        serializer.save(owner=self.request.user)    # Сохраняем текущего пользователя как владельца. То, что
+                                                    # передается здесь, будет добавлено к данным перед сохранением.
+
+
 
 # Подробности, обновление и удаление подзадачи:
 class SubTaskDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -213,7 +252,8 @@ class SubTaskDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = SubTaskCreateSerializer
 
     # _____ home_work_12:  2:  Добавление пермишенов:
-    permission_classes = [IsAdminUser]
+    # _____ home_work_13:  2:  Добавление пермишенов для API:
+    permission_classes = [IsAdminUser, IsOwnerOrReadOnly]
 
 
 # //////////////     home_work_09   ПРЕДСТАВЛЕНИЯ из предыдущей версии views.py       //////////////////////////////
@@ -343,5 +383,18 @@ class CategoryViewSet(viewsets.ModelViewSet):
         ]
         return Response(data)
         # return Response(category_with_tasks_count)
+
+
+
+# //////////////   home_work_13   Задание 1. Извлечение текущего пользователя из запроса     ////////////////////
+
+# _____ hw_13:  1.6. Представление задач текущего пользователя.
+
+class MyTaskListView(ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Task.objects.filter(owner=self.request.user)  # Выводить только свои задачи.
 
 

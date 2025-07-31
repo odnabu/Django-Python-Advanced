@@ -9,7 +9,8 @@ from django.urls import resolve
 class JWTAuthenticationMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        if request.path_info in ['/project_manager/login/','/project_manager/registration/','/project_manager/logout/']:
+        if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/les_18_shop/logout/',
+                                 '/hw_02_task_manager/login/', '/hw_02_task_manager/registration/', '/hw_02_task_manager/logout/']:
             return
         access_token_cookie = request.COOKIES.get('access_token')
 

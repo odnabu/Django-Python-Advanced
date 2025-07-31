@@ -51,21 +51,24 @@ urlpatterns += [
     path('tasks/statistics/', TaskStatisticsView.as_view(), name='task-statistics'),      # hw_06: http://127.0.0.1:8000/hw-02/tasks/statistics/
 ]
 
-# _____ hw_06:  5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularRedocView,
-    SpectacularSwaggerView,
-)
-
-urlpatterns += [
-    # Схема OpenAPI
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    # Swagger UI
-    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),     # hw_06: http://127.0.0.1:8000/hw-02/swagger/
-    # Redoc UI
-    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),              # hw_06: http://127.0.0.1:8000/hw-02/redoc/
-]
+# # _____ hw_06:  5. ДОПОЛНИТЕЛЬНО  -->  5.2.2. Подключение Swagger и ReDoc
+# #  \\\\\\\\\   СМОТРИ в DjangoProject_config/urls.py --->     ////////////////////////////
+# Теперь это здесь НЕ нужно! Всё прописано в РУТЕ (в конфигах), поскольку касается всего проекта,
+# а не всего приложения.
+# from drf_spectacular.views import (
+#     SpectacularAPIView,
+#     SpectacularRedocView,
+#     SpectacularSwaggerView,
+# )
+#
+# urlpatterns += [
+#     # Схема OpenAPI
+#     path('schema/', SpectacularAPIView.as_view(), name='schema'),
+#     # Swagger UI
+#     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),     # hw_06: http://127.0.0.1:8000/hw-02/swagger/
+#     # Redoc UI
+#     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),              # hw_06: http://127.0.0.1:8000/hw-02/redoc/
+# ]
 
 
 
@@ -117,7 +120,6 @@ urlpatterns += [
     # # обычному пользователю получить доступ.
     path('admin/', AdminView.as_view(), name='admin'),
 ]
-
 # ---------------------------------------------------------------------------------------------------------------
 
 
@@ -126,4 +128,12 @@ urlpatterns += [
 # Здесь url добавлять НЕ нужно, т.к. по условию ДЗ нужно прописать СТАНДАРТНЫЕ из DRF - DjangoModelPermissions.
 
 
+
+
+#       ///////   home_work_12.md    /////////
+# _____ hw_13:  1.6. Представление задач текущего пользователя.
+from hw_02_task_manager.views import MyTaskListView
+urlpatterns += [
+    path('tasks/my/', MyTaskListView.as_view(), name='my-tasks'),
+]
 

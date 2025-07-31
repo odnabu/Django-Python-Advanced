@@ -30,15 +30,18 @@ class TaskSerializer(serializers.ModelSerializer):
     # ____  Для к "home_work_08.md"  ____
     deadline_weekday = serializers.SerializerMethodField()
 
+
     class Meta:
         model = Task
-
-        # Для к "home_work_07.md":
-        # fields = ['id', 'title', 'deadline', 'subtasks']
+        # ____  Для "home_work_07.md"  ____
+        fields = ['id', 'title', 'owner', 'deadline', 'subtasks']
         # fields = '__all__'
 
-        # Для к "home_work_08.md":
-        fields = ['id', 'title', 'deadline', 'deadline_weekday', 'subtasks']
+        # ____  Для к "home_work_08.md"  ____
+        # fields = ['id', 'title', 'deadline', 'deadline_weekday', 'subtasks']
+
+        # ____  Для к "home_work_13.md", задание 1  ____
+        read_only_fields = ['owner']  # Делаем поле 'owner' только для чтения
 
     # Для к "home_work_08.md":
     def get_deadline_weekday(self, obj):
@@ -87,8 +90,8 @@ class CategorySerializer(serializers.ModelSerializer):
 class SubTaskCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubTask
-        fields = '__all__'           # ['id', 'title', 'description', 'status', 'deadline']
-        # fields = ['id', 'title', 'description', 'status', 'deadline', 'task']
+        # fields = '__all__'           # ['id', 'title', 'description', 'status', 'deadline']
+        fields = ['id', 'title', 'description', 'status', 'deadline', 'task']
         read_only_fields = ['created_at']
 
 
@@ -118,11 +121,16 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
 # _____ 3. Использование вложенных сериализаторов
 
 class SubTaskSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = SubTask
-        # fields = '__all__'
+        fields = '__all__'
         # fields = ['id', 'title', 'description', 'status', 'deadline', 'created_at', 'task']
-        fields = ['id', 'title', 'status', 'deadline', 'task']
+        # fields = ['id', 'title', 'status', 'deadline', 'task']
+
+        # ____  Для к "home_work_13.md", задание 1  ____
+        read_only_fields = ['owner']  # Делаем поле 'owner' только для чтения
+
 
 
     # Сериализатор, который использует только названия подзадач:
@@ -143,7 +151,8 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         # fields = '__all__'
 
         # Для к "home_work_08.md":
-        fields = ['id', 'title', 'description', 'status', 'deadline', 'weekday', 'created_at', 'categories', 'subtasks']
+        # fields = ['id', 'title', 'description', 'status', 'deadline', 'weekday', 'created_at', 'categories', 'subtasks']
+        fields = '__all__'
 
     # Для к "home_work_08.md":
     def get_weekday(self, obj):

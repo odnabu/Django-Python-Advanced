@@ -3,9 +3,12 @@ from tkinter.constants import CASCADE
 
 from django.db import models
 from django.core.validators import MinLengthValidator   # Список валидаторов: https://django.fun/docs/django/5.0/ref/validators/
-# Для home_work_10.md:
+# *****  home_work_10  *****************************
 from django.utils import timezone
 from hw_02_task_manager.managers import SoftDeleteManager
+# *****  home_work_13  *****************************
+from django.contrib.auth.models import User  # или get_user_model()
+
 
 
 # ___ Модель Category __________________________________________________________________________________________
@@ -88,6 +91,18 @@ class Task(models.Model):
     deadline = models.DateTimeField(help_text='Введите дату и время дедлайна.')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания')
 
+    # -------------------------------------------------------------------------------
+    # ///////   home_work_13.md    /////////
+    # _____ home_work_13   1:  Извлечение текущего пользователя из запроса:
+    # Так как внутри моего проекта возник конфликт между МОДЕЛЯМИ приложений (project и hw_02_task_manager),
+    # после доработки кода по примеру видео урока 35 и подсказки Чата, для вызова встроенной модели User
+    # для таблицы с информацией о пользователях, нужно добавить связь (отношение Relation) между
+    # моделью Task и моделью User с другим related_name, например, related_name=owned_tasks.
+    # Тогда доработанная строка кода для Владельца (создателя) задачи:
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name="Owner", null=True, related_name='owned_tasks')
+    # -------------------------------------------------------------------------------
+
+
     # def save(self, *args, **kwargs):
     #     """
     #     Функция для создания дефолтного названия задачи с ее номером == id,
@@ -143,6 +158,18 @@ class SubTask(models.Model):
     status = models.CharField(choices=status_choices, verbose_name='Статус подзадачи')
     deadline = models.DateTimeField(help_text='Введите дату и время дедлайна для этой подзадачи.')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время создания подзадачи')
+
+    # -------------------------------------------------------------------------------
+    # ///////   home_work_13.md    /////////
+    # _____ home_work_13   1:  Извлечение текущего пользователя из запроса:
+    # Так как внутри моего проекта возник конфликт между МОДЕЛЯМИ приложений (project и hw_02_task_manager),
+    # после доработки кода по примеру видео урока 35 и подсказки Чата, для вызова встроенной модели User
+    # для таблицы с информацией о пользователях, нужно добавить связь (отношение Relation) между
+    # моделью Task и моделью User с другим related_name, например, related_name=owned_tasks.
+    # Тогда доработанная строка кода для Владельца (создателя) ПОДзадачи будет с related_name=owned_SUBtasks:
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name="Owner", null=True, related_name='owned_subtasks')
+    # -------------------------------------------------------------------------------
+
 
     # ///////   home_work_03.md    /////////
     class Meta:

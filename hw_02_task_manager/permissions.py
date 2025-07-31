@@ -1,4 +1,4 @@
-# //////////////      home_work_12    Задание 2: Реализация пермишенов для API       //////////////////////////////
+# //////////////      home_work_13    Задание 2: Реализация пермишенов для API       //////////////////////////////
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
