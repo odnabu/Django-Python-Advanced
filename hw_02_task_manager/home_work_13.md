@@ -7,7 +7,7 @@ __Цель:__
 Настроить и интегрировать Swagger для автоматической генерации документации API.  
 
 ###  Задание 1. Извлечение текущего пользователя из запроса  
-Шаги для выполнения (см. начало [<font color="#696969">[3, p. 77]</font>](#p1), [<font color="#696969">[4, s. 22]</font>](#c1)):
+Шаги для выполнения (см. начало [<font color="#696969">[2, p. 77]</font>](#p1), [<font color="#696969">[4, s. 22]</font>](#c1)):
 1. Обновите модели, чтобы включить поле owner. 
    - Обновите модели Task и SubTask для включения поля owner. 
 2. Измените сериализаторы. 
@@ -66,22 +66,16 @@ if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/
 
 
 ### <m style="color: #008000">Источники</m>  
-<m style="color: #606060">Видео - уроки от *24.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 35, c \_:\_:\_]</font>](#v1).  
+<m style="color: #606060">Видео - уроки от *24.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 35, c 1:49:40]</font>](#v1).  
 [1] ▶ Video 35 "Python Adv 35: Виды разрешений, сигналы" (3:15:05), *24.07.2025* начиная 
 <m style="color: red">c 1:49:40</m>: <m id="v1">https://player.vimeo.com/video/1104102562?h=2ad6195fdc</m>.  
-[2] ▶ Video \_ "" (\_:\_:\_), *\_.07.2025* начиная 
-<m style="color: red">c \_:\_</m>: <m id="v2"></m>.  
-[3] Presentation 31 _"Авторизация"_. <a id="p1">Les35-Django_31-AuTHORisation-24_07.pdf</a>. 
+[2] Presentation 31 _"Авторизация"_. <a id="p1">Les35-Django_31-AuTHORisation-24_07.pdf</a>. 
 <m style="color: #606060">——▷  Получение пользователя из request. Разрешения на уровне объектов в 
 Django REST Framework. Разрешения моделей. Использование разрешений моделей в представлениях</m>   
 [4] Conspectus 31 "Урок 31. Авторизация" <a id="c1">Les35-Django_31---AuTHORisation-24_07.pdf</a>.  
-[5] Presentation \_ _""_.  
-<a id="p2"></a>. 
-<m style="color: #606060">——▷  </m>.   
-[6] Conspectus \_ <a id="c2"></a>.  
-[7] Приложение **home_work_12**: файл <m id="hw7">home_work_12.md</m>.  
-[8] Руководство по оформлению Markdown файлов: https://gist.github.com/Jekins/2bf2d0638163f1294637.  
-[9] Шпаргалка по Markdown: https://gist.github.com/fomvasss/8dd8cd7f88c67a4e3727f9d39224a84c.
+[5] Приложение **home_work_12**: файл <m id="hw7">home_work_12.md</m>.  
+[6] Руководство по оформлению Markdown файлов: https://gist.github.com/Jekins/2bf2d0638163f1294637.  
+[7] Шпаргалка по Markdown: https://gist.github.com/fomvasss/8dd8cd7f88c67a4e3727f9d39224a84c.
 
 
 
@@ -137,7 +131,7 @@ Python Adv 35: Виды разрешений, сигналы	Python Advanced	Ban
 
 Описание реализации этого задания по шагам смотри в:  
 1. записи урока [<font color="#696969">[1 - ▶  Video 35]</font>](#v1) начиная <m style="color: red">c 1:53:10</m>.
-2. тексте презентации и конспекте (начало) [<font color="#696969">[3, s. 7]</font>](#p1), 
+2. тексте презентации и конспекте (начало) [<font color="#696969">[2, s. 7]</font>](#p1), 
 [<font color="#696969">[4, p. 2]</font>](#c1).
 4. решении для этой задачи от [ChatGPT](https://chatgpt.com/s/t_688b1e85716c8191a973ec91ebba4eb1).  
 5. примере реализации для [models.py, views.py etc. to "library" from V. Bandylo on GitHub](https://github.com/viacheslav-bandylo/111124-projects/blob/main/library/models.py). 
@@ -261,7 +255,7 @@ class SubTaskSerializer(serializers.ModelSerializer):
 Чтобы производилось ___автоматическое___ внесение в поле `'owner'` ЮЗЕРА, который посылает запрос 
 на создание задачи или подзадачи НУЖНО в файле <a>views.py</a> с представлениями `TaskListCreateView` 
 и `SubTaskListCreateView` добавить еще один метод `perform_create` (ДО метода `create` в [пример Bandylo](https://github.com/viacheslav-bandylo/111124-projects/blob/main/library/serializers.py))
-[<font color="#696969">[1 - ▶  Video 35, 1:56:50]</font>](#v1), [<font color="#696969">[3, p. 8,9]</font>](#p1).
+[<font color="#696969">[1 - ▶  Video 35, 1:56:50]</font>](#v1), [<font color="#696969">[2, p. 8,9]</font>](#p1).
 ```python
 # views.py
 class TaskListCreateView(ListCreateAPIView):
@@ -348,7 +342,7 @@ class SubTaskListCreateView(ListCreateAPIView):
 
 ### <m id="ss1.5" style="color: #008000">1.5. Представление задач текущего пользователя</m>  
 Для реализации этой задачи смотри пример [<font color="#696969">[1 - ▶  Video 35, 2:10:10]</font>](#v1), 
-[<font color="#696969">[3, p. 9]</font>](#p1).  
+[<font color="#696969">[2, p. 9]</font>](#p1).  
 Добавить представление в <a>views.py</a>:  
 ```python
 # views.py
@@ -385,7 +379,7 @@ path('tasks/my/', MyTaskListView.as_view(), name='my-tasks'),
 ## <m id="s2" style="color: #008000">2. Реализация пермишенов для API</m>    
 Описание реализации кастомных разрешений (Permissions) по шагам смотри:  
 1. в записи урока [<font color="#696969">[1 - ▶  Video 35]</font>](#v1) <m style="color: red">c 2:20:10</m>.
-2. в тексте презентации и конспекте [<font color="#696969">[3, s. 15]</font>](#p1).
+2. в тексте презентации и конспекте [<font color="#696969">[2, s. 15]</font>](#p1).
 3. в решении для этой задачи от [ChatGPT](https://chatgpt.com/s/t_688b1e85716c8191a973ec91ebba4eb1).  
 4. в примере реализации ["library" from V. Bandylo on GitHub](https://github.com/viacheslav-bandylo/111124-projects/blob/main/library/permissions.py).
 
