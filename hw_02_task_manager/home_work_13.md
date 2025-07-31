@@ -44,6 +44,27 @@ __Цель:__
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
 
+
+---
+<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
+
+## <b style="color: yellow; background: darkred; padding: 10px; ">ВООБЩЕ черт знает что творится!.....</b>   
+
+ВОПРОСЫ  
+1. <b style="color: red;">NB!</b> Почему нет всех полей на создание задачи на Fig 1.B ????????????????
+2. Можно ли в middleware.py так добавлять маршруты:
+```python
+if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/les_18_shop/logout/',
+                                 '/hw_02_task_manager/login/', '/hw_02_task_manager/registration/', '/hw_02_task_manager/logout/']:
+```
+3. Почему НЕЛЬЗЯ прямо в таблицах в БД поменять значение и потом обращаться к нему?
+
+<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
+
+---
+
+
+
 ### <m style="color: #008000">Источники</m>  
 <m style="color: #606060">Видео - уроки от *24.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 35, c \_:\_:\_]</font>](#v1).  
 [1] ▶ Video 35 "Python Adv 35: Виды разрешений, сигналы" (3:15:05), *24.07.2025* начиная 
@@ -265,24 +286,8 @@ class SubTaskListCreateView(ListCreateAPIView):
 Причем вызывается после успешной валидации данных.
 
 ---
-<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
 
-<b style="color: yellow; background: darkred; padding: 10px; ">ВООБЩЕ черт знает что творится!.....</b>   
-
-ВОПРОСЫ  
-1. <b style="color: red;">NB!</b> Почему нет всех полей на создание задачи на Fig 1.B ????????????????
-2. Можно ли в middleware.py так добавлять маршруты:
-```python
-if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/les_18_shop/logout/',
-                                 '/hw_02_task_manager/login/', '/hw_02_task_manager/registration/', '/hw_02_task_manager/logout/']:
-```
-3. 
-
-<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
-
----
-
-### <m id="ss1.5" style="color: #008000">1.5. Проверка работы кода из пп. 1.1-1.3</m>
+### <m id="ss1.4" style="color: #008000">1.4. Проверка работы кода из пп. 1.1-1.3</m>
 Результат с проверкой Аутентификации в браузере [<font color="#696969">[1 - ▶  Video 35, 2:03:20]</font>](#v1)
 в МОЕМ случае НЕ получится, т.к. `refresh`-токен все еще валиден. А мне его пересоздавать как-то не очень хочется,
 потому что я на этом еще пару часов потеряю. А я уже хочу начать финальный проект...
@@ -341,7 +346,7 @@ if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/
 
 ---
 
-### <m id="ss1.6" style="color: #008000">1.6. Представление задач текущего пользователя</m>  
+### <m id="ss1.5" style="color: #008000">1.5. Представление задач текущего пользователя</m>  
 Для реализации этой задачи смотри пример [<font color="#696969">[1 - ▶  Video 35, 2:10:10]</font>](#v1), 
 [<font color="#696969">[3, p. 9]</font>](#p1).  
 Добавить представление в <a>views.py</a>:  
@@ -362,8 +367,8 @@ path('tasks/my/', MyTaskListView.as_view(), name='my-tasks'),
 
 ---
 
-### <m id="ss1.7" style="color: #008000">1.7. Результат п. 1.6 через Postman и браузер:</m>  
-<b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> Как и в п. 1.5 СНАЧАЛА сгенерировать новый `access`-токен (по запросу "hw_11 - 1 Getting JWT Token" из HW_11), 
+### <m id="ss1.6" style="color: #008000">1.6. Результат п. 1.5 через Postman и браузер:</m>  
+<b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> Как и в пп. 1.4, 1.5 СНАЧАЛА сгенерировать новый `access`-токен (по запросу "hw_11 - 1 Getting JWT Token" из HW_11), 
 иначе не сработает ни один метод, в данном случае `GET`.
 
 <img src="figs/hw_13/task_1/img_t1_f_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
@@ -373,9 +378,6 @@ path('tasks/my/', MyTaskListView.as_view(), name='my-tasks'),
 <m id="img1.1" style="margin: 40px; color:#606060;">Fig. 1.1. Выполнение POST-запроса в Postman для получения JWT-токена.</m>
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
-
-
-
 
 
 
@@ -435,14 +437,33 @@ class SubTaskDetailView(RetrieveUpdateDestroyAPIView):
 
 ### <m id="ss2.3" style="color: #008000">2.3. Проверка применения кастомного пермишена</m>  
 
-<b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> Как и в п. 1.5 СНАЧАЛА сгенерировать новый `access`-токен 
+<b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> Как и в п. 1.4-1.6 СНАЧАЛА сгенерировать новый `access`-токен 
 (по запросу "hw_11 - 1 Getting JWT Token" из HW_11), иначе не сработает ни один метод, в данном случае `GET`.
 
 <img src="figs/hw_13/task_2/img_t2_1_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
 
 <img src="figs/hw_13/task_2/img_t2_1_2.png" width="900" style="margin: 0 0 0 40px"/>
 
-<m id="img2.1" style="margin: 40px; color:#606060;">Fig. 2.1. Выполнение POST-запроса в Postman для получения JWT-токена.</m>
+<m id="img2.1" style="margin: 40px; color:#606060;">Fig. 2.1. Получение в Postman детальной информации по задаче 
+с доступом на редактирование.</m>
+
+---
+
+<img src="figs/hw_13/task_2/img_t2_2_1.png" width="900" style="margin: 0 0 0 40px"/><br>  
+
+<img src="figs/hw_13/task_2/img_t2_2_2.png" width="900" style="margin: 0 0 0 40px"/>
+
+<m id="img2.2" style="margin: 40px; color:#606060;">Fig. 2.2. Выполнение PUT-запроса в Postman для изменения задачи.</m>
+
+---
+
+<img src="figs/hw_13/task_2/img_t2_3_1.png" width="700" style="margin: 0 0 0 40px"/><br>  
+
+<img src="figs/hw_13/task_2/img_t2_3_2.png" width="700" style="margin: 0 0 0 40px"/>
+
+<m id="img2.3" style="margin: 40px; color:#606060;">Fig. 2.3. Результат создания новой подзадачи и выполнения 
+GET-запроса по url: http://127.0.0.1:8000/hw-02/subtasks/16/.</m>
+
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 

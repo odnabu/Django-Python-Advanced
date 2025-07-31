@@ -34,11 +34,11 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         # ____  Для "home_work_07.md"  ____
-        fields = ['id', 'title', 'owner', 'deadline', 'subtasks']
+        # fields = ['id', 'title', 'deadline', 'subtasks']
         # fields = '__all__'
 
         # ____  Для к "home_work_08.md"  ____
-        # fields = ['id', 'title', 'deadline', 'deadline_weekday', 'subtasks']
+        fields = ['id', 'title', 'owner', 'deadline', 'deadline_weekday', 'subtasks']
 
         # ____  Для к "home_work_13.md", задание 1  ____
         read_only_fields = ['owner']  # Делаем поле 'owner' только для чтения
@@ -91,7 +91,8 @@ class SubTaskCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubTask
         # fields = '__all__'           # ['id', 'title', 'description', 'status', 'deadline']
-        fields = ['id', 'title', 'description', 'status', 'deadline', 'task']
+        # fields = ['id', 'title', 'description', 'status', 'deadline', 'task']
+        fields = ['id', 'title', 'owner', 'description', 'status', 'deadline', 'task']
         read_only_fields = ['created_at']
 
 

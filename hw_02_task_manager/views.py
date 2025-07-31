@@ -34,7 +34,7 @@ from rest_framework.permissions import (DjangoModelPermissions,
 from rest_framework.generics import ListAPIView
 # from rest_framework_simplejwt.tokens import RefreshToken
 from hw_02_task_manager.permissions import IsOwnerOrReadOnly      # Кастомный Пермишен для ДЗ 13.
-
+from hw_02_task_manager.serializers import SubTaskSerializer
 
 
 
@@ -250,6 +250,7 @@ class SubTaskDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     """
     queryset = SubTask.objects.all()
     serializer_class = SubTaskCreateSerializer
+    # serializer_class = SubTaskSerializer
 
     # _____ home_work_12:  2:  Добавление пермишенов:
     # _____ home_work_13:  2:  Добавление пермишенов для API:
