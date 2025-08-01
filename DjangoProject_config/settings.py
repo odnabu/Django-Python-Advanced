@@ -349,6 +349,7 @@ AUTH_USER_MODEL = env('AUTH_USER_MODEL', default='auth.User')
 
 
 
-# ---------------------------- НЕ ЗНАЮ пока, для чего - разберусь позже -------------
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Настройка параметров электронной почты. См. Les38-Python Adv_34-Сигналы в Django-25_07.pdf
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

@@ -33,11 +33,11 @@ Python Advanced - Django
 
 
 ### <m style="color: #008000">Источники</m>  
-<m style="color: #606060">Видео - уроки от *24.07.2025*</m>  [<font color="#696969">[1 - ▶  Video 36, c 19:30]</font>](#v1).  
-[1] ▶ Video 36 "Python Adv 36: Практикум 10" (2:00:24), *24.07.2025* начиная 
+<m style="color: #606060">ОСНОВНОЕ Видео - урок от *25.07.2025*</m>  [<font color="#696969">[2 - ▶  Video 38, c 17:30]</font>](#v1).  
+[1] ▶ Video 36 _"Python Adv 36: Практикум 10"_ (2:00:24), *24.07.2025* начиная 
 <m style="color: red">c 19:30</m>: <m id="v1">https://player.vimeo.com/video/1104118811?h=0528f86959</m>.  
-[2] ▶ Video \_ "" (\_:\_:\_), *\_.07.2025* начиная 
-<m style="color: red">c \_:\_</m>: <m id="v2"></m>.  
+[2] ▶ Video 38 _"Python Adv 38: Сигналы в Django. Настройка параметров электронной почты)"_ (1:37:49), *25.07.2025* начиная 
+<m style="color: red">c 17:30</m>: <m id="v2">https://player.vimeo.com/video/1104431422?h=837d17d86d</m>.  
 [3] Presentation 33 _"Автоматическое использование JWT. Логин и регистрция с JWT"_. 
 <a id="p1">Les37-Python Adv_33-Register_User-JWT-25_07.pdf</a>. 
 <m style="color: #606060">——▷  Автоматическое использование JWT токенов. Регистрация пользователя с использованием JWT</m>.   
