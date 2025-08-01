@@ -46,12 +46,12 @@ urlpatterns = [
     path('product/<int:pk>/', ProductRetrieveUpdateDestroyView.as_view(), name='product-detail'),
     # 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
     path('order-statistics/', OrderStatisticsView.as_view(), name='order-statistics'),
-    # 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов
+    # les_18_shop/urls.py --> 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов
     # Реализация логина с сохранением токенов в куки:
     path('login/', LoginView.as_view(), name='shop-login'),
-    # 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT
+    # les_18_shop/urls.py --> 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT
     path('registration/', RegistrationView.as_view(), name='shop-registration'),
-    # 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: РАЗЛОГИНИВАНИЕ пользователя с JWT
+    # les_18_shop/urls.py --> 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: РАЗЛОГИНИВАНИЕ пользователя с JWT
     path('logout/', LogoutView.as_view(), name='shop-logout'),
 ]
 

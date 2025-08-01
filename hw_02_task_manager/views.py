@@ -26,15 +26,20 @@ from hw_02_task_manager.models import Category
 from hw_02_task_manager.serializers import CategorySerializer
 
 # *****  home_work_12  *****************************
-from rest_framework.permissions import (DjangoModelPermissions,
+from rest_framework.permissions import (DjangoModelPermissions,     # Встроенный класс разрешений. В моей hw_13 не используется.
                                         AllowAny, IsAuthenticated, IsAdminUser,
-                                        IsAuthenticatedOrReadOnly,
-                                        )
+                                        IsAuthenticatedOrReadOnly)
 # *****  home_work_13  *****************************
 from rest_framework.generics import ListAPIView
-# from rest_framework_simplejwt.tokens import RefreshToken
 from hw_02_task_manager.permissions import IsOwnerOrReadOnly      # Кастомный Пермишен для ДЗ 13.
 from hw_02_task_manager.serializers import SubTaskSerializer
+# *****  home_work_14  *****************************
+from hw_02_task_manager.serializers import UserRegisterSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.http import HttpResponse
+from django.contrib.auth import authenticate
+
+
 
 
 
@@ -50,7 +55,6 @@ class PublicView(APIView):
 
     def get(self, request, format=None):
         return Response(status=status.HTTP_200_OK, data={'message': 'This endpoint have access for anyone!'})
-
 
 
 # 23.07.2025 - Python Adv 34: Практикум 9, 1:15:40.
@@ -98,51 +102,6 @@ class ProtectedDataView(APIView):
 
 
 
-# %%%%%%%%%%%%%%%%%%%%%%%%%   Для проверки аутентификации в home_work_13   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# См. les_18_shop/views.py в части: 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов
-
-# # Вспомогательная функция для установки cookie
-# def set_jwt_cookies(response, user):
-#     refresh = RefreshToken.for_user(user)
-#     access_token = refresh.access_token
-#
-#     response.set_cookie(
-#         key='access_token',
-#         value=str(access_token),
-#         httponly=True, secure=False, samesite='Lax'
-#     )
-#     response.set_cookie(
-#         key='refresh_token',
-#         value=str(refresh),
-#         httponly=True, secure=False, samesite='Lax'
-#     )
-
-# # Реализация логина с сохранением токенов в куки:
-# class LoginView(APIView):
-#     # Разрешаем доступ всем (даже анонимным пользователям), чтобы они могли войти
-#     permission_classes = [AllowAny]
-#
-#     def post(self, request, *args, **kwargs):
-#         username = request.data.get('username')
-#         password = request.data.get('password')
-#
-#         # Проверяем, существует ли пользователь с таким логином и паролем
-#         user = authenticate(request, username=username, password=password)
-#
-#         if user:
-#             # Создаем успешный ответ
-#             response = Response(status=status.HTTP_200_OK)
-#
-#             set_jwt_cookies(response, user)
-#
-#             return response
-
-# --------------------------------------------------------------------------------------
-
-
-
-
-
 
 # //////////////      home_work_12    Задание 2: Реализация пермишенов для API      //////////////////////////////
 
@@ -165,6 +124,7 @@ class TaskListCreateView(ListCreateAPIView):
     Cоздание задачи и получение списка задач.
     """
     queryset = Task.objects.all()
+    # serializer_class = TaskSerializer
     serializer_class = TaskSerializer
 
     # Подключение бэкендов для фильтрации, поиска и сортировки:
@@ -188,17 +148,40 @@ class TaskListCreateView(ListCreateAPIView):
                                                     # передается здесь, будет добавлено к данным перед сохранением.
 
 
+    # _____ home_work_13, 14:    Переопределяем метод TaskListCreateView  ______
+    # Этот метод позволяет нам динамически выбирать сериалайзер:
+    def get_serializer_class(self):
+        # Для безопасных методов (только чтение), таких как GET:
+        if self.request.method == 'GET':
+            return TaskSerializer
+        # Для остальных методов (POST):
+        return TaskDetailSerializer
+
+
+
+
 # Класс для получения/обновления/удаления задачи:
 class TaskDetailView(RetrieveUpdateDestroyAPIView):
     """
     Получение, обновление и удаление задачи.
     """
     queryset = Task.objects.all()
-    serializer_class = TaskDetailSerializer
+    # serializer_class = TaskDetailSerializer
 
     # _____ home_work_12:  2:  Добавление пермишенов:
     # _____ home_work_13:  2:  Добавление пермишенов для API:
     permission_classes = [IsAdminUser, IsOwnerOrReadOnly]
+
+    # _____ home_work_13, 14:
+    # Переопределить метод get_serializer_class, чтобы обращаться к нему динамически.
+    # Добавление возможности переключения сериализаторов в зависимости от параметра ?subtask_titles=true.
+    # Сначала закомментировать строку ВЫШЕ:
+    # serializer_class = TaskDetailSerializer
+    # Затем обновить TaskDetailView, чтобы сериализатор выбирался по параметру:
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return TaskSerializer
+        return TaskDetailSerializer
 
 
 
@@ -392,10 +375,108 @@ class CategoryViewSet(viewsets.ModelViewSet):
 # _____ hw_13:  1.6. Представление задач текущего пользователя.
 
 class MyTaskListView(ListAPIView):
+    """
+    Задачи залогиненого юзера.
+    """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Task.objects.filter(owner=self.request.user)  # Выводить только свои задачи.
+
+
+
+
+
+# //////////////   home_work_14     ////////////////////
+
+# _____ hw_14:  Задание 1. Регистрация пользователя
+# Смотри пример les_18_shop/views.py  -->  # 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов.
+
+# Вспомогательная функция для установки cookie:
+def set_jwt_cookies(response, user):
+    refresh = RefreshToken.for_user(user)
+    access_token = refresh.access_token
+
+    response.set_cookie(
+        key='access_token',
+        value=str(access_token),
+        httponly=True, secure=False, samesite='Lax'
+    )
+    response.set_cookie(
+        key='refresh_token',
+        value=str(refresh),
+        httponly=True, secure=False, samesite='Lax'
+    )
+
+
+# Смотри пример les_18_shop/views.py  -->  # 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT.
+class UserRegistrationView(APIView):
+    """
+    Регистрация нового юзера с такими обязательными полями:
+    username: <имя пользователя>
+    password: <пароль>
+    email: <адрес@домен>
+    Для тестирования: { "username": "hw_14_user", "password": "hw_14_user*", "email": "hw_14_user@od.com" }
+    """
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = UserRegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            # Создаем ответ с данными пользователя
+            response = Response({
+                'user': {
+                    'username': user.username,
+                    'email': user.email
+                }
+            }, status=status.HTTP_201_CREATED)
+
+            # Вызываем нашу функцию, чтобы добавить cookie с токенами в ответ
+            set_jwt_cookies(response, user)
+
+            return response
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# _____ hw_14:  Задание 2. Вход в аккаунт -- LogIn
+# Смотри пример les_18_shop/views.py  -->  Реализация логина с сохранением токенов в куки:
+class LoginView(APIView):
+    """
+    Ввод username и password.
+    Для тестирования: { "username": "odnabu", "password": "123" }
+    """
+    # Разрешаем доступ всем (даже анонимным пользователям), чтобы они могли войти
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        # Проверяем, существует ли пользователь с таким логином и паролем
+        user = authenticate(request, username=username, password=password)
+
+        if user:
+            # Создаем успешный ответ
+            response = Response(status=status.HTTP_200_OK)
+            set_jwt_cookies(response, user)
+
+            return response
+
+
+
+# _____ hw_14:  Задание 3. Выход из аккаунта -- LogOut
+# Смотри пример les_18_shop/views.py  -->  24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: РАЗЛОГИНИВАНИЕ пользователя с JWT
+class LogoutView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Создаем пустой ответ
+        response = Response(data={'message': 'Logout successful'},status=status.HTTP_204_NO_CONTENT)
+        # Отправляем команду браузеру на удаление cookie
+        response.delete_cookie('access_token')
+        response.delete_cookie('refresh_token')
+        return response
+
 
 

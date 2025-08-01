@@ -16,7 +16,7 @@ class IsOwnerOrReadOnly(BasePermission):
         # Разрешения на запись (POST, PUT, PATCH, DELETE) даем только владельцу объекта.
         return obj.owner == request.user
 
-
+# Из урока # 24.07.2025 - Python Adv 36: Практикум 10.
 # class CanGetGenresStatisticPermission(BasePermission):
 #     def has_permission(self, request, view):
 #         # Проверяем, есть ли у пользователя право 'library.can_get_statistic'

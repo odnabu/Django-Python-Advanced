@@ -7,7 +7,10 @@ from django.core.validators import MinLengthValidator   # Список вали�
 from django.utils import timezone
 from hw_02_task_manager.managers import SoftDeleteManager
 # *****  home_work_13  *****************************
-from django.contrib.auth.models import User  # или get_user_model()
+from django.contrib.auth.models import User
+# или через get_user_model(), тогда добавить так:
+# from django.contrib.auth import get_user_model
+# User = get_user_model()
 
 
 

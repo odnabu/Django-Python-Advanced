@@ -45,23 +45,37 @@ __Цель:__
 
 
 
----
-<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
 
-## <b style="color: yellow; background: darkred; padding: 10px; ">ВООБЩЕ черт знает что творится!.....</b>   
+[//]: # (---)
 
-ВОПРОСЫ  
-1. <b style="color: red;">NB!</b> Почему нет всех полей на создание задачи на Fig 1.B ????????????????
-2. Можно ли в middleware.py так добавлять маршруты:
-```python
-if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/les_18_shop/logout/',
-                                 '/hw_02_task_manager/login/', '/hw_02_task_manager/registration/', '/hw_02_task_manager/logout/']:
-```
-3. Почему НЕЛЬЗЯ прямо в таблицах в БД поменять значение и потом обращаться к нему?
+[//]: # (<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  )
 
-<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
+[//]: # ()
+[//]: # (## <b style="color: yellow; background: darkred; padding: 10px; ">ВООБЩЕ черт знает что творится!.....</b>   )
 
----
+[//]: # ()
+[//]: # (ВОПРОСЫ  )
+
+[//]: # (1. <b style="color: red;">NB!</b> Почему нет всех полей на создание задачи на Fig 1.B ????????????????)
+
+[//]: # (2. Можно ли в middleware.py так добавлять маршруты:)
+
+[//]: # (```python)
+
+[//]: # (if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/les_18_shop/logout/',)
+
+[//]: # (                                 '/hw_02_task_manager/login/', '/hw_02_task_manager/registration/', '/hw_02_task_manager/logout/']:)
+
+[//]: # (```)
+
+[//]: # (3. Почему НЕЛЬЗЯ прямо в таблицах в БД поменять значение и потом обращаться к нему?)
+
+[//]: # ()
+[//]: # (<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  )
+
+[//]: # ()
+[//]: # (---)
+
 
 
 
@@ -81,9 +95,6 @@ Django REST Framework. Разрешения моделей. Использова
 
 
 
-
-Python Adv 35: Виды разрешений, сигналы	Python Advanced	Bandylo Viacheslav	24.07.2025
-
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border: 2px outset #8A2BE2; margin: 60px 0 40px 0; padding: 5px 0 5px 25px;">ОТЧЕТ</div>
 
 
@@ -91,8 +102,8 @@ Python Adv 35: Виды разрешений, сигналы	Python Advanced	Ban
 
 <div style="margin: 40px 20px 20px 0;">
 <m style="color: #F00000; border: 2px solid #6B0000; padding: 10px;"> NB ! </m> 
-<b style="color: #F00000; border: 1px solid black; padding: 5px;">!!! ВСЕГДА</b> после изменения в моделях (НЕ в сериализаторе) выполнять и применять миграции.
-<p style="margin: 0 0 0 55px;"><b style="color: #F00000; border: 1px solid black; padding: 5px;">ПРИМЕНЯТЬ</b> миграции так же нужно в ситуациях:
+<b style="color: #F00000; padding: 5px;">!!! ВСЕГДА</b> после изменения в моделях (НЕ в сериализаторе) выполнять и применять миграции.
+<p style="margin: 0 0 0 55px;"><b style="color: #F00000; padding: 5px;">ПРИМЕНЯТЬ</b> миграции так же нужно в ситуациях:
 <p style="margin: 0 0 0 70px;">1. Склонирован/получен проект с миграциями.
 <p style="margin: 0 0 0 70px;">2. Применения уже готовых .py-файлы миграций.
 <p style="margin: 0 0 0 70px;">3. На сервере (или в другом окружении).
@@ -116,7 +127,8 @@ Python Adv 35: Виды разрешений, сигналы	Python Advanced	Ban
    python manage.py runserver
 ```
 
----
+<div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
+
 
 
 
@@ -124,9 +136,9 @@ Python Adv 35: Виды разрешений, сигналы	Python Advanced	Ban
 
 <div style="margin: 20px 20px 20px 0;">
 <b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b>Так как на консультации 1 от 28.07.2025 пофиксили проблемы с обновлением токена 
-для Аутентификации и Авторизации для всего проекта благодаря решению Макса Полякова, то теперь в настройках
-<m style="color: limegreen">config /</m> <a>settings.py</a> и в <m style="color: limegreen">config /</m> <a>urls.py</a>
-можно не отключать опцию, связанную с Аутентификацией.
+в <a>DjangoProject_config / middleware.py</a> для Аутентификации и Авторизации для всего проекта благодаря 
+решению Макса Полякова, то теперь в настройках <m style="color: limegreen">config /</m> <a>settings.py</a> 
+и в <m style="color: limegreen">config /</m> <a>urls.py</a> можно не отключать опцию, связанную с Аутентификацией.
 </div>
 
 Описание реализации этого задания по шагам смотри в:  
@@ -218,7 +230,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-<img src="figs/hw_13/img_t1_a_1.png" width="500" style="margin: 0 0 0 40px"/><br>  
+<img src="figs/hw_13/task_1/img_t1_a_1.png" width="500" style="margin: 0 0 0 40px"/><br>  
 
 <img src="figs/hw_13/task_1/img_t1_a_2.png" width="700" style="margin: 0 0 0 40px"/>
 
@@ -430,6 +442,8 @@ class SubTaskDetailView(RetrieveUpdateDestroyAPIView):
 ---
 
 ### <m id="ss2.3" style="color: #008000">2.3. Проверка применения кастомного пермишена</m>  
+Смотри так же советы [ChatGPT](https://chatgpt.com/s/t_688bd20d948081918a45522f574d393d).
+
 
 <b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> Как и в п. 1.4-1.6 СНАЧАЛА сгенерировать новый `access`-токен 
 (по запросу "hw_11 - 1 Getting JWT Token" из HW_11), иначе не сработает ни один метод, в данном случае `GET`.
@@ -488,7 +502,7 @@ URLS:
 
 
 
-## <m id="s4" style="color: #008000">4. GitHub</m>
+## <m id="s5" style="color: #008000">5. GitHub</m>
 - Запуште проект в Git-репозиторий и прикрепите как решение ссылку на него.
 
 Ссылка на отчет по ДЗ <a>home_work_13.md</a> со скриншотами: https://github.com/odnabu/Django-Python-Advanced/blob/main/hw_02_task_manager/home_work_13.md.  

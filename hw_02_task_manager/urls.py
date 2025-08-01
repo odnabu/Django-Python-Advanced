@@ -137,3 +137,21 @@ urlpatterns += [
     path('tasks/my/', MyTaskListView.as_view(), name='my-tasks'),
 ]
 
+
+
+#       ///////   home_work_14.md    /////////
+
+# _____ hw_13:  1 - 3: Регистрация пользователя, логин, логаут.
+from hw_02_task_manager.views import UserRegistrationView, LoginView, LogoutView
+
+urlpatterns += [
+    # les_18_shop/urls.py --> 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT
+    # { "username": "hw_14_user", "password": "hw_14_user*", "email": "hw_14_user@od.com" }
+    path('registration/', UserRegistrationView.as_view(), name='task-project-registration'),
+    # les_18_shop/urls.py --> 24.07.2025 - Les 37, Lec 33: Автосохранение и автоиспользование JWT токенов
+    # Реализация логина с сохранением токенов в куки:  { "username": "odnabu", "password": "123" }
+    path('login/', LoginView.as_view(), name='task-project-login'),
+    # les_18_shop/urls.py --> 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: РАЗЛОГИНИВАНИЕ пользователя с JWT
+    path('logout/', LogoutView.as_view(), name='task-project-logout'),
+]
+

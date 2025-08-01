@@ -82,7 +82,7 @@ class LoginView(APIView):
 # --------------------------------------------------------------------------------------
 
 
-# 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT
+# 24.07.2025 - Les 38 (Les 37 in the list of Module), Lec 33: Регистрация пользователя с JWT.
 class RegistrationView(APIView):
     permission_classes = [AllowAny]
 
@@ -127,7 +127,7 @@ class LogoutView(APIView):
 
 
 
-# 24.07.2025 - Pr 10: Задание 2. Создание кастомных классов разрешений
+# 24.07.2025 - Python Adv 36: Практикум 10: Задание 2. Создание кастомных классов разрешений.
 from les_18_shop.permissions import IsOwnerOrReadOnly, CanViewOrderStatistics
 
 
@@ -144,7 +144,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
 
 
-# 27.07.2025 - Pr 8: Задание 2: Представления и маршруты для модели Supplier
+# 27.07.2025 - Pr 8: Задание 2: Представления и маршруты для модели Supplier.
 class SupplierViewSet(viewsets.ModelViewSet):
     """
     Представления и маршруты для модели Supplier
@@ -154,7 +154,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
 
 
 
-# 27.07.2025 - Pr 8: Задание 3: Представления и маршруты для модели Product
+# 27.07.2025 - Pr 8: Задание 3: Представления и маршруты для модели Product.
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from les_18_shop.models import Product
 from les_18_shop.serializers import (ProductSerializer, ProductCreateUpdateSerializer,
@@ -241,7 +241,7 @@ class ProductDetailViewSet(viewsets.ModelViewSet):
 
 
 
-# 27.07.2025 - Pr 8: Задание 5: Представления и маршруты для модели Address
+# 27.07.2025 - Pr 8: Задание 5: Представления и маршруты для модели Address.
 class AddressViewSet(viewsets.ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
@@ -336,10 +336,10 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         return OrderItemCreateUpdateSerializer
 
 
-# 24.07.2025 - Pr 10: Задание 1: Добавление filter_backends
+# 24.07.2025 - Python Adv 36: Практикум 10: Задание 1: Добавление filter_backends
 
 
-# 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
+# 24.07.2025 - Python Adv 36: Практикум 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
 class OrderStatisticsView(APIView):
     # ВРЕМЕННО, чтобы с ТОКЕНОМ не морочиться:
     # authentication_classes = [BasicAuthentication]
