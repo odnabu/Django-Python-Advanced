@@ -46,35 +46,21 @@ __Цель:__
 
 
 
-[//]: # (---)
+---
+<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
 
-[//]: # (<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  )
-
-[//]: # ()
 [//]: # (## <b style="color: yellow; background: darkred; padding: 10px; ">ВООБЩЕ черт знает что творится!.....</b>   )
+<b>ВОПРОСЫ</b>  
+1. <b style="color: red;">NB!</b> Почему нет всех полей на создание задачи на Fig 1.B ????????????????
+2. Можно ли в middleware.py так добавлять маршруты:
+```python
+if request.path_info in ['/shop/login/', '/shop/registration/', '/shop/logout/',
+                         '/hw-02/login/', '/hw-02/registration/', '/hw-02/logout/']:
+```
+3. Почему НЕЛЬЗЯ прямо в таблицах в БД поменять значение и потом обращаться к нему?
+<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  
 
-[//]: # ()
-[//]: # (ВОПРОСЫ  )
-
-[//]: # (1. <b style="color: red;">NB!</b> Почему нет всех полей на создание задачи на Fig 1.B ????????????????)
-
-[//]: # (2. Можно ли в middleware.py так добавлять маршруты:)
-
-[//]: # (```python)
-
-[//]: # (if request.path_info in ['/les_18_shop/login/', '/les_18_shop/registration/', '/les_18_shop/logout/',)
-
-[//]: # (                                 '/hw_02_task_manager/login/', '/hw_02_task_manager/registration/', '/hw_02_task_manager/logout/']:)
-
-[//]: # (```)
-
-[//]: # (3. Почему НЕЛЬЗЯ прямо в таблицах в БД поменять значение и потом обращаться к нему?)
-
-[//]: # ()
-[//]: # (<div style="border-top: 2px solid #a00000; padding: 5px;"></div>  )
-
-[//]: # ()
-[//]: # (---)
+---
 
 
 

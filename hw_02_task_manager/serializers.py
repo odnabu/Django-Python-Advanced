@@ -40,7 +40,7 @@ class TaskSerializer(serializers.ModelSerializer):
         # fields = '__all__'
 
         # ____  Для к "home_work_08.md"  ____
-        fields = ['id', 'title', 'owner', 'deadline', 'deadline_weekday', 'subtasks']
+        fields = ['id', 'title', 'owner', 'deadline', 'deadline_weekday', 'status', 'subtasks']
 
         # ____  Для к "home_work_13.md", задание 1  ____
         read_only_fields = ['owner']  # Делаем поле 'owner' только для чтения
@@ -160,8 +160,8 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         # fields = '__all__'
 
         # Для к "home_work_08.md":
-        # fields = ['id', 'title', 'description', 'status', 'deadline', 'weekday', 'created_at', 'categories', 'subtasks']
-        fields = '__all__'
+        fields = ['id', 'title', 'owner', 'description', 'status', 'deadline', 'weekday', 'created_at', 'categories', 'subtasks']
+        # fields = '__all__'
 
     # _____ home_work_08:
     def get_weekday(self, obj):
@@ -172,10 +172,10 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         return None
 
     # _____ home_work_07   4. Валидация данных в сериализаторах:
-    def validate_deadline(self, value):
-        if value < date.today():
-            raise ValidationError("Deadline can't be in the past.")
-        return value
+    # def validate_deadline(self, value):
+    #     if value < date.today():
+    #         raise ValidationError("Deadline can't be in the past.")
+    #     return value
 
 
 # _____ 4. Валидация данных в сериализаторах

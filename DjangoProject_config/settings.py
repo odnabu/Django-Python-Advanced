@@ -351,5 +351,7 @@ AUTH_USER_MODEL = env('AUTH_USER_MODEL', default='auth.User')
 
 
 # Настройка параметров электронной почты. См. Les38-Python Adv_34-Сигналы в Django-25_07.pdf
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # email выводится в консоль
+EMAIL_HOST_USER = 'noreply@taskmanager.local'                       # От кого отправлять письма
+
 

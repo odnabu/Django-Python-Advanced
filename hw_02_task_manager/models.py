@@ -106,6 +106,11 @@ class Task(models.Model):
     # -------------------------------------------------------------------------------
 
 
+    # _____  home_work_15:  2. Добавление поля `last_notified_status` в модель `Task`
+    # Новое поле для хранения последнего уведомленного статуса
+    last_notified_status = models.CharField(max_length=20, blank=True, null=True)
+
+
     # def save(self, *args, **kwargs):
     #     """
     #     Функция для создания дефолтного названия задачи с ее номером == id,

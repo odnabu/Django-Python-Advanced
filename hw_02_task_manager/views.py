@@ -101,6 +101,27 @@ class ProtectedDataView(APIView):
 # --------------------------------------------------------------------------------------------------------------
 
 
+# //////////////      home_work_15    Сигналы      //////////////////////////////
+
+from rest_framework.permissions import BasePermission, SAFE_METHODS
+
+
+class IsOwnerOrAdmin(BasePermission):
+    """
+    Разрешение на редактирование объекта владельцу или админу.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Разрешаем безопасные методы всем
+        if request.method in SAFE_METHODS:
+            return True
+
+        # Разрешаем редактирование владельцу или админу
+        return obj.owner == request.user or request.user.is_staff
+
+# --------------------------------------------------------------------------------------
+
+
 
 
 # //////////////      home_work_12    Задание 2: Реализация пермишенов для API      //////////////////////////////
@@ -170,7 +191,8 @@ class TaskDetailView(RetrieveUpdateDestroyAPIView):
 
     # _____ home_work_12:  2:  Добавление пермишенов:
     # _____ home_work_13:  2:  Добавление пермишенов для API:
-    permission_classes = [IsAdminUser, IsOwnerOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrAdmin]
 
     # _____ home_work_13, 14:
     # Переопределить метод get_serializer_class, чтобы обращаться к нему динамически.
@@ -237,7 +259,8 @@ class SubTaskDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
     # _____ home_work_12:  2:  Добавление пермишенов:
     # _____ home_work_13:  2:  Добавление пермишенов для API:
-    permission_classes = [IsAdminUser, IsOwnerOrReadOnly]
+    # permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrAdmin]
 
 
 # //////////////     home_work_09   ПРЕДСТАВЛЕНИЯ из предыдущей версии views.py       //////////////////////////////
