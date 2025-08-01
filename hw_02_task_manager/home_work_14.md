@@ -242,7 +242,7 @@ urlpatterns += [
 
 <img src="figs/hw_14/img_logout_2.png" width="700" style="margin: 0 0 0 40px"/>
 
-<m id="img2.2" style="margin: 40px; color:#606060;">Fig. 2.2. Выполнение PUT-запроса в Postman для изменения задачи.</m>
+<m id="img2.2" style="margin: 40px; color:#606060;">Fig. 2.2. Выход из логина по url: http://127.0.0.1:8000/hw-02/logout/.</m>
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
