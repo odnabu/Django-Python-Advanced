@@ -1,6 +1,3 @@
-VIDEO - Python Adv 36: Практикум 10	Python Advanced	Bandylo Viacheslav	24.07.2025, 2:00:24.
----
-
 Python Advanced - Django  
 31.07.2025
 
