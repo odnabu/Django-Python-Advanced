@@ -87,11 +87,12 @@ Python Advanced - Django
 
 <div style="margin: 20px 20px 20px 0;">
 <b style="color: #F00000; border: 2px solid #6B0000; display: inline-block; padding: 10px; margin: 0 10px 0 0;"> NB ! </b> ВАЖНЫЕ ДЕТАЛИ:
-<p style="margin: 0 0 0 65px;"><b style="color: red">1.</b> Смотри Video от <m style="color: red">27.07.2025</m>
+<p style="margin: 0 0 0 65px;"><b style="color: red">1.</b> <m style="color: limegreen">ModelViewSet</m> - для каждой модели используется <b style="color: red">ЕДИНОЖДЫ</b>.
+<p style="margin: 0 0 0 65px;"><b style="color: red">2.</b> Смотри Video от <m style="color: red">27.07.2025</m>
 с решением этой задачи для файла <a>les_18_shop/ views.py</a> в части с заданием:
 <br> <m style="color: #606060"># 27.07.2025 - Pr 8: Задание 1: Представления и маршруты для модели Category</m>.
 
-<p style="margin: 0 0 0 65px;"><b style="color: red">2.</b> Так как на лекции 23.07.2025 и практике 9 от 24.07.2025 
+<p style="margin: 0 0 0 65px;"><b style="color: red">3.</b> Так как на лекции 23.07.2025 и практике 9 от 24.07.2025 
 добавлены Аутентификация и Авторизация, для успешного окончания этой ДЗ необходимо выполнить такие действия:
 <p style="margin: 0 0 0 80px;"><b style="color: red">ИЛИ </b> ОТКЛЮЧИТЬ АУТЕНТИФИКАЦИЮ в 
 <m style="color: limegreen">config /</m> <a>settings.py</a> и в <m style="color: limegreen">config /</m> <a>urls.py</a>.

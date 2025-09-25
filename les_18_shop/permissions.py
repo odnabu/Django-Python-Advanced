@@ -4,8 +4,8 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 class IsOwnerOrReadOnly(BasePermission):
     """
-    Пользовательское разрешение, которое позволяет редактировать объект
-    только его владельцу (user). Остальным разрешено только чтение.
+    A user permission that allows only the owner (user) to edit the object.
+    Others are allowed to read only.
     """
     def has_object_permission(self, request, view, obj):
         # Разрешения на чтение (GET, HEAD, OPTIONS) даем всем.
@@ -13,8 +13,7 @@ class IsOwnerOrReadOnly(BasePermission):
         if request.method in SAFE_METHODS:
             return True
 
-        # Разрешение на запись (POST, PUT, PATCH, DELETE) даем только
-        # владельцу объекта.
+        # Разрешение на запись (POST, PUT, PATCH, DELETE) даем только владельцу объекта.
         return obj.user == request.user
 
 
@@ -22,8 +21,7 @@ class IsOwnerOrReadOnly(BasePermission):
 # 24.07.2025 - Pr 10: Задание 3. Добавление эндпоинта для статистики. Часть 1
 class CanViewOrderStatistics(BasePermission):
     """
-    Разрешает доступ только пользователям, у которых есть право
-    'can_view_order_statistics'.
+    Allows access only to users who have the 'can_view_order_statistics' right.
     """
     def has_permission(self, request, view):
         # request.user.has_perm() проверяет, есть ли у пользователя

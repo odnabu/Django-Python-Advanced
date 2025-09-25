@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 
-from datetime import timedelta
 from pathlib import Path
+from datetime import timedelta
 # Для чтения переменной окружения в settings.py из .env:
 from environ import Env
 # import environ
@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'hw_02_task_manager',
     'project',
     'les_18_shop',
+    'library',
     # ____ Для HW_06   -->  5.2.2. Подключение Swagger и ReDoc
     'drf_spectacular',
     'drf_spectacular_sidecar',
@@ -238,9 +239,10 @@ REST_FRAMEWORK = {
 # Аутентификация JWT ______ Practice 9, 24.07.2025:
 SIMPLE_JWT = {
     # Время жизни access токена (короткое):
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     # Время жизни refresh токена (длинное):
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    # 'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     # Можно добавить и другие настройки, например, для токенов одноразового использования
 
     # Включаем ротацию refresh токенов для повышения безопасности:

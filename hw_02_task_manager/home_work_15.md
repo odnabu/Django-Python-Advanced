@@ -34,10 +34,10 @@ Python Advanced - Django
 Как пример реализации сигналов см. приложение [signals.py in "library" by Bandylo](https://github.com/viacheslav-bandylo/111124-projects/tree/main/library).  
 Когда статус задачи меняется (например, с "New" на "In Progress", или "Done"), 
 отправить владельцу задачи email-уведомление. При этом:
-- [] Использование сигнала `post_save`.
-- [] Проверка, изменился ли статус.
-- [] Проверка, не отправлялось ли уведомление на тот же статус ранее.
-- [] Отправление email с помощью тестового SMTP-сервера (в консоль).
+- [x] Использование сигнала `post_save`.
+- [x] Проверка, изменился ли статус.
+- [x] Проверка, не отправлялось ли уведомление на тот же статус ранее.
+- [x] Отправление email с помощью тестового SMTP-сервера (в консоль).
 
 <div style="font: bold normal 110% sans-serif; color: #8A2BE2; white-space: pre; border-top: 2px dotted #008000; padding: 5px;"></div>  
 
